@@ -77,6 +77,7 @@ namespace ApiTax.Controllers
 
             for (int x = 0; x < _Header.Count(); x++)
             {
+                memory_id=_ExtraJsonData[x].ClientID;
                 long randomSerialDecimal = random.Next(999999999);
                 var now = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
                 var taxId = TaxApiService.Instance.TaxIdGenerator.GenerateTaxId(memory_id,
