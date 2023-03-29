@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ApiTax.Models.tb_send>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Client.ClientID)  
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SendDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Fname) 
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Client.ClientID)  @Html.DisplayFor(modelItem => item.Client.tb_person.Fname) @Html.DisplayFor(modelItem => item.Client.tb_person.Lname) @Html.DisplayFor(modelItem => item.Client.tb_person.ComapnyName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SendDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.User.Fname)  @Html.DisplayFor(modelItem => item.User.LastName)
+    </td>
+    <td>
+        
+        @Html.ActionLink("استعلام ارسال", "Index","tb_check_send", new { send_id = item.SendId },new { }) |
+        @Html.ActionLink("لاگ ارسال", "Details", new { id = item.SendId })
+    </td>
+</tr>
+}
+
+</table>

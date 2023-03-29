@@ -14,23 +14,49 @@ using TaxCollectData.Library.Business;
 using TaxCollectData.Library.Dto.Config;
 using TaxCollectData.Library.Dto.Content;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
+using TaxCollectData.Library.Abstraction;
+using TaxCollectData.Library.Dto.Properties;
+using TaxCollectData.Library.Enums;
+using System.Threading.Tasks;
 
 namespace ApiTax.Controllers
 {
     public class HomeController : Controller
     {
         private StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
-        public ActionResult Index()
+        public  ActionResult Index()
         {
 
-            //var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/FA.CER.CER"));
+            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/FA.CER.CER"));
+            var path = Server.MapPath(@"~/App_Data/FA.CER.CER");
 
-            //string privateKey = "-----BEGIN PRIVATE KEY-----\r\nXXX\r\n-----END PRIVATE KEY-----";
+
+            TaxApiService.Instance.Init("A11ZTP", new Pkcs8SignatoryConfig(path, null),new NormalProperties(ClientType.SELF_TSP, ""), "https://tp.tax.gov.ir/req/api/self-tsp");
+
+            ServerInformationModel serverInformation=  TaxApiService.Instance.TaxApis.GetServerInformation();
+
+         
+            //  TaxApiService.Instance.TaxApis.RequestToken();
+        
+            var json = "{Header:{Bid:'salam'}}";
+            var dd = JsonConvert.DeserializeObject<TaxCollectData.Library.Dto.Content.InvoiceDto>(json);
+            TaxCollectData.Library.Dto.Content.InvoiceDto invoiceDto = new TaxCollectData.Library.Dto.Content.InvoiceDto();
+            
+            var invoices = new List<TaxCollectData.Library.Dto.Content.InvoiceDto>
+                 {
+                      invoiceDto
+                 };
 
 
-            //TaxApiService.Instance.Init("A11TH5", new SignatoryConfig(fileContents, null));
-            //TaxApiService.Instance.TaxApis.GetServerInformation();
-            //TaxApiService.Instance.TaxApis.RequestToken();
+            ITaxApis _api = TaxApiService.Instance.TaxApis;
+
+            TokenModel token =  _api.RequestToken();
+
+            var headers = new Dictionary<string, string>();
+
+           // var result=  TaxApiService.Instance.TaxApis.SendInvoices(invoices, headers);
+            var responseModel =  TaxApiService.Instance.TaxApis.SendInvoices(invoices, null);
             return View();
         }
 
@@ -95,4 +121,6 @@ namespace ApiTax.Controllers
             return IsValid;
         }
     }
+
+
 }

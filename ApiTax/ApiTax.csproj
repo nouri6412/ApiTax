@@ -270,8 +270,8 @@
       <Private>True</Private>
       <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="TaxCollectData.Library, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\TaxCollectData.Library.0.0.4\lib\netstandard2.0\TaxCollectData.Library.dll</HintPath>
+    <Reference Include="TaxCollectData.Library, Version=0.0.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\TaxCollectData.Library.0.0.12\lib\netstandard2.0\TaxCollectData.Library.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -414,6 +414,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\fa.pem" />
+    <Content Include="Business\Signatory\Pkcs11Signatory\ShuttleCsp11_3003.dll" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -515,6 +517,7 @@
   <ItemGroup>
     <Folder Include="App_Start\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

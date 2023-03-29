@@ -1,0 +1,74 @@
+﻿@model ApiTax.Models.tb_check_send
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tb_check_send</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Response)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Response)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckResponse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckResponse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.state)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.state)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReferenceNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReferenceNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tb_send.UID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_send.UID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SendCheckId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
