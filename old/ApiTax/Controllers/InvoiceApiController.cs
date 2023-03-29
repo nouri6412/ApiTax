@@ -47,7 +47,7 @@ namespace ApiTax.Controllers
             var username = User.Identity.Name;
             CurrentUser = db.Users.Where(r => r.NationalCode == username).FirstOrDefault();
 
-            init();
+       
             var json = formCollection["excel_data"];
             List<ApiTax.Models.InvoiceBodyDto> _body = JsonConvert.DeserializeObject<List<ApiTax.Models.InvoiceBodyDto>>(json);
             List<ApiTax.Models.InvoiceHeaderDto> _Header = JsonConvert.DeserializeObject<List<ApiTax.Models.InvoiceHeaderDto>>(json);
@@ -63,6 +63,7 @@ namespace ApiTax.Controllers
             }
 
             _Client = ex_client.FirstOrDefault();
+            init();
 
             var random = new Random();
 
@@ -169,7 +170,8 @@ namespace ApiTax.Controllers
         {
             var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/FA.CER.CER"));
             func = new func();
-            _api= func.initApi("A1211P", fileContents);
+            //  _api= func.initApi("A1211P", fileContents);
+            _api = func.initApi(_Client.ClientID, _Client.PrivateKey);
 
         }
         public string send_invoice(List<ApiTax.Models.InvoiceDto> list_send)
@@ -527,12 +529,12 @@ namespace ApiTax.Controllers
                 {
                     if (az.ToList().Count() == 0)
                     {
-                        //MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
-                        //{
-                        //    row = x,
-                        //    title = "عدم دسترسی",
-                        //    message = "محدودیت دسترسی برای این شعبه یا حافظه مالیاتی"
-                        //};
+                        MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
+                        {
+                            row = x,
+                            title = "عدم دسترسی",
+                            message = "محدودیت دسترسی برای این شعبه یا حافظه مالیاتی"
+                        };
                     }
                 }
 

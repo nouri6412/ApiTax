@@ -22,7 +22,7 @@
             وضعیت استعلام
         </th>
         <th>
-            پاسخ استعلام
+            وضعیت ارسال صورتحساب
         </th>
         <th></th>
     </tr>
@@ -48,9 +48,20 @@
             <span style="color:#51c720">استعلام شده</span>
         }
     </td>
-    <td>  @Html.DisplayFor(modelItem => item.CheckResponse)</td>
+    <td>
+        @if (item.ResponseStatus == "FAILED")
+        {
+        <span style="color:red">FAILED</span>
+        }
+        else 
+        {
+    <span style="color:#51c720">@Html.DisplayFor(modelItem => item.ResponseStatus)</span>
+        }
+        
+    </td>
     <td>
         @Html.ActionLink("درخواست استعلام", "CheckSend", new { id = item.SendCheckId }) |
+        @Html.ActionLink("مشاهده پاسخ استعلام", "Details", new { id = item.SendCheckId }) |
         @Html.ActionLink("جزئیات", "Details", new { id = item.SendCheckId })
     </td>
 </tr>

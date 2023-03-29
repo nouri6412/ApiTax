@@ -41,7 +41,7 @@ namespace ApiTax.Controllers
 
             var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/FA.CER.CER"));
             func func = new func();
-            _api= func.initApi("A1211P", fileContents);
+            _api= func.initApi(tb_check_send.tb_send.Client.ClientID, tb_check_send.tb_send.Client.PrivateKey);
 
             func.check_send(new List<tb_check_send>() { tb_check_send },db);
             return RedirectToAction("Index",new { send_id = tb_check_send.SendId});
