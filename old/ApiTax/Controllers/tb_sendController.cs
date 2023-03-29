@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ApiTax.Models;
+using PagedList;
 
 namespace ApiTax.Controllers
 {
@@ -16,13 +17,17 @@ namespace ApiTax.Controllers
         private StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
 
         // GET: tb_send
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             InitRequest InitRequest = new InitRequest();
             InitRequest.init(User);
-            
 
-            return View(db.tb_send.Where(r=>r.UserID==GlobalUser.CurrentUser.UserID).Include(t => t.User).Include(t => t.Client).ToList());
+            int pageSize = 15;
+            int pageIndex = 1;
+
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var list = db.tb_send.Where(r => r.UserID == GlobalUser.CurrentUser.UserID).Include(t => t.User).Include(t => t.Client).OrderByDescending(r=>r.SendId).ToPagedList(pageIndex,pageSize);
+            return View(list);
         }
 
         // GET: tb_send/Details/5

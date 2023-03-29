@@ -1,6 +1,9 @@
-﻿@model IEnumerable<ApiTax.Models.tb_send>
-
+﻿
+@using PagedList.Mvc
+@model  PagedList.IPagedList<ApiTax.Models.tb_send>
 @{
+    /**/
+
     ViewBag.Title = "Index";
 }
 
@@ -9,34 +12,49 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Client.ClientID)  
+            ClientID
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SendDate)
+            SendDate
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.Fname) 
+            کاربر
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Client.ClientID)  @Html.DisplayFor(modelItem => item.Client.tb_person.Fname) @Html.DisplayFor(modelItem => item.Client.tb_person.Lname) @Html.DisplayFor(modelItem => item.Client.tb_person.ComapnyName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.SendDate)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.User.Fname)  @Html.DisplayFor(modelItem => item.User.LastName)
-    </td>
-    <td>
-        
-        @Html.ActionLink("استعلام ارسال", "Index","tb_check_send", new { send_id = item.SendId },new { }) |
-        @Html.ActionLink("لاگ ارسال", "Details", new { id = item.SendId })
-    </td>
-</tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.ClientID)  @Html.DisplayFor(modelItem => item.Client.tb_person.Fname) @Html.DisplayFor(modelItem => item.Client.tb_person.Lname) @Html.DisplayFor(modelItem => item.Client.tb_person.ComapnyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SendDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Fname)  @Html.DisplayFor(modelItem => item.User.LastName)
+            </td>
+            <td>
+
+                @Html.ActionLink("استعلام ارسال", "Index", "tb_check_send", new { send_id = item.SendId }, new { }) |
+                @Html.ActionLink("لاگ ارسال", "Details", new { id = item.SendId })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<hr />
+
+<div id="container" style="margin-left: 20px">
+    <p></p>
+    <p></p>
+    <div class="pagination" style="margin-left: 400px">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>
+
+
+

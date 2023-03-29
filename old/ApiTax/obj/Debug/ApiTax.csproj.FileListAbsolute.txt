@@ -370,6 +370,8 @@ E:\git\tax-old\ApiTax\obj\Debug\ApiTax.csproj.CopyComplete
 E:\git\tax-old\ApiTax\obj\Debug\ApiTax.dll
 E:\git\tax-old\ApiTax\obj\Debug\ApiTax.pdb
 E:\git\tax-old\ApiTax\obj\Debug\ApiTax.csprojAssemblyReference.cache
+E:\git\ApiTax\old\ApiTax\bin\EntityFramework.SqlServer.dll
+E:\git\ApiTax\old\ApiTax\bin\EntityFramework.xml
 E:\git\ApiTax\old\ApiTax\bin\ApiTax.dll.config
 E:\git\ApiTax\old\ApiTax\bin\ApiTax.dll
 E:\git\ApiTax\old\ApiTax\bin\ApiTax.pdb
@@ -424,7 +426,6 @@ E:\git\ApiTax\old\ApiTax\bin\AutoMapper.dll
 E:\git\ApiTax\old\ApiTax\bin\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 E:\git\ApiTax\old\ApiTax\bin\BouncyCastle.Crypto.dll
 E:\git\ApiTax\old\ApiTax\bin\EntityFramework.dll
-E:\git\ApiTax\old\ApiTax\bin\EntityFramework.SqlServer.dll
 E:\git\ApiTax\old\ApiTax\bin\EPPlus.dll
 E:\git\ApiTax\old\ApiTax\bin\EPPlus.Interfaces.dll
 E:\git\ApiTax\old\ApiTax\bin\EPPlus.System.Drawing.dll
@@ -477,7 +478,6 @@ E:\git\ApiTax\old\ApiTax\bin\TaxCollectData.Library.dll
 E:\git\ApiTax\old\ApiTax\bin\WebGrease.dll
 E:\git\ApiTax\old\ApiTax\bin\AutoMapper.xml
 E:\git\ApiTax\old\ApiTax\bin\BouncyCastle.Crypto.xml
-E:\git\ApiTax\old\ApiTax\bin\EntityFramework.xml
 E:\git\ApiTax\old\ApiTax\bin\EntityFramework.SqlServer.xml
 E:\git\ApiTax\old\ApiTax\bin\EPPlus.xml
 E:\git\ApiTax\old\ApiTax\bin\Microsoft.AspNet.Identity.Core.xml
@@ -556,3 +556,7 @@ E:\git\ApiTax\old\ApiTax\obj\Debug\ApiTax.csproj.CoreCompileInputs.cache
 E:\git\ApiTax\old\ApiTax\obj\Debug\ApiTax.csproj.CopyComplete
 E:\git\ApiTax\old\ApiTax\obj\Debug\ApiTax.dll
 E:\git\ApiTax\old\ApiTax\obj\Debug\ApiTax.pdb
+E:\git\ApiTax\old\ApiTax\bin\PagedList.dll
+E:\git\ApiTax\old\ApiTax\bin\PagedList.Mvc.dll
+E:\git\ApiTax\old\ApiTax\bin\PagedList.xml
+E:\git\ApiTax\old\ApiTax\bin\PagedList.Mvc.xml
