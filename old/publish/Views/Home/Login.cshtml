@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>LogIn</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Login Failed, check details");
+    <div class="container">
+
+        <fieldset>
+            <legend>Login Form</legend>
+            <div class="row">
+                <div class="col-12">
+                    <label>NationalCode</label>
+                    <input id="NationalCode" name="NationalCode" placeholder="NationalCode" class="form-control" />
+                </div>
+                <hr />
+
+                <div class="col-12">
+                    <label>PassWord</label>
+                    <input id="PassWord" name="PassWord" placeholder="PassWord" class="form-control" type="password" />
+                </div>
+            </div>
+<hr />
+    <input type="submit" value="Log In" class="btn btn-primary" />
+</fieldset>
+</div>
+}

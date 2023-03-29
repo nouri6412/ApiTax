@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="be595d2313a5488f9a211a55d4f2e1da" Name="Diagram1" ZoomLevel="93">
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.Branch" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.Client" Width="1.5" PointX="12.75" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.CompanyType" Width="1.5" PointX="8.25" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.Curreny" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.ErrorCode" Width="1.5" PointX="15" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.ErrorType" Width="1.5" PointX="12.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.FieldPosition" Width="1.5" PointX="2.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.ftType" Width="1.5" PointX="5.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.InPatern" Width="1.5" PointX="5.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.InsType" Width="1.5" PointX="5.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.InType" Width="1.5" PointX="12.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.InvoiceBody" Width="1.5" PointX="10.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.InvoiceField" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.InvoiceHeader" Width="1.5" PointX="8" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.muType" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.OptionalMode" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.Payment" Width="1.5" PointX="10.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.PersonType" Width="1.5" PointX="8.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.pmtType" Width="1.5" PointX="14.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.Product" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.ProductType" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.SpecialOrGeneral" Width="1.5" PointX="0.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.TaxableOrFree" Width="1.5" PointX="0.75" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.tb_check_send" Width="1.5" PointX="17.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.tb_person" Width="1.5" PointX="10.5" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.tb_send" Width="1.5" PointX="15" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.User" Width="1.5" PointX="12.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreTerminalSystemModel.UserBranch" Width="1.5" PointX="18" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_Branch_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_UserBranch_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_Client_tb_person" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_tb_send_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_tb_person_CompanyType" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_ErrorCode_ErrorType" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_Invoice_ftType" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_Invoice_inp" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_Invoice_InsType" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_InvoiceBody_InvoiceHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_InvoiceField_FieldPosition" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_InvoiceField_OptionalMode" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_InvoiceField_OptionalMode1" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_InvoiceField_OptionalMode2" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_InvoiceField_OptionalMode3" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_InvoiceField_OptionalMode4" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_InvoiceField_OptionalMode5" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_InvoiceField_OptionalMode6" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_InvoiceField_OptionalMode7" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_InvoiceField_OptionalMode8" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_Payment_InvoiceHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_Product_muType" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_Person_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_Product_ProductType" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_Product_SpecialOrGeneral" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_Product_TaxableOrFree" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_tb_check_send_tb_send" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_tb_send_User" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreTerminalSystemModel.FK_UserBranch_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
