@@ -1,11 +1,28 @@
-﻿<input type="file" id="fileUpload" />
-<input type="button" id="upload" value="Upload" onclick="UploadProcess()" />
-<br />
-<div id="ExcelTable"></div>
+﻿<div style="margin-top:50px" class="panel panel-info">
+    <div class="panel-heading">آپلود فایل صورت حساب</div>
+    <div class="panel-body">
+        <div id="upload-panel" class="container p-5">
+            <input type="file" id="fileUpload" />
+            <hr />
+            <input class="btn btn-primary" type="button" id="upload" value="بارگذاری فایل اکسل" onclick="UploadProcess()" />
+            <hr />
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-info">
+    <div class="panel-heading">نتیجه ارسال صورت حساب</div>
+    <div id="result" class="panel-body">
+        
+    </div>
+</div>
+
 
 <script type="text/javascript">
     var Main_Data = [];
-        function send_data_excel_ajax(data) {
+    function send_data_excel_ajax(data) {
+        $("#result").html("لطفا منتظر بمانید");
+        $("#upload-panel").css('display','none');
             //  JSON.stringify(data)
             $.ajax({
                 type: 'POST',
@@ -13,14 +30,21 @@
                 data: {
                     excel_data: JSON.stringify(data)
                 },
-                success: function(msg) {
+                success: function (msg) {
+                     $("#upload-panel").css('display','block');
                     var jss = msg;
                    // console.log(jss);
                       var res=JSON.parse(jss);
-                      console.log(res);
+                    console.log(res);
+                    $("#result").html('');
+                           		var jsonViewer = new JSONViewer();
+        document.querySelector("#result").appendChild(jsonViewer.getContainer());
+        jsonViewer.showJSON(res, null, 1);
                    // console.log(jss);
                 },
-                error: function(error) {
+                error: function (error) {
+                     $("#result").html("خطا در ارسال اطلاعات به سرور");
+                           $("#upload-panel").css('display','block');
                     //Message
                     console.error(error.responseText);
                 }
