@@ -32,7 +32,7 @@ namespace ApiTax.Controllers
         // GET: InvoiceApi
         public ActionResult Index()
         {
-           
+
 
             return View();
         }
@@ -45,20 +45,20 @@ namespace ApiTax.Controllers
         [HttpPost]
         public JsonResult UploadInvoice(FormCollection formCollection)
         {
-          
+
 
             InitRequest InitRequest = new InitRequest();
             InitRequest.init(User);
 
             CurrentUser = GlobalUser.CurrentUser;
-          
-       
+
+
             var json = formCollection["excel_data"];
             List<ApiTax.Models.InvoiceBodyDto> _body = JsonConvert.DeserializeObject<List<ApiTax.Models.InvoiceBodyDto>>(json);
             List<ApiTax.Models.InvoiceHeaderDto> _Header = JsonConvert.DeserializeObject<List<ApiTax.Models.InvoiceHeaderDto>>(json);
             List<ApiTax.Models.PaymentDto> _Payments = JsonConvert.DeserializeObject<List<ApiTax.Models.PaymentDto>>(json);
             List<ExtraJsonData> _ExtraJsonData = JsonConvert.DeserializeObject<List<ExtraJsonData>>(json);
-            memory_id=_ExtraJsonData[0].ClientID;
+            memory_id = _ExtraJsonData[0].ClientID;
             var ex_client = db.Clients.Where(r => r.ClientID == memory_id);
 
             if (ex_client == null || ex_client.Count() == 0)
@@ -77,7 +77,7 @@ namespace ApiTax.Controllers
 
             for (int x = 0; x < _Header.Count(); x++)
             {
-               
+
                 long randomSerialDecimal = random.Next(999999999);
                 var now = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
                 var taxId = TaxApiService.Instance.TaxIdGenerator.GenerateTaxId(memory_id,
@@ -203,7 +203,7 @@ namespace ApiTax.Controllers
                         CheckPack = "",
                         InvoicePack = json,
                         ResponcePack = json_result,
-                        SendDate = DateTime.Now.Date.Year.ToString()+"-"+ DateTime.Now.Date.Month.ToString() + "-" + DateTime.Now.Date.Day.ToString(),
+                        SendDate = DateTime.Now.Date.Year.ToString() + "-" + DateTime.Now.Date.Month.ToString() + "-" + DateTime.Now.Date.Day.ToString(),
                         state = 0,
                         UserID = CurrentUser.UserID,
                         ClientID = _Client.ID
@@ -213,7 +213,7 @@ namespace ApiTax.Controllers
 
                     List<ResponcePack> responseData = JsonConvert.DeserializeObject<List<ResponcePack>>(json_result, settings);
 
-                 var list_check=   new List<tb_check_send>();
+                    var list_check = new List<tb_check_send>();
                     for (int x = 0; x < invoices.Count(); x++)
                     {
 
@@ -232,7 +232,7 @@ namespace ApiTax.Controllers
                         db.SaveChanges();
                         list_check.Add(_tb_check_send);
                     }
-              
+
 
                     func.check_send(list_check, db);
 
@@ -529,7 +529,15 @@ namespace ApiTax.Controllers
                     };
                 }
 
-
+                if (memory_id != _ClientID)
+                {
+                    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
+                    {
+                        row = x,
+                        title = " مغایرت حافظه مالیاتی",
+                        message = "شما مجاز به آپلود اطلاعات چندین حافظه مالیاتی در یک فایل نیستید"
+                    };
+                }
                 var az = db.UserBranches.Where(r => r.UserID == CurrentUser.UserID && r.Branch.BranchNum == sbc && r.Branch.Client.ClientID == _ClientID);
                 if (az != null)
                 {
