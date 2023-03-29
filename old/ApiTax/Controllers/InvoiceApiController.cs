@@ -58,7 +58,7 @@ namespace ApiTax.Controllers
             List<ApiTax.Models.InvoiceHeaderDto> _Header = JsonConvert.DeserializeObject<List<ApiTax.Models.InvoiceHeaderDto>>(json);
             List<ApiTax.Models.PaymentDto> _Payments = JsonConvert.DeserializeObject<List<ApiTax.Models.PaymentDto>>(json);
             List<ExtraJsonData> _ExtraJsonData = JsonConvert.DeserializeObject<List<ExtraJsonData>>(json);
-
+            memory_id=_ExtraJsonData[0].ClientID;
             var ex_client = db.Clients.Where(r => r.ClientID == memory_id);
 
             if (ex_client == null || ex_client.Count() == 0)
@@ -77,7 +77,7 @@ namespace ApiTax.Controllers
 
             for (int x = 0; x < _Header.Count(); x++)
             {
-                memory_id=_ExtraJsonData[x].ClientID;
+               
                 long randomSerialDecimal = random.Next(999999999);
                 var now = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
                 var taxId = TaxApiService.Instance.TaxIdGenerator.GenerateTaxId(memory_id,
