@@ -15,6 +15,7 @@ using TaxCollectData.Library.Dto.Content;
 
 namespace ApiTax.Controllers
 {
+    [Authorize]
     public class tb_check_sendController : Controller
     {
         private StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
@@ -23,7 +24,21 @@ namespace ApiTax.Controllers
         // GET: tb_check_send
         public ActionResult Index(long? send_id)
         {
+            var tb_send = db.tb_send.Where(r => r.SendId == send_id).Include(r=>r.Client).FirstOrDefault();
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+
+            var ex = GlobalUser.UserBranches.Where(r => r.Branch.Client.ID == tb_send.Client.ID);
+
+            if (ex == null || ex.Count() == 0)
+            {
+                return HttpNotFound();
+            }
+
             var tb_check_send = db.tb_check_send.Where(r=>r.SendId==send_id).Include(t => t.tb_send);
+
+
+
             return View(tb_check_send.ToList());
         }
 
@@ -35,6 +50,16 @@ namespace ApiTax.Controllers
             }
             tb_check_send tb_check_send = db.tb_check_send.Find(id);
             if (tb_check_send == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+
+            var ex = GlobalUser.UserBranches.Where(r => r.Branch.Client.ID == tb_check_send.tb_send.Client.ID);
+            if (ex == null || ex.Count() == 0)
             {
                 return HttpNotFound();
             }
@@ -59,13 +84,22 @@ namespace ApiTax.Controllers
             {
                 return HttpNotFound();
             }
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+
+            var ex = GlobalUser.UserBranches.Where(r => r.Branch.Client.ID == tb_check_send.tb_send.Client.ID);
+            if (ex == null || ex.Count() == 0)
+            {
+                return HttpNotFound();
+            }
             return View(tb_check_send);
         }
 
         // GET: tb_check_send/Create
         public ActionResult Create()
         {
-            ViewBag.SendId = new SelectList(db.tb_send, "SendId", "UID");
+          //  ViewBag.SendId = new SelectList(db.tb_send, "SendId", "UID");
             return View();
         }
 
@@ -79,7 +113,7 @@ namespace ApiTax.Controllers
             if (ModelState.IsValid)
             {
                 db.tb_check_send.Add(tb_check_send);
-                db.SaveChanges();
+               // db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -99,8 +133,8 @@ namespace ApiTax.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.SendId = new SelectList(db.tb_send, "SendId", "UID", tb_check_send.SendId);
-            return View(tb_check_send);
+           // ViewBag.SendId = new SelectList(db.tb_send, "SendId", "UID", tb_check_send.SendId);
+            return View(new tb_check_send() { });
         }
 
         // POST: tb_check_send/Edit/5
@@ -113,7 +147,7 @@ namespace ApiTax.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(tb_check_send).State = EntityState.Modified;
-                db.SaveChanges();
+               // db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.SendId = new SelectList(db.tb_send, "SendId", "UID", tb_check_send.SendId);
@@ -132,7 +166,7 @@ namespace ApiTax.Controllers
             {
                 return HttpNotFound();
             }
-            return View(tb_check_send);
+            return View(new tb_check_send() { });
         }
 
         // POST: tb_check_send/Delete/5
@@ -141,8 +175,8 @@ namespace ApiTax.Controllers
         public ActionResult DeleteConfirmed(long id)
         {
             tb_check_send tb_check_send = db.tb_check_send.Find(id);
-            db.tb_check_send.Remove(tb_check_send);
-            db.SaveChanges();
+         //   db.tb_check_send.Remove(tb_check_send);
+          //  db.SaveChanges();
             return RedirectToAction("Index");
         }
 

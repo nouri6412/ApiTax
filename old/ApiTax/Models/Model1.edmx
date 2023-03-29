@@ -360,6 +360,7 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
           <Property Name="IsActive" Type="bit" />
           <Property Name="StartActive" Type="datetime" />
           <Property Name="EndActive" Type="datetime" />
+          <Property Name="isAdmin" Type="bit" />
         </EntityType>
         <EntityType Name="UserBranch">
           <Key>
@@ -1261,6 +1262,7 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="StartActive" Type="DateTime" Precision="3" />
           <Property Name="EndActive" Type="DateTime" Precision="3" />
+          <Property Name="isAdmin" Type="Boolean" />
           <NavigationProperty Name="tb_send" Relationship="Self.FK_tb_send_User" FromRole="User" ToRole="tb_send" />
           <NavigationProperty Name="UserBranches" Relationship="Self.FK_UserBranch_User" FromRole="User" ToRole="UserBranch" />
         </EntityType>
@@ -2138,6 +2140,7 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="StartActive" ColumnName="StartActive" />
                 <ScalarProperty Name="EndActive" ColumnName="EndActive" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

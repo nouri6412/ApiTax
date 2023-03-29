@@ -10,6 +10,7 @@ using ApiTax.Models;
 
 namespace ApiTax.Controllers
 {
+    [Authorize]
     public class UserBranchesController : Controller
     {
         private StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
@@ -17,8 +18,15 @@ namespace ApiTax.Controllers
         // GET: UserBranches
         public ActionResult Index(long UserID = 0)
         {
-            var User = db.Users.Find(UserID);
-            ViewBag.UserSelected = User;
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
+            var User1 = db.Users.Find(UserID);
+            ViewBag.UserSelected = User1;
             var userBranches = db.UserBranches.Where(r=>r.UserID== UserID).Include(u => u.User);
             return View(userBranches.ToList());
         }
@@ -26,6 +34,13 @@ namespace ApiTax.Controllers
         // GET: UserBranches/Details/5
         public ActionResult Details(long? id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -41,6 +56,13 @@ namespace ApiTax.Controllers
         // GET: UserBranches/Create
         public ActionResult Create(long UserID = 0)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             ViewBag.UserID = UserID;
             var br = from br1 in db.Branches
                      join cl in db.Clients on br1.ClientID equals cl.ID
@@ -60,6 +82,13 @@ namespace ApiTax.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserID,BrancheID,UserBranchId")] UserBranch userBranch)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (ModelState.IsValid)
             {
                 db.UserBranches.Add(userBranch);
@@ -80,6 +109,13 @@ namespace ApiTax.Controllers
         // GET: UserBranches/Edit/5
         public ActionResult Edit(long? id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -106,6 +142,13 @@ namespace ApiTax.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UserID,BrancheID,UserBranchId")] UserBranch userBranch)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(userBranch).State = EntityState.Modified;
@@ -124,6 +167,13 @@ namespace ApiTax.Controllers
         // GET: UserBranches/Delete/5
         public ActionResult Delete(long? id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -141,6 +191,13 @@ namespace ApiTax.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             UserBranch userBranch = db.UserBranches.Find(id);
             db.UserBranches.Remove(userBranch);
             db.SaveChanges();

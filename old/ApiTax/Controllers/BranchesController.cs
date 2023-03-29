@@ -10,6 +10,7 @@ using ApiTax.Models;
 
 namespace ApiTax.Controllers
 {
+    [Authorize]
     public class BranchesController : Controller
     {
         private StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
@@ -17,15 +18,32 @@ namespace ApiTax.Controllers
         // GET: Branches
         public ActionResult Index(long ClientID = 0)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
+
             var Client = db.Clients.Find(ClientID);
             ViewBag.Client = Client;
             var branches = db.Branches.Where(r=>r.ClientID== ClientID);
+
+
             return View(branches.ToList());
         }
 
         // GET: Branches/Details/5
         public ActionResult Details(int? id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -41,6 +59,7 @@ namespace ApiTax.Controllers
         // GET: Branches/Create
         public ActionResult Create(long ClientID = 0)
         {
+
             ViewBag.ClientID = ClientID;
             return View();
         }
@@ -52,6 +71,14 @@ namespace ApiTax.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BranchID,BranchName,PhoneNumber,ManagerName,ZipCode,BranchAddress,ClientID,BranchNum")] Branch branch)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
+
             if (ModelState.IsValid)
             {
                 db.Branches.Add(branch);
@@ -66,6 +93,13 @@ namespace ApiTax.Controllers
         // GET: Branches/Edit/5
         public ActionResult Edit(int? id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -85,6 +119,13 @@ namespace ApiTax.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "BranchID,BranchName,PhoneNumber,ManagerName,ZipCode,BranchAddress,ClientID,BranchNum")] Branch branch)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(branch).State = EntityState.Modified;
@@ -97,6 +138,13 @@ namespace ApiTax.Controllers
         // GET: Branches/Delete/5
         public ActionResult Delete(int? id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -114,6 +162,13 @@ namespace ApiTax.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             Branch branch = db.Branches.Find(id);
             db.Branches.Remove(branch);
             db.SaveChanges();

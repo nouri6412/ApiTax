@@ -10,6 +10,7 @@ using ApiTax.Models;
 
 namespace ApiTax.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
@@ -17,12 +18,26 @@ namespace ApiTax.Controllers
         // GET: Users
         public ActionResult Index()
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             return View(db.Users.ToList());
         }
 
         // GET: Users/Details/5
         public ActionResult Details(int? id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +53,13 @@ namespace ApiTax.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             return View();
         }
 
@@ -48,6 +70,13 @@ namespace ApiTax.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserID,NationalCode,Fname,LastName,Mobile,FatherName,Email,PassWord,IsActive,StartActive,EndActive")] User user)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (ModelState.IsValid)
             {
                 db.Users.Add(user);
@@ -61,6 +90,13 @@ namespace ApiTax.Controllers
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +116,13 @@ namespace ApiTax.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UserID,NationalCode,Fname,LastName,Mobile,FatherName,Email,PassWord,IsActive,StartActive,EndActive")] User user)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(user).State = EntityState.Modified;
@@ -92,6 +135,13 @@ namespace ApiTax.Controllers
         // GET: Users/Delete/5
         public ActionResult Delete(int? id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +159,13 @@ namespace ApiTax.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             User user = db.Users.Find(id);
             db.Users.Remove(user);
             db.SaveChanges();

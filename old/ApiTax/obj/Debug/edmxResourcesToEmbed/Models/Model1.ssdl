@@ -355,6 +355,7 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
     <Property Name="IsActive" Type="bit" />
     <Property Name="StartActive" Type="datetime" />
     <Property Name="EndActive" Type="datetime" />
+    <Property Name="isAdmin" Type="bit" />
   </EntityType>
   <EntityType Name="UserBranch">
     <Key>

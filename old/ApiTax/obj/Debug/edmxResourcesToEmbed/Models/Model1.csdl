@@ -393,6 +393,7 @@
     <Property Name="IsActive" Type="Boolean" />
     <Property Name="StartActive" Type="DateTime" Precision="3" />
     <Property Name="EndActive" Type="DateTime" Precision="3" />
+    <Property Name="isAdmin" Type="Boolean" />
     <NavigationProperty Name="tb_send" Relationship="Self.FK_tb_send_User" FromRole="User" ToRole="tb_send" />
     <NavigationProperty Name="UserBranches" Relationship="Self.FK_UserBranch_User" FromRole="User" ToRole="UserBranch" />
   </EntityType>

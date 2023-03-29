@@ -32,6 +32,7 @@ namespace ApiTax.Models
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> StartActive { get; set; }
         public Nullable<System.DateTime> EndActive { get; set; }
+        public Nullable<bool> isAdmin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_send> tb_send { get; set; }

@@ -10,6 +10,7 @@ using ApiTax.Models;
 
 namespace ApiTax.Controllers
 {
+    [Authorize]
     public class tb_personController : Controller
     {
         private StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
@@ -17,6 +18,13 @@ namespace ApiTax.Controllers
         // GET: tb_person
         public ActionResult Index(int type=0)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             ViewBag.type = type;
             var tb_person = db.tb_person.Include(t => t.CompanyType).Include(t => t.PersonType);
             return View(tb_person.ToList());
@@ -25,6 +33,13 @@ namespace ApiTax.Controllers
         // GET: tb_person/Details/5
         public ActionResult Details(long? id, int type = 0)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -42,6 +57,13 @@ namespace ApiTax.Controllers
         // GET: tb_person/Create
         public ActionResult Create( int type = 0)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             ViewBag.CompanyTypeId = new SelectList(db.CompanyTypes, "CompanyTypeId", "CompanyTypeName");
             ViewBag.PersonTypeId = new SelectList(db.PersonTypes, "PersonTypeID", "Title");
 
@@ -56,6 +78,13 @@ namespace ApiTax.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "PersonID,NatioinalCode,PersonTypeId,Fname,Lname,FatherName,BirthDate,Address,Phone,Mobile,ComapnyName,Zipcode,RegisterationDate,CompanyTypeId,RegisterNumber")] tb_person tb_person)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             int type = 0;
             if (tb_person.PersonTypeId == 2)
             {
@@ -81,6 +110,13 @@ namespace ApiTax.Controllers
         // GET: tb_person/Edit/5
         public ActionResult Edit(long? id, int type = 0)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -104,6 +140,13 @@ namespace ApiTax.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "PersonID,NatioinalCode,PersonTypeId,Fname,Lname,FatherName,BirthDate,Address,Phone,Mobile,ComapnyName,Zipcode,RegisterationDate,CompanyTypeId,RegisterNumber")] tb_person tb_person)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             int type = 0;
             if (tb_person.PersonTypeId == 2)
             {
@@ -127,6 +170,13 @@ namespace ApiTax.Controllers
         // GET: tb_person/Delete/5
         public ActionResult Delete(long? id, int type = 0)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -146,6 +196,12 @@ namespace ApiTax.Controllers
         public ActionResult DeleteConfirmed(long id)
         {
 
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
 
             tb_person tb_person = db.tb_person.Find(id);
             int type = 0;

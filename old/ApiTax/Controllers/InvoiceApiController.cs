@@ -20,6 +20,7 @@ using TaxCollectData.Library.Abstraction;
 
 namespace ApiTax.Controllers
 {
+    [Authorize]
     public class InvoiceApiController : Controller
     {
         private StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
@@ -44,9 +45,13 @@ namespace ApiTax.Controllers
         [HttpPost]
         public JsonResult UploadInvoice(FormCollection formCollection)
         {
-            var username = User.Identity.Name;
-            CurrentUser = db.Users.Where(r => r.NationalCode == username).FirstOrDefault();
+          
 
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+
+            CurrentUser = GlobalUser.CurrentUser;
+          
        
             var json = formCollection["excel_data"];
             List<ApiTax.Models.InvoiceBodyDto> _body = JsonConvert.DeserializeObject<List<ApiTax.Models.InvoiceBodyDto>>(json);

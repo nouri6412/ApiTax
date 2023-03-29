@@ -10,6 +10,7 @@ using ApiTax.Models;
 
 namespace ApiTax.Controllers
 {
+    [Authorize]
     public class ClientsController : Controller
     {
         private StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
@@ -17,6 +18,14 @@ namespace ApiTax.Controllers
         // GET: Clients
         public ActionResult Index(long PersonId=0)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
+
             var person = db.tb_person.Find(PersonId);
             ViewBag.Person = person;
             return View(db.Clients.Where(r=>r.PersonId==PersonId).ToList());
@@ -25,6 +34,13 @@ namespace ApiTax.Controllers
         // GET: Clients/Details/5
         public ActionResult Details(long? id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -40,6 +56,13 @@ namespace ApiTax.Controllers
         // GET: Clients/Create
         public ActionResult Create(long PersonId = 0)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             ViewBag.PersonId = PersonId;
             return View();
         }
@@ -51,6 +74,13 @@ namespace ApiTax.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,ClientID,PublicKey,PrivateKey,Econo,ParticipationID,TraceCode,Tins,PersonId")] Client client)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (ModelState.IsValid)
             {
                 db.Clients.Add(client);
@@ -64,6 +94,13 @@ namespace ApiTax.Controllers
         // GET: Clients/Edit/5
         public ActionResult Edit(long? id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -83,6 +120,13 @@ namespace ApiTax.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,ClientID,PublicKey,PrivateKey,Econo,ParticipationID,TraceCode,Tins,PersonId")] Client client)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(client).State = EntityState.Modified;
@@ -95,6 +139,13 @@ namespace ApiTax.Controllers
         // GET: Clients/Delete/5
         public ActionResult Delete(long? id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -112,6 +163,13 @@ namespace ApiTax.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            if (GlobalUser.isAdmin == false)
+            {
+                return HttpNotFound();
+            }
             Client client = db.Clients.Find(id);
             db.Clients.Remove(client);
             db.SaveChanges();

@@ -10,6 +10,7 @@ using ApiTax.Models;
 
 namespace ApiTax.Controllers
 {
+    [Authorize]
     public class tb_sendController : Controller
     {
         private StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
@@ -17,12 +18,20 @@ namespace ApiTax.Controllers
         // GET: tb_send
         public ActionResult Index()
         {
-            return View(db.tb_send.Include(t => t.User).Include(t => t.Client).ToList());
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+            
+
+            return View(db.tb_send.Where(r=>r.UserID==GlobalUser.CurrentUser.UserID).Include(t => t.User).Include(t => t.Client).ToList());
         }
 
         // GET: tb_send/Details/5
         public ActionResult Details(long? id)
         {
+        
+
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -32,6 +41,16 @@ namespace ApiTax.Controllers
             {
                 return HttpNotFound();
             }
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+
+            var ex = GlobalUser.UserBranches.Where(r=>r.Branch.Client.ID== tb_send.Client.ID);
+            if(ex == null || ex.Count()==0)
+            {
+                return HttpNotFound();
+            }
+
             return View(tb_send);
         }
 
@@ -48,12 +67,12 @@ namespace ApiTax.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "SendId,UID,InvoicePack,ResponcePack,CheckPack,SendDate,UserID,state")] tb_send tb_send)
         {
-            if (ModelState.IsValid)
-            {
-                db.tb_send.Add(tb_send);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    db.tb_send.Add(tb_send);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
 
             return View(tb_send);
         }
@@ -61,16 +80,16 @@ namespace ApiTax.Controllers
         // GET: tb_send/Edit/5
         public ActionResult Edit(long? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tb_send tb_send = db.tb_send.Find(id);
-            if (tb_send == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tb_send);
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //tb_send tb_send = db.tb_send.Find(id);
+            //if (tb_send == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            return View(new tb_send() { });
         }
 
         // POST: tb_send/Edit/5
@@ -82,8 +101,7 @@ namespace ApiTax.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tb_send).State = EntityState.Modified;
-                db.SaveChanges();
+           
                 return RedirectToAction("Index");
             }
             return View(tb_send);
@@ -101,7 +119,7 @@ namespace ApiTax.Controllers
             {
                 return HttpNotFound();
             }
-            return View(tb_send);
+            return View(new tb_send() { });
         }
 
         // POST: tb_send/Delete/5
@@ -110,8 +128,8 @@ namespace ApiTax.Controllers
         public ActionResult DeleteConfirmed(long id)
         {
             tb_send tb_send = db.tb_send.Find(id);
-            db.tb_send.Remove(tb_send);
-            db.SaveChanges();
+            //db.tb_send.Remove(tb_send);
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 

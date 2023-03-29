@@ -8,9 +8,54 @@ using TaxCollectData.Library.Abstraction;
 using TaxCollectData.Library.Business;
 using TaxCollectData.Library.Dto.Config;
 using TaxCollectData.Library.Dto.Content;
+using System.Web.Routing;
 
 namespace ApiTax.Models
 {
+    public static class GlobalUser
+    {
+        public static User CurrentUser { get; set; }
+        public static Boolean isAdmin { get; set; }
+        public static Boolean isLogin { get; set; }
+        public static List<UserBranch> UserBranches { get; set; }
+    }
+
+    public class InitRequest
+    {
+        public void init(System.Security.Principal.IPrincipal User)
+        {
+            try
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
+                    var username = User.Identity.Name;
+                    var CurrentUser = db.Users.Where(r => r.NationalCode == username).FirstOrDefault();
+                    GlobalUser.isLogin = true;
+                    GlobalUser.UserBranches = CurrentUser.UserBranches.ToList();
+                  
+                    if (CurrentUser.isAdmin == true)
+                    {
+                        GlobalUser.isAdmin = true;
+                    }
+                    else
+                    {
+                        GlobalUser.isAdmin = false;
+                    }
+                    GlobalUser.CurrentUser = CurrentUser;
+                }
+                else
+                {
+                    GlobalUser.isLogin = false;
+                    GlobalUser.isAdmin = false;
+                    GlobalUser.CurrentUser = new Models.User();
+                    GlobalUser.UserBranches = new List<UserBranch>();
+                }
+
+            }
+            catch { }
+        }
+    }
     public class func
     {
       public  ITaxApis _api;

@@ -365,6 +365,7 @@
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="StartActive" ColumnName="StartActive" />
           <ScalarProperty Name="EndActive" ColumnName="EndActive" />
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
