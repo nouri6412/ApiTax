@@ -83,6 +83,8 @@ namespace ApiTax.Controllers
                 var taxId = TaxApiService.Instance.TaxIdGenerator.GenerateTaxId(memory_id,
                 randomSerialDecimal, DateTime.Now);
                 _Header[x].Taxid = taxId;
+                _Header[x].Indati2m = now;
+                _Header[x].Indatim = now;
             }
 
             long? inno = 0;
