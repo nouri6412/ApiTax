@@ -27,7 +27,7 @@ namespace ApiTax.Controllers
         public User CurrentUser;
         public Client _Client;
         func func;
-        public string memory_id = "A1211P";
+        public string memory_id = "";
         ITaxApis _api;
         // GET: InvoiceApi
         public ActionResult Index()
@@ -36,9 +36,11 @@ namespace ApiTax.Controllers
 
             return View();
         }
-        public ActionResult UploadInvoice()
+        public ActionResult UploadInvoice(int? type,int? sub_type,string title)
         {
-
+            ViewBag.type_1 = type;
+            ViewBag.type_2 = sub_type;
+            ViewBag.page_title = title;
             return View();
         }
 
@@ -72,10 +74,126 @@ namespace ApiTax.Controllers
 
             var random = new Random();
 
-
+            int? type_1 = Convert.ToInt32(formCollection["type_1"]);
+            int? type_2 = Convert.ToInt32(formCollection["type_2"]);
 
 
             for (int x = 0; x < _Header.Count(); x++)
+            {
+                #region ضربدر ها
+
+                try
+                {
+                    _body[x].Prdis = Convert.ToDecimal(_body[x].Am) * _body[x].Fee;
+                }
+                catch { }
+
+                ////
+
+                try
+                {
+                    _body[x].Adis = _body[x].Prdis - _body[x].Dis;
+                }
+                catch { }
+
+                ////
+
+                if (type_1 == 1 && type_2 == 3)
+                {
+                    try
+                    {
+                        _body[x].Adis = _body[x].Prdis + _body[x].Consfee + _body[x].Spro + _body[x].Bros - _body[x].Dis;
+                    }
+                    catch { }
+                }
+
+                ////
+
+                try
+                {
+                    _body[x].Vam = _body[x].Adis * _body[x].Vra;
+                }
+                catch { }
+
+
+                #endregion
+            } ///body
+
+            for (int x = 0; x < _Header.Count(); x++)
+            {
+
+                #region جمع ها  
+
+                try
+                {
+                    if (_body[x].Vop != null)
+                    {
+                        _Header[x].Tvop += Convert.ToDecimal(_body[x].Vop);
+                    }
+                }
+                catch { }
+
+                try
+                {
+                    if (_body[x].Dis != null)
+                    {
+                        _Header[x].Tdis += _body[x].Dis;
+                    }
+                }
+                catch { }
+
+                try
+                {
+                    if (_body[x].Prdis != null)
+                    {
+                        _Header[x].Tprdis += _body[x].Prdis;
+                    }
+                }
+                catch { }
+
+                try
+                {
+                    if (_body[x].Vam != null)
+                    {
+                        _Header[x].Tvam += _body[x].Vam;
+                    }
+                }
+                catch { }
+
+                try
+                {
+                    if (_body[x].Adis != null)
+                    {
+                        _Header[x].Tadis += _body[x].Adis;
+                    }
+                }
+                catch { }
+
+                try
+                {
+                    if (_body[x].Odam != null)
+                    {
+                        _Header[x].Todam += _body[x].Odam;
+                    }
+                }
+                catch { }
+
+                try {
+                    _Header[x].Cap = _Header[x].Tbill - _Header[x].Insp - _Header[x].Tvop - _Header[x].Todam;
+                }
+                catch { }
+
+
+                #endregion
+            }///header
+
+
+            for (int x = 0; x < _Header.Count(); x++)
+            {
+
+            }///payment
+
+                for (int x = 0; x < _Header.Count(); x++)
             {
 
                 long randomSerialDecimal = random.Next(999999999);
@@ -85,6 +203,8 @@ namespace ApiTax.Controllers
                 _Header[x].Taxid = taxId;
                 _Header[x].Indati2m = now;
                 _Header[x].Indatim = now;
+                _Header[x].Tdis = 0;
+
             }
 
             long? inno = 0;
@@ -94,7 +214,6 @@ namespace ApiTax.Controllers
             var list_detail = new List<ApiTax.Models.InvoiceBodyDto>();
             for (int x = 0; x < _Header.Count(); x++)
             {
-
                 if ((inno != _Header[x].Inno && inno != 0) || x == _Header.Count() - 1)
                 {
                     if (x == _Header.Count() - 1)
@@ -122,9 +241,15 @@ namespace ApiTax.Controllers
 
                 inno = _Header[x].Inno;
 
-                int? type_1 = _Header[x].Inty;
-                int? type_2 = _Header[x].Inp;
+                //int? type_1 = _Header[x].Inty;
+                //int? type_2 = _Header[x].Inp;
+
+          
+                _Header[x].Inty = type_1;
+          
+                _Header[x].Inp = type_2;
                 int? _sbc = _Header[x].Sbc;
+
 
                 string ClientID = _ExtraJsonData[x].ClientID;
 

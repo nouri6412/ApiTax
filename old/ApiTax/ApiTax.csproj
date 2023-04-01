@@ -297,8 +297,11 @@
   <ItemGroup>
     <Compile Include="Controllers\BranchesController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\ContactInPersonsController.cs" />
     <Compile Include="Controllers\InvoiceApiController.cs" />
     <Compile Include="Controllers\tb_check_sendController.cs" />
+    <Compile Include="Controllers\tb_contactController.cs" />
+    <Compile Include="Controllers\tb_marketingController.cs" />
     <Compile Include="Controllers\tb_personController.cs" />
     <Compile Include="Controllers\tb_sendController.cs" />
     <Compile Include="Controllers\UserBranchesController.cs" />
@@ -310,6 +313,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CompanyType.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContactInPerson.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Curreny.cs">
@@ -388,7 +394,22 @@
     <Compile Include="Models\TaxableOrFree.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tb_bank.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tb_check_send.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_contact.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_degree.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_magor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tb_marketing.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_person.cs">
@@ -534,8 +555,24 @@
     <Content Include="Views\tb_check_send\Details.cshtml" />
     <Content Include="Views\tb_check_send\Edit.cshtml" />
     <Content Include="Views\tb_check_send\Index.cshtml" />
+    <Content Include="Views\tb_marketing\Create.cshtml" />
+    <Content Include="Views\tb_marketing\Delete.cshtml" />
+    <Content Include="Views\tb_marketing\Details.cshtml" />
+    <Content Include="Views\tb_marketing\Edit.cshtml" />
+    <Content Include="Views\tb_marketing\Index.cshtml" />
+    <Content Include="Views\tb_contact\Create.cshtml" />
+    <Content Include="Views\tb_contact\Delete.cshtml" />
+    <Content Include="Views\tb_contact\Details.cshtml" />
+    <Content Include="Views\tb_contact\Edit.cshtml" />
+    <Content Include="Views\tb_contact\Index.cshtml" />
+    <Content Include="Views\ContactInPersons\Create.cshtml" />
+    <Content Include="Views\ContactInPersons\Delete.cshtml" />
+    <Content Include="Views\ContactInPersons\Details.cshtml" />
+    <Content Include="Views\ContactInPersons\Edit.cshtml" />
+    <Content Include="Views\ContactInPersons\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\sample\" />
     <Folder Include="App_Start\" />
     <Folder Include="Uploads\" />
   </ItemGroup>

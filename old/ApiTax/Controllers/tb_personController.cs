@@ -66,6 +66,7 @@ namespace ApiTax.Controllers
             }
             ViewBag.CompanyTypeId = new SelectList(db.CompanyTypes, "CompanyTypeId", "CompanyTypeName");
             ViewBag.PersonTypeId = new SelectList(db.PersonTypes, "PersonTypeID", "Title");
+            ViewBag.BankID = new SelectList(db.tb_bank, "BankID", "title");
 
             ViewBag.type = type;
             return View();
@@ -76,7 +77,7 @@ namespace ApiTax.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PersonID,NatioinalCode,PersonTypeId,Fname,Lname,FatherName,BirthDate,Address,Phone,Mobile,ComapnyName,Zipcode,RegisterationDate,CompanyTypeId,RegisterNumber")] tb_person tb_person)
+        public ActionResult Create([Bind(Include = "PersonID,NatioinalCode,PersonTypeId,Fname,Lname,FatherName,BirthDate,Address,Phone,Mobile,ComapnyName,Zipcode,RegisterationDate,CompanyTypeId,RegisterNumber,BankID,Shaba")] tb_person tb_person)
         {
 
             InitRequest InitRequest = new InitRequest();
@@ -101,7 +102,7 @@ namespace ApiTax.Controllers
             ViewBag.CompanyTypeId = new SelectList(db.CompanyTypes, "CompanyTypeId", "CompanyTypeName", tb_person.CompanyTypeId);
             ViewBag.PersonTypeId = new SelectList(db.PersonTypes, "PersonTypeID", "Title", tb_person.PersonTypeId);
 
-  
+            ViewBag.BankID = new SelectList(db.tb_bank, "BankID", "title", tb_person.BankID);
 
             ViewBag.type = type;
             return View(tb_person);
@@ -128,7 +129,7 @@ namespace ApiTax.Controllers
             }
             ViewBag.CompanyTypeId = new SelectList(db.CompanyTypes, "CompanyTypeId", "CompanyTypeName", tb_person.CompanyTypeId);
             ViewBag.PersonTypeId = new SelectList(db.PersonTypes, "PersonTypeID", "Title", tb_person.PersonTypeId);
-
+            ViewBag.BankID = new SelectList(db.tb_bank, "BankID", "title", tb_person.BankID);
             ViewBag.type = type;
             return View(tb_person);
         }
@@ -138,7 +139,7 @@ namespace ApiTax.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PersonID,NatioinalCode,PersonTypeId,Fname,Lname,FatherName,BirthDate,Address,Phone,Mobile,ComapnyName,Zipcode,RegisterationDate,CompanyTypeId,RegisterNumber")] tb_person tb_person)
+        public ActionResult Edit([Bind(Include = "PersonID,NatioinalCode,PersonTypeId,Fname,Lname,FatherName,BirthDate,Address,Phone,Mobile,ComapnyName,Zipcode,RegisterationDate,CompanyTypeId,RegisterNumber,BankID,Shaba")] tb_person tb_person)
         {
 
             InitRequest InitRequest = new InitRequest();
@@ -160,7 +161,7 @@ namespace ApiTax.Controllers
             }
             ViewBag.CompanyTypeId = new SelectList(db.CompanyTypes, "CompanyTypeId", "CompanyTypeName", tb_person.CompanyTypeId);
             ViewBag.PersonTypeId = new SelectList(db.PersonTypes, "PersonTypeID", "Title", tb_person.PersonTypeId);
-
+            ViewBag.BankID = new SelectList(db.tb_bank, "BankID", "title", tb_person.BankID);
 
 
             ViewBag.type = type;

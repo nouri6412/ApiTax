@@ -17,6 +17,7 @@ namespace ApiTax.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            this.tb_marketing = new HashSet<tb_marketing>();
             this.tb_send = new HashSet<tb_send>();
             this.UserBranches = new HashSet<UserBranch>();
         }
@@ -30,10 +31,16 @@ namespace ApiTax.Models
         public string Email { get; set; }
         public string PassWord { get; set; }
         public Nullable<bool> IsActive { get; set; }
-        public Nullable<System.DateTime> StartActive { get; set; }
-        public Nullable<System.DateTime> EndActive { get; set; }
+        public string StartActive { get; set; }
+        public string EndActive { get; set; }
         public Nullable<bool> isAdmin { get; set; }
+        public Nullable<int> user_type { get; set; }
+        public Nullable<int> BankID { get; set; }
+        public string Shaba { get; set; }
     
+        public virtual tb_bank tb_bank { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_marketing> tb_marketing { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_send> tb_send { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

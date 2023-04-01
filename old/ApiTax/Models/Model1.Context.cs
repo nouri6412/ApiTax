@@ -28,6 +28,7 @@ namespace ApiTax.Models
         public virtual DbSet<Branch> Branches { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<CompanyType> CompanyTypes { get; set; }
+        public virtual DbSet<ContactInPerson> ContactInPersons { get; set; }
         public virtual DbSet<Curreny> Currenies { get; set; }
         public virtual DbSet<ErrorCode> ErrorCodes { get; set; }
         public virtual DbSet<ErrorType> ErrorTypes { get; set; }
@@ -48,7 +49,12 @@ namespace ApiTax.Models
         public virtual DbSet<ProductType> ProductTypes { get; set; }
         public virtual DbSet<SpecialOrGeneral> SpecialOrGenerals { get; set; }
         public virtual DbSet<TaxableOrFree> TaxableOrFrees { get; set; }
+        public virtual DbSet<tb_bank> tb_bank { get; set; }
         public virtual DbSet<tb_check_send> tb_check_send { get; set; }
+        public virtual DbSet<tb_contact> tb_contact { get; set; }
+        public virtual DbSet<tb_degree> tb_degree { get; set; }
+        public virtual DbSet<tb_magor> tb_magor { get; set; }
+        public virtual DbSet<tb_marketing> tb_marketing { get; set; }
         public virtual DbSet<tb_person> tb_person { get; set; }
         public virtual DbSet<tb_send> tb_send { get; set; }
         public virtual DbSet<User> Users { get; set; }

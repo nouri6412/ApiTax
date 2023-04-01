@@ -53,7 +53,7 @@ namespace ApiTax.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
-
+            ViewBag.BankID = new SelectList(db.tb_bank, "BankID", "title");
             InitRequest InitRequest = new InitRequest();
             InitRequest.init(User);
             if (GlobalUser.isAdmin == false)
@@ -68,22 +68,29 @@ namespace ApiTax.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,NationalCode,Fname,LastName,Mobile,FatherName,Email,PassWord,IsActive,StartActive,EndActive")] User user)
+        public ActionResult Create([Bind(Include = "UserID,NationalCode,Fname,LastName,Mobile,FatherName,Email,PassWord,IsActive,BankID,Shaba")] User user)
         {
 
-            InitRequest InitRequest = new InitRequest();
-            InitRequest.init(User);
-            if (GlobalUser.isAdmin == false)
-            {
-                return HttpNotFound();
-            }
             if (ModelState.IsValid)
             {
+                user.StartActive = DateTime.Now.Date.Year.ToString() + "-" + DateTime.Now.Date.Month.ToString() + "-" + DateTime.Now.Date.Day.ToString();
+                user.user_type = 2;
                 db.Users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
+                InitRequest InitRequest = new InitRequest();
+                InitRequest.init(User);
+                if (GlobalUser.isAdmin == false)
+                {
+                    return RedirectToAction("Index","Home",new { });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+
+            }
+            ViewBag.BankID = new SelectList(db.tb_bank, "BankID", "title",user.BankID);
             return View(user);
         }
 
@@ -106,6 +113,7 @@ namespace ApiTax.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.BankID = new SelectList(db.tb_bank, "BankID", "title", user.BankID);
             return View(user);
         }
 
@@ -114,7 +122,7 @@ namespace ApiTax.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,NationalCode,Fname,LastName,Mobile,FatherName,Email,PassWord,IsActive,StartActive,EndActive")] User user)
+        public ActionResult Edit([Bind(Include = "UserID,NationalCode,Fname,LastName,Mobile,FatherName,Email,PassWord,IsActive,BankID,Shaba,StartActive,EndActive,user_type")] User user)
         {
 
             InitRequest InitRequest = new InitRequest();
@@ -129,6 +137,7 @@ namespace ApiTax.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.BankID = new SelectList(db.tb_bank, "BankID", "title", user.BankID);
             return View(user);
         }
 

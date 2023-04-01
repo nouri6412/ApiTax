@@ -18,6 +18,7 @@ namespace ApiTax.Models
         public static Boolean isAdmin { get; set; }
         public static Boolean isLogin { get; set; }
         public static List<UserBranch> UserBranches { get; set; }
+        public static int? user_type { get; set; }
     }
 
     public class InitRequest
@@ -33,7 +34,9 @@ namespace ApiTax.Models
                     var CurrentUser = db.Users.Where(r => r.NationalCode == username).FirstOrDefault();
                     GlobalUser.isLogin = true;
                     GlobalUser.UserBranches = CurrentUser.UserBranches.ToList();
-                  
+
+                    GlobalUser.user_type = CurrentUser.user_type;
+
                     if (CurrentUser.isAdmin == true)
                     {
                         GlobalUser.isAdmin = true;
@@ -46,6 +49,7 @@ namespace ApiTax.Models
                 }
                 else
                 {
+                    GlobalUser.user_type = 0;
                     GlobalUser.isLogin = false;
                     GlobalUser.isAdmin = false;
                     GlobalUser.CurrentUser = new Models.User();

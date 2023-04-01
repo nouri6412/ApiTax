@@ -35,10 +35,14 @@ namespace ApiTax.Models
         public string RegisterationDate { get; set; }
         public Nullable<int> CompanyTypeId { get; set; }
         public string RegisterNumber { get; set; }
+        public Nullable<int> BankID { get; set; }
+        public string Shaba { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Client> Clients { get; set; }
         public virtual CompanyType CompanyType { get; set; }
+        public virtual ContactInPerson ContactInPerson { get; set; }
         public virtual PersonType PersonType { get; set; }
+        public virtual tb_bank tb_bank { get; set; }
     }
 }
