@@ -38,7 +38,7 @@ namespace ApiTax.Controllers
             var tb_check_send = db.tb_check_send.Where(r=>r.SendId==send_id).Include(t => t.tb_send);
 
 
-
+            ViewBag.send_id = send_id;
             return View(tb_check_send.ToList());
         }
 
@@ -93,6 +93,7 @@ namespace ApiTax.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.send_id = tb_check_send.SendId;
             return View(tb_check_send);
         }
 
