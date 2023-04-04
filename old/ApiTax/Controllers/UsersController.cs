@@ -54,12 +54,6 @@ namespace ApiTax.Controllers
         public ActionResult Create()
         {
             ViewBag.BankID = new SelectList(db.tb_bank, "BankID", "title");
-            InitRequest InitRequest = new InitRequest();
-            InitRequest.init(User);
-            if (GlobalUser.isAdmin == false)
-            {
-                return HttpNotFound();
-            }
             return View();
         }
 
