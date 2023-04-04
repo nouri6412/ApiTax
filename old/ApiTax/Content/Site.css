@@ -150,6 +150,12 @@ th {
         background-color: #2f64a7;
     }
 
+    .navbar-inverse .navbar-brand {
+        color: #fff;
+        font-weight: bold;
+        font-size: 22px;
+    }
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
