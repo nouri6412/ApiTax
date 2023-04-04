@@ -1,11 +1,11 @@
 ﻿@model ApiTax.Models.Client
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "جدید";
     long PersonId = ViewBag.PersonId;
 }
 
-<h2>Create</h2>
+<h2>گزینه جدید</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -74,12 +74,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="ذخیره" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index",new { PersonId =PersonId })
+    @Html.ActionLink("بازگشت به لیست", "Index",new { PersonId =PersonId })
 </div>
