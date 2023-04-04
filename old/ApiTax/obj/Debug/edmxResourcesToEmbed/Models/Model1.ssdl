@@ -34,6 +34,14 @@
     <Property Name="CompanyTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CompanyTypeName" Type="nvarchar" MaxLength="100" />
   </EntityType>
+  <EntityType Name="ContactInPerson">
+    <Key>
+      <PropertyRef Name="ContactInPersonID" />
+    </Key>
+    <Property Name="ContactInPersonID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="personID" Type="bigint" />
+    <Property Name="ContactID" Type="bigint" />
+  </EntityType>
   <EntityType Name="Curreny">
     <Key>
       <PropertyRef Name="cut" />
@@ -291,6 +299,14 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Title" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="tb_bank">
+    <Key>
+      <PropertyRef Name="BankID" />
+    </Key>
+    <Property Name="BankID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="200" />
+    <Property Name="ShabaPatern" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="tb_check_send">
     <Key>
       <PropertyRef Name="SendCheckId" />
@@ -305,6 +321,44 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
     <Property Name="ReferenceNumber" Type="nvarchar" MaxLength="200" />
     <Property Name="invoiceData" Type="text" />
     <Property Name="ResponseStatus" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="tb_contact">
+    <Key>
+      <PropertyRef Name="ContactID" />
+    </Key>
+    <Property Name="ContactID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NationalCode" Type="nvarchar" MaxLength="20" />
+    <Property Name="Fullname" Type="nvarchar" MaxLength="100" />
+    <Property Name="tel" Type="nvarchar" MaxLength="100" />
+    <Property Name="mobile" Type="nvarchar" MaxLength="100" />
+    <Property Name="address" Type="nvarchar" MaxLength="200" />
+    <Property Name="degreeID" Type="int" />
+    <Property Name="magorID" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_degree">
+    <Key>
+      <PropertyRef Name="degreeID" />
+    </Key>
+    <Property Name="degreeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_magor">
+    <Key>
+      <PropertyRef Name="magorID" />
+    </Key>
+    <Property Name="magorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_marketing">
+    <Key>
+      <PropertyRef Name="MarketingID" />
+    </Key>
+    <Property Name="MarketingID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="NationalCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="title" Type="nvarchar" MaxLength="50" />
+    <Property Name="note" Type="text" />
+    <Property Name="RegDate" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="tb_person">
     <Key>
@@ -325,6 +379,8 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
     <Property Name="RegisterationDate" Type="nvarchar" MaxLength="50" />
     <Property Name="CompanyTypeId" Type="int" />
     <Property Name="RegisterNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankID" Type="int" />
+    <Property Name="Shaba" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="tb_send">
     <Key>
@@ -353,9 +409,12 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="PassWord" Type="nvarchar" MaxLength="200" />
     <Property Name="IsActive" Type="bit" />
-    <Property Name="StartActive" Type="datetime" />
-    <Property Name="EndActive" Type="datetime" />
+    <Property Name="StartActive" Type="nvarchar" MaxLength="50" />
+    <Property Name="EndActive" Type="nvarchar" MaxLength="50" />
     <Property Name="isAdmin" Type="bit" />
+    <Property Name="user_type" Type="int" />
+    <Property Name="BankID" Type="int" />
+    <Property Name="Shaba" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="UserBranch">
     <Key>
@@ -386,6 +445,30 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
       </Principal>
       <Dependent Role="Client">
         <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactInPerson_tb_contact">
+    <End Role="tb_contact" Type="Self.tb_contact" Multiplicity="1" />
+    <End Role="ContactInPerson" Type="Self.ContactInPerson" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tb_contact">
+        <PropertyRef Name="ContactID" />
+      </Principal>
+      <Dependent Role="ContactInPerson">
+        <PropertyRef Name="ContactInPersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactInPerson_tb_person">
+    <End Role="tb_person" Type="Self.tb_person" Multiplicity="1" />
+    <End Role="ContactInPerson" Type="Self.ContactInPerson" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tb_person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="ContactInPerson">
+        <PropertyRef Name="ContactInPersonID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -653,6 +736,42 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tb_contact_tb_degree">
+    <End Role="tb_degree" Type="Self.tb_degree" Multiplicity="0..1" />
+    <End Role="tb_contact" Type="Self.tb_contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_degree">
+        <PropertyRef Name="degreeID" />
+      </Principal>
+      <Dependent Role="tb_contact">
+        <PropertyRef Name="degreeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_contact_tb_magor">
+    <End Role="tb_magor" Type="Self.tb_magor" Multiplicity="0..1" />
+    <End Role="tb_contact" Type="Self.tb_contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_magor">
+        <PropertyRef Name="magorID" />
+      </Principal>
+      <Dependent Role="tb_contact">
+        <PropertyRef Name="magorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_marketing_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="tb_marketing" Type="Self.tb_marketing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="tb_marketing">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tb_person_CompanyType">
     <End Role="CompanyType" Type="Self.CompanyType" Multiplicity="0..1" />
     <End Role="tb_person" Type="Self.tb_person" Multiplicity="*" />
@@ -662,6 +781,18 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
       </Principal>
       <Dependent Role="tb_person">
         <PropertyRef Name="CompanyTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_person_tb_bank">
+    <End Role="tb_bank" Type="Self.tb_bank" Multiplicity="0..1" />
+    <End Role="tb_person" Type="Self.tb_person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_bank">
+        <PropertyRef Name="BankID" />
+      </Principal>
+      <Dependent Role="tb_person">
+        <PropertyRef Name="BankID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -686,6 +817,18 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
       </Principal>
       <Dependent Role="tb_send">
         <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_tb_bank">
+    <End Role="tb_bank" Type="Self.tb_bank" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_bank">
+        <PropertyRef Name="BankID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="BankID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -717,6 +860,7 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
     <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CompanyType" EntityType="Self.CompanyType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContactInPerson" EntityType="Self.ContactInPerson" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Curreny" EntityType="Self.Curreny" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ErrorCode" EntityType="Self.ErrorCode" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ErrorType" EntityType="Self.ErrorType" Schema="dbo" store:Type="Tables" />
@@ -737,7 +881,12 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
     <EntitySet Name="ProductType" EntityType="Self.ProductType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SpecialOrGeneral" EntityType="Self.SpecialOrGeneral" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TaxableOrFree" EntityType="Self.TaxableOrFree" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_bank" EntityType="Self.tb_bank" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_check_send" EntityType="Self.tb_check_send" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_contact" EntityType="Self.tb_contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_degree" EntityType="Self.tb_degree" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_magor" EntityType="Self.tb_magor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_marketing" EntityType="Self.tb_marketing" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_person" EntityType="Self.tb_person" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_send" EntityType="Self.tb_send" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -749,6 +898,14 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
     <AssociationSet Name="FK_Client_tb_person" Association="Self.FK_Client_tb_person">
       <End Role="tb_person" EntitySet="tb_person" />
       <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactInPerson_tb_contact" Association="Self.FK_ContactInPerson_tb_contact">
+      <End Role="tb_contact" EntitySet="tb_contact" />
+      <End Role="ContactInPerson" EntitySet="ContactInPerson" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactInPerson_tb_person" Association="Self.FK_ContactInPerson_tb_person">
+      <End Role="tb_person" EntitySet="tb_person" />
+      <End Role="ContactInPerson" EntitySet="ContactInPerson" />
     </AssociationSet>
     <AssociationSet Name="FK_ErrorCode_ErrorType" Association="Self.FK_ErrorCode_ErrorType">
       <End Role="ErrorType" EntitySet="ErrorType" />
@@ -838,8 +995,24 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
       <End Role="tb_send" EntitySet="tb_send" />
       <End Role="tb_check_send" EntitySet="tb_check_send" />
     </AssociationSet>
+    <AssociationSet Name="FK_tb_contact_tb_degree" Association="Self.FK_tb_contact_tb_degree">
+      <End Role="tb_degree" EntitySet="tb_degree" />
+      <End Role="tb_contact" EntitySet="tb_contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_contact_tb_magor" Association="Self.FK_tb_contact_tb_magor">
+      <End Role="tb_magor" EntitySet="tb_magor" />
+      <End Role="tb_contact" EntitySet="tb_contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_marketing_User" Association="Self.FK_tb_marketing_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="tb_marketing" EntitySet="tb_marketing" />
+    </AssociationSet>
     <AssociationSet Name="FK_tb_person_CompanyType" Association="Self.FK_tb_person_CompanyType">
       <End Role="CompanyType" EntitySet="CompanyType" />
+      <End Role="tb_person" EntitySet="tb_person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_person_tb_bank" Association="Self.FK_tb_person_tb_bank">
+      <End Role="tb_bank" EntitySet="tb_bank" />
       <End Role="tb_person" EntitySet="tb_person" />
     </AssociationSet>
     <AssociationSet Name="FK_tb_send_Client" Association="Self.FK_tb_send_Client">
@@ -849,6 +1022,10 @@ warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not
     <AssociationSet Name="FK_tb_send_User" Association="Self.FK_tb_send_User">
       <End Role="User" EntitySet="User" />
       <End Role="tb_send" EntitySet="tb_send" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_tb_bank" Association="Self.FK_User_tb_bank">
+      <End Role="tb_bank" EntitySet="tb_bank" />
+      <End Role="User" EntitySet="User" />
     </AssociationSet>
     <AssociationSet Name="FK_UserBranch_Branch" Association="Self.FK_UserBranch_Branch">
       <End Role="Branch" EntitySet="Branch" />

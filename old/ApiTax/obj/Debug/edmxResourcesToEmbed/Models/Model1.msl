@@ -38,6 +38,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ContactInPersons">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.ContactInPerson">
+        <MappingFragment StoreEntitySet="ContactInPerson">
+          <ScalarProperty Name="ContactInPersonID" ColumnName="ContactInPersonID" />
+          <ScalarProperty Name="personID" ColumnName="personID" />
+          <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Currenies">
       <EntityTypeMapping TypeName="StoreTerminalSystemModel.Curreny">
         <MappingFragment StoreEntitySet="Curreny">
@@ -299,6 +308,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tb_bank">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.tb_bank">
+        <MappingFragment StoreEntitySet="tb_bank">
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="ShabaPatern" ColumnName="ShabaPatern" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tb_check_send">
       <EntityTypeMapping TypeName="StoreTerminalSystemModel.tb_check_send">
         <MappingFragment StoreEntitySet="tb_check_send">
@@ -312,6 +330,48 @@
           <ScalarProperty Name="ReferenceNumber" ColumnName="ReferenceNumber" />
           <ScalarProperty Name="invoiceData" ColumnName="invoiceData" />
           <ScalarProperty Name="ResponseStatus" ColumnName="ResponseStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_contact">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.tb_contact">
+        <MappingFragment StoreEntitySet="tb_contact">
+          <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+          <ScalarProperty Name="NationalCode" ColumnName="NationalCode" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="degreeID" ColumnName="degreeID" />
+          <ScalarProperty Name="magorID" ColumnName="magorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_degree">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.tb_degree">
+        <MappingFragment StoreEntitySet="tb_degree">
+          <ScalarProperty Name="degreeID" ColumnName="degreeID" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_magor">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.tb_magor">
+        <MappingFragment StoreEntitySet="tb_magor">
+          <ScalarProperty Name="magorID" ColumnName="magorID" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_marketing">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.tb_marketing">
+        <MappingFragment StoreEntitySet="tb_marketing">
+          <ScalarProperty Name="MarketingID" ColumnName="MarketingID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="NationalCode" ColumnName="NationalCode" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="RegDate" ColumnName="RegDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -333,6 +393,8 @@
           <ScalarProperty Name="RegisterationDate" ColumnName="RegisterationDate" />
           <ScalarProperty Name="CompanyTypeId" ColumnName="CompanyTypeId" />
           <ScalarProperty Name="RegisterNumber" ColumnName="RegisterNumber" />
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="Shaba" ColumnName="Shaba" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -366,6 +428,9 @@
           <ScalarProperty Name="StartActive" ColumnName="StartActive" />
           <ScalarProperty Name="EndActive" ColumnName="EndActive" />
           <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+          <ScalarProperty Name="user_type" ColumnName="user_type" />
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="Shaba" ColumnName="Shaba" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

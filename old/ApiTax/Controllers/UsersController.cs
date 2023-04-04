@@ -10,7 +10,7 @@ using ApiTax.Models;
 
 namespace ApiTax.Controllers
 {
-    [Authorize]
+ 
     public class UsersController : Controller
     {
         private StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
