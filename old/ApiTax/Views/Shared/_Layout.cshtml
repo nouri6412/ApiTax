@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Store Terminal System</title>
+    <title>@ViewBag.Title - سیستم ارسال صورت حساب ها</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <script type="text/javascript" src="~/Scripts/xlsx.full.min.js"></script>
@@ -22,7 +22,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application Send Tax", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("سیستم ارسال صورت حساب", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -103,14 +103,14 @@
 
                         }
                         <li> @Html.ActionLink("بازاریابی", "index", "tb_marketing")</li>
-                        <li> @Html.ActionLink("Log Out", "Logout", "Home")</li>
+                        <li> @Html.ActionLink("خروج از سیستم", "Logout", "Home")</li>
 
                     }
                     else
                     {
                         <li> @Html.ActionLink("ثبتنام", "Create", "Users")</li>
                         <li>
-                            @Html.ActionLink("Log In", "Login", "Home")
+                            @Html.ActionLink("ورود به سامانه", "Login", "Home")
                         </li>
                     }
                 </ul>

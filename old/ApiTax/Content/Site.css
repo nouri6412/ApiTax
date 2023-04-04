@@ -117,6 +117,39 @@ th {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.navbar-nav > li {
+    float: right;
+}
+
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 8px 8px;
+}
+
+.navbar-nav {
+    float: right;
+    margin: 0;
+}
+
+.navbar-inverse {
+    background-color: #337ab7;
+    border-color: #080808;
+}
+    .navbar-inverse .navbar-nav > li > a {
+        color: #fff;
+    }
+        .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+            color: #c9c9c9;
+            background-color: transparent;
+        }
+
+    .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+        color: #fff;
+        background-color: #2f64a7;
+    }
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
