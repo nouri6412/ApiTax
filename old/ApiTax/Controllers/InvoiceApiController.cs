@@ -111,7 +111,7 @@ namespace ApiTax.Controllers
 
                 try
                 {
-                    _body[x].Vam = _body[x].Adis * _body[x].Vra;
+                    _body[x].Vam = (_body[x].Adis * _body[x].Vra)/100;
                 }
                 catch { }
 
@@ -119,73 +119,6 @@ namespace ApiTax.Controllers
                 #endregion
             } ///body
 
-            for (int x = 0; x < _Header.Count(); x++)
-            {
-
-                #region جمع ها  
-
-                try
-                {
-                    if (_body[x].Vop != null)
-                    {
-                        _Header[x].Tvop += Convert.ToDecimal(_body[x].Vop);
-                    }
-                }
-                catch { }
-
-                try
-                {
-                    if (_body[x].Dis != null)
-                    {
-                        _Header[x].Tdis += _body[x].Dis;
-                    }
-                }
-                catch { }
-
-                try
-                {
-                    if (_body[x].Prdis != null)
-                    {
-                        _Header[x].Tprdis += _body[x].Prdis;
-                    }
-                }
-                catch { }
-
-                try
-                {
-                    if (_body[x].Vam != null)
-                    {
-                        _Header[x].Tvam += _body[x].Vam;
-                    }
-                }
-                catch { }
-
-                try
-                {
-                    if (_body[x].Adis != null)
-                    {
-                        _Header[x].Tadis += _body[x].Adis;
-                    }
-                }
-                catch { }
-
-                try
-                {
-                    if (_body[x].Odam != null)
-                    {
-                        _Header[x].Todam += _body[x].Odam;
-                    }
-                }
-                catch { }
-
-                try {
-                    _Header[x].Cap = _Header[x].Tbill - _Header[x].Insp - _Header[x].Tvop - _Header[x].Todam;
-                }
-                catch { }
-
-
-                #endregion
-            }///header
 
 
             for (int x = 0; x < _Header.Count(); x++)
@@ -280,6 +213,104 @@ namespace ApiTax.Controllers
                     }
                 }
 
+            }
+
+           foreach(var item in list)
+            {
+                #region جمع ها  
+
+                try
+                {
+                    item.Header.Tvop = 0;
+                    foreach(var it in item.Body)
+                    {
+                        try
+                        {
+                            item.Header.Tvop += Convert.ToDecimal(it.Vop);
+                        }
+                        catch { }
+                    }                
+                }
+                catch { }
+
+                try
+                {
+                    item.Header.Tdis = 0;
+                    foreach (var it in item.Body)
+                    {
+                        try
+                        {
+                            item.Header.Tdis += Convert.ToDecimal(it.Dis);
+                        }
+                        catch { }
+                    }
+                }
+                catch { }
+
+                try
+                {
+                    item.Header.Tprdis = 0;
+                    foreach (var it in item.Body)
+                    {
+                        try
+                        {
+                            item.Header.Tprdis += Convert.ToDecimal(it.Prdis);
+                        }
+                        catch { }
+                    }
+                }
+                catch { }
+
+                try
+                {
+                    item.Header.Tvam = 0;
+                    foreach (var it in item.Body)
+                    {
+                        try
+                        {
+                            item.Header.Tvam += Convert.ToDecimal(it.Vam);
+                        }
+                        catch { }
+                    }
+                }
+                catch { }
+
+                try
+                {
+                    item.Header.Tadis = 0;
+                    foreach (var it in item.Body)
+                    {
+                        try
+                        {
+                            item.Header.Tadis += Convert.ToDecimal(it.Adis);
+                        }
+                        catch { }
+                    }
+                }
+                catch { }
+
+                try
+                {
+                    item.Header.Todam = 0;
+                    foreach (var it in item.Body)
+                    {
+                        try
+                        {
+                            item.Header.Todam += Convert.ToDecimal(it.Odam);
+                        }
+                        catch { }
+                    }
+                }
+                catch { }
+
+                try
+                {
+                    item.Header.Cap = item.Header.Tbill - item.Header.Insp - item.Header.Tvop - item.Header.Todam;
+                }
+                catch { }
+
+
+                #endregion
             }
 
             MyExportData MyExportData = new MyExportData() { list = list, list_error = _InvoiceMyValidation };
