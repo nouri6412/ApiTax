@@ -744,7 +744,6 @@ C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\bin\ru\Microsoft.VisualStudio
 C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\bin\tr\Microsoft.VisualStudio.Validation.resources.dll
 C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\bin\zh-Hans\Microsoft.VisualStudio.Validation.resources.dll
 C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\bin\zh-Hant\Microsoft.VisualStudio.Validation.resources.dll
-C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\obj\Debug\ApiTax.csprojAssemblyReference.cache
 C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\obj\Debug\ApiTax.csproj.ResolveComReference.cache
 C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\obj\Debug\ApiTax.csproj.CoreCompileInputs.cache
 C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\obj\Debug\ApiTax.csproj.CopyComplete
