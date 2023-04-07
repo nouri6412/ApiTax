@@ -104,6 +104,11 @@ namespace ApiTax.Controllers
                     {
                         ///صادراتی از اکسل بر می دارد
                     }
+                    else if (type_1 == 1 && type_2 == 3)
+                    {
+                        ///الگوی طلا و جواهر
+                        _body[x].Odam =Math.Floor( Convert.ToDecimal( (_body[x].Tcpbs * _body[x].Olr)/100));
+                    }
                     else
                     {
                         _body[x].Odam =Math.Floor( Convert.ToDecimal( (_body[x].Adis * _body[x].Odr)/100));
