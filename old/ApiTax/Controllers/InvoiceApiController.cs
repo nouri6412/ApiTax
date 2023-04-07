@@ -36,7 +36,7 @@ namespace ApiTax.Controllers
 
             return View();
         }
-        public ActionResult UploadInvoice(int? type,int? sub_type,string title)
+        public ActionResult UploadInvoice(int? type, int? sub_type, string title)
         {
             ViewBag.type_1 = type;
             ViewBag.type_2 = sub_type;
@@ -111,7 +111,8 @@ namespace ApiTax.Controllers
 
                 try
                 {
-                    _body[x].Vam = (_body[x].Adis * _body[x].Vra)/100;
+                    Int64 Vam = (Int64)(_body[x].Adis * (_body[x].Vra / 100));
+                    _body[x].Vam = (decimal)(Vam);
                 }
                 catch { }
 
@@ -126,7 +127,7 @@ namespace ApiTax.Controllers
 
             }///payment
 
-                for (int x = 0; x < _Header.Count(); x++)
+            for (int x = 0; x < _Header.Count(); x++)
             {
 
                 long randomSerialDecimal = random.Next(999999999);
@@ -177,9 +178,9 @@ namespace ApiTax.Controllers
                 //int? type_1 = _Header[x].Inty;
                 //int? type_2 = _Header[x].Inp;
 
-          
+
                 _Header[x].Inty = type_1;
-          
+
                 _Header[x].Inp = type_2;
                 int? _sbc = _Header[x].Sbc;
 
@@ -215,21 +216,34 @@ namespace ApiTax.Controllers
 
             }
 
-           foreach(var item in list)
+            foreach (var item in list)
             {
                 #region جمع ها  
+                try
+                {
+                    item.Header.Tbill = 0;
+                    foreach (var it in item.Body)
+                    {
+                        try
+                        {
+                            item.Header.Tbill += Convert.ToDecimal(it.Tsstam);
+                        }
+                        catch { }
+                    }
+                }
+                catch { }
 
                 try
                 {
                     item.Header.Tvop = 0;
-                    foreach(var it in item.Body)
+                    foreach (var it in item.Body)
                     {
                         try
                         {
                             item.Header.Tvop += Convert.ToDecimal(it.Vop);
                         }
                         catch { }
-                    }                
+                    }
                 }
                 catch { }
 
@@ -305,7 +319,7 @@ namespace ApiTax.Controllers
 
                 try
                 {
-                    item.Header.Cap = item.Header.Tbill - item.Header.Insp - item.Header.Tvop - item.Header.Todam;
+                    item.Header.Cap = item.Header.Tbill - item.Header.Insp - item.Header.Tvam - item.Header.Todam;
                 }
                 catch { }
 
