@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "";
+    long id = ViewBag.id;
+    int type =ViewBag.type;
+    string message = "";
+    if(type==3)
+    {
+        message = "ابطال صورت حساب";
+    }
+
+    if(type==4)
+    {
+        message ="برگشت از فروش صورت حساب";
+    }
+
+    message = "آیا از" + " " + message + " "+"اطمینان دارید؟";
+}
+
+<h2 style="color:red">@message</h2>
+
+

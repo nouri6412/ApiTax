@@ -84,7 +84,7 @@ namespace ApiTax.Controllers
 
                 try
                 {
-                    _body[x].Prdis = Convert.ToDecimal(_body[x].Am) * _body[x].Fee;
+                    _body[x].Prdis =Math.Floor(Convert.ToDecimal( Convert.ToDecimal(_body[x].Am) * _body[x].Fee));
                 }
                 catch { }
 
@@ -92,7 +92,24 @@ namespace ApiTax.Controllers
 
                 try
                 {
-                    _body[x].Adis = _body[x].Prdis - _body[x].Dis;
+                    _body[x].Adis =Math.Floor(Convert.ToDecimal( _body[x].Prdis - _body[x].Dis));
+                }
+                catch { }
+
+                ////
+
+                try
+                {
+                    if (type_1 == 1 && type_2 == 7)
+                    {
+                        ///صادراتی از اکسل بر می دارد
+                    }
+                    else
+                    {
+                        _body[x].Odam =Math.Floor( Convert.ToDecimal( (_body[x].Adis * _body[x].Odr)/100));
+                    }
+
+               
                 }
                 catch { }
 
@@ -102,7 +119,7 @@ namespace ApiTax.Controllers
                 {
                     try
                     {
-                        _body[x].Adis = _body[x].Prdis + _body[x].Consfee + _body[x].Spro + _body[x].Bros - _body[x].Dis;
+                        _body[x].Adis =Math.Floor( Convert.ToDecimal( _body[x].Prdis + _body[x].Consfee + _body[x].Spro + _body[x].Bros - _body[x].Dis));
                     }
                     catch { }
                 }
@@ -111,16 +128,14 @@ namespace ApiTax.Controllers
 
                 try
                 {
-                    Int64 Vam = (Int64)(_body[x].Adis * (_body[x].Vra / 100));
-                    _body[x].Vam = (decimal)(Vam);
+                    decimal Vam =Math.Floor(Convert.ToDecimal((_body[x].Adis * _body[x].Vra) /100));
+                    _body[x].Vam = Vam;
                 }
                 catch { }
 
 
                 #endregion
             } ///body
-
-
 
             for (int x = 0; x < _Header.Count(); x++)
             {
@@ -132,11 +147,25 @@ namespace ApiTax.Controllers
 
                 long randomSerialDecimal = random.Next(999999999);
                 var now = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
+                string date1 = "";
+                try {
+                    date1 = _Header[x].Indati2m.ToString().Substring(0, 4) +"/"+ _Header[x].Indati2m.ToString().Substring(4, 2) +"/"+ _Header[x].Indati2m.ToString().Substring(6, 2);
+                }
+                catch {
+                    MyExportData MyExportData1 = new MyExportData() {  };
+
+                    MyExportData1.state = false;
+                    MyExportData1.message = "{error:'invalid data in row "+(x+1)+"'}";
+
+                    var output1 = JsonConvert.SerializeObject(MyExportData1);
+                    return Json(output1, JsonRequestBehavior.AllowGet);
+                }
+                var now2 = new DateTimeOffset(utility.ToMiladi(date1)).ToUnixTimeMilliseconds();
                 var taxId = TaxApiService.Instance.TaxIdGenerator.GenerateTaxId(memory_id,
                 randomSerialDecimal, DateTime.Now);
                 _Header[x].Taxid = taxId;
-                _Header[x].Indati2m = now;
-                _Header[x].Indatim = now;
+                _Header[x].Indati2m = now2;
+                _Header[x].Indatim = now ;
                 _Header[x].Tdis = 0;
 
             }
@@ -221,15 +250,31 @@ namespace ApiTax.Controllers
                 #region جمع ها  
                 try
                 {
-                    item.Header.Tbill = 0;
+                    if (type_1 == 1 && type_2 == 7)
+                    {
+                        /// صادرات از اکسل می گیرد
+                    }
+                    else
+                    {
+                        item.Header.Tbill = 0;
+                    }
+                      
                     foreach (var it in item.Body)
                     {
                         try
                         {
-                            item.Header.Tbill += Convert.ToDecimal(it.Tsstam);
+                            if(type_1==1 && type_2==7)
+                            {
+                                ///صادراتی از اکسل بر می دارد
+                            }
+                            else
+                            {
+                                item.Header.Tbill += Convert.ToDecimal(it.Tsstam);
+                            }
                         }
                         catch { }
                     }
+                    item.Header.Tbill = Math.Floor(Convert.ToDecimal(item.Header.Tbill));
                 }
                 catch { }
 
@@ -244,6 +289,8 @@ namespace ApiTax.Controllers
                         }
                         catch { }
                     }
+                    item.Header.Tvop = Math.Floor(Convert.ToDecimal(item.Header.Tvop));
+
                 }
                 catch { }
 
@@ -258,6 +305,7 @@ namespace ApiTax.Controllers
                         }
                         catch { }
                     }
+                    item.Header.Tdis = Math.Floor(Convert.ToDecimal(item.Header.Tdis));
                 }
                 catch { }
 
@@ -268,10 +316,11 @@ namespace ApiTax.Controllers
                     {
                         try
                         {
-                            item.Header.Tprdis += Convert.ToDecimal(it.Prdis);
+                            item.Header.Tprdis +=Convert.ToDecimal(it.Prdis);
                         }
                         catch { }
                     }
+                    item.Header.Tprdis = Math.Floor(Convert.ToDecimal(item.Header.Tprdis));
                 }
                 catch { }
 
@@ -286,6 +335,7 @@ namespace ApiTax.Controllers
                         }
                         catch { }
                     }
+                    item.Header.Tvam = Math.Floor(Convert.ToDecimal(item.Header.Tvam));
                 }
                 catch { }
 
@@ -300,6 +350,7 @@ namespace ApiTax.Controllers
                         }
                         catch { }
                     }
+                    item.Header.Tadis = Math.Floor(Convert.ToDecimal(item.Header.Tadis));
                 }
                 catch { }
 
@@ -314,12 +365,15 @@ namespace ApiTax.Controllers
                         }
                         catch { }
                     }
+                    item.Header.Todam = Math.Floor(Convert.ToDecimal(item.Header.Todam));
+
                 }
                 catch { }
 
                 try
                 {
                     item.Header.Cap = item.Header.Tbill - item.Header.Insp - item.Header.Tvam - item.Header.Todam;
+                    item.Header.Cap = Math.Floor(Convert.ToDecimal(item.Header.Cap));
                 }
                 catch { }
 
@@ -343,6 +397,37 @@ namespace ApiTax.Controllers
 
             var output = JsonConvert.SerializeObject(MyExportData);
             return Json(output, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult edit(long id = 0, int type = 0)
+        {
+            ViewBag.id = id;
+            ViewBag.type = type;
+            return View();
+        }
+        public ActionResult Confirmedit(long id=0 ,int type=0)
+        {
+            tb_check_send tb_check_send = db.tb_check_send.Where(r=>r.SendCheckId==id).FirstOrDefault();
+            ApiTax.Models.InvoiceDto _InvoiceDto = JsonConvert.DeserializeObject<ApiTax.Models.InvoiceDto>(tb_check_send.invoiceData);
+            var list = new List<ApiTax.Models.InvoiceDto>();
+            var random = new Random();
+            long randomSerialDecimal = random.Next(999999999);
+            var now = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
+
+            var taxId = TaxApiService.Instance.TaxIdGenerator.GenerateTaxId(memory_id,
+randomSerialDecimal, DateTime.Now);
+
+            _InvoiceDto.Header.Indatim = now;
+            _InvoiceDto.Header.Ins = type;
+            _InvoiceDto.Header.Irtaxid = _InvoiceDto.Header.Taxid;
+            _InvoiceDto.Header.Taxid = taxId;
+            list.Add(_InvoiceDto);
+            MyExportData MyExportData = new MyExportData() { list = list };
+
+
+
+                MyExportData.response = send_invoice(list);
+            return RedirectToAction("index");
         }
         public void init()
         {

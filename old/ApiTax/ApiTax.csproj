@@ -642,6 +642,7 @@
     <Content Include="Views\ContactInPersons\Details.cshtml" />
     <Content Include="Views\ContactInPersons\Edit.cshtml" />
     <Content Include="Views\ContactInPersons\Index.cshtml" />
+    <Content Include="Views\InvoiceApi\edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\sample\" />

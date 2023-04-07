@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
 namespace ApiTax.Models
 {
-    public class utility
+    public static class utility
     {
         public static string ToJson()
         {
@@ -17,6 +18,34 @@ namespace ApiTax.Models
 
             return json;
 
+        }
+
+        public static string ToPersian(string date)
+        {
+            try
+            {
+                DateTime d = DateTime.Parse(date);
+                PersianCalendar pc = new PersianCalendar();
+                return string.Format("{0}/{1}/{2}", pc.GetYear(d), pc.GetMonth(d), pc.GetDayOfMonth(d));
+            }
+            catch {
+                return "";
+            }
+
+
+        }
+
+        public static DateTime ToMiladi(string date)
+        {
+            try
+            {
+                return DateTime.Parse(date, new System.Globalization.CultureInfo("fa-IR"));
+
+            }
+            catch
+            {
+                return DateTime.Now;
+            }
         }
     }
 

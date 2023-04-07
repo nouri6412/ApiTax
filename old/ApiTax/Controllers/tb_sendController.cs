@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -21,22 +22,19 @@ namespace ApiTax.Controllers
         {
             InitRequest InitRequest = new InitRequest();
             InitRequest.init(User);
-
+           
             int pageSize = 15;
             int pageIndex = 1;
 
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var list = db.tb_send.Where(r => r.UserID == GlobalUser.CurrentUser.UserID).Include(t => t.User).Include(t => t.Client).OrderByDescending(r=>r.SendId).ToPagedList(pageIndex,pageSize);
+            ViewBag.page_index = pageIndex;
             return View(list);
         }
 
         // GET: tb_send/Details/5
         public ActionResult Details(long? id)
         {
-        
-
-
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

@@ -1,21 +1,30 @@
 ﻿
 @using PagedList.Mvc
 @model  PagedList.IPagedList<ApiTax.Models.tb_send>
+    @using ApiTax.Models
 @{
     /**/
 
-    ViewBag.Title = "Index";
+    ViewBag.Title = "صورت حساب های ارسال شده";
+    int page1 = ViewBag.page_index;
+    int index = (page1-1) *15;
+
 }
+
+
 
 <h2>صورت حساب های ارسال شده</h2>
 
 <table class="table">
     <tr>
         <th>
-            ClientID
+            ردیف
         </th>
         <th>
-            SendDate
+           حافظه مالیاتی
+        </th>
+        <th>
+         تاریخ ارسال
         </th>
         <th>
             کاربر
@@ -25,12 +34,16 @@
 
     @foreach (var item in Model)
     {
+        index++;
         <tr>
+            <td>
+                @index.ToString()
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Client.ClientID)  @Html.DisplayFor(modelItem => item.Client.tb_person.Fname) @Html.DisplayFor(modelItem => item.Client.tb_person.Lname) @Html.DisplayFor(modelItem => item.Client.tb_person.ComapnyName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SendDate)
+             @utility.ToPersian(item.SendDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.User.Fname)  @Html.DisplayFor(modelItem => item.User.LastName)
@@ -51,8 +64,8 @@
     <p></p>
     <p></p>
     <div class="pagination" style="margin-left: 400px">
-        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
-        of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        صفحه @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        از @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
     </div>
 </div>
 
