@@ -749,3 +749,4 @@ C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\obj\Debug\ApiTax.csproj.CoreC
 C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\obj\Debug\ApiTax.csproj.CopyComplete
 C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\obj\Debug\ApiTax.dll
 C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\obj\Debug\ApiTax.pdb
+C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\obj\Debug\ApiTax.csprojAssemblyReference.cache
