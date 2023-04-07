@@ -174,9 +174,23 @@ namespace ApiTax.Controllers
 
                 try
                 {
+                    _body[x].Tsstam = Math.Floor(Convert.ToDecimal((_body[x].Vam + _body[x].Adis + _body[x].Odam + _body[x].Olam)));
+                }
+                catch { }
+
+                try
+                {
                     _body[x].Cop = Math.Floor(Convert.ToDecimal((_body[x].Tsstam * _Header[x].Cap) / _Header[x].Tadis));
                 }
                 catch { }
+
+
+                try
+                {
+                    _body[x].Vop = Math.Floor(Convert.ToDecimal((_body[x].Vam * _Header[x].Cap) / _Header[x].Tadis)).ToString();
+                }
+                catch { }
+
 
 
                 #endregion
