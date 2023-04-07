@@ -96,7 +96,23 @@ namespace ApiTax.Controllers
                 }
                 catch { }
 
+
+
+
                 ////
+                ///
+
+                try
+                {
+                     if (type_1 == 1 && type_2 == 3)
+                    {
+                        ///الگوی طلا و جواهر
+                        _body[x].Odam = Math.Floor(Convert.ToDecimal((_body[x].Consfee + _body[x].Spro + _body[x].Bros)));
+                    }
+
+
+                }
+                catch { }
 
                 try
                 {
@@ -107,7 +123,7 @@ namespace ApiTax.Controllers
                     else if (type_1 == 1 && type_2 == 3)
                     {
                         ///الگوی طلا و جواهر
-                        _body[x].Odam =Math.Floor( Convert.ToDecimal( (_body[x].Tcpbs * _body[x].Olr)/100));
+                        _body[x].Odam =Math.Floor( Convert.ToDecimal( (_body[x].Tcpbs * _body[x].Odr)/100));
                     }
                     else
                     {
@@ -115,6 +131,24 @@ namespace ApiTax.Controllers
                     }
 
                
+                }
+                catch { }
+
+                try
+                {
+                    if (type_1 == 1 && type_2 == 7)
+                    {
+                        ///صادراتی از اکسل بر می دارد
+                    }
+                    else if (type_1 == 1 && type_2 == 3)
+                    {
+                        ///الگوی طلا و جواهر
+                        _body[x].Odam = Math.Floor(Convert.ToDecimal((_body[x].Tcpbs * _body[x].Olr) / 100));
+                    }
+                    else
+                    {
+                        _body[x].Olam = Math.Floor(Convert.ToDecimal((_body[x].Adis * _body[x].Olr) / 100));
+                    }
                 }
                 catch { }
 
@@ -135,6 +169,12 @@ namespace ApiTax.Controllers
                 {
                     decimal Vam =Math.Floor(Convert.ToDecimal((_body[x].Adis * _body[x].Vra) /100));
                     _body[x].Vam = Vam;
+                }
+                catch { }
+
+                try
+                {
+                    _body[x].Cop = Math.Floor(Convert.ToDecimal((_body[x].Tsstam * _Header[x].Cap) / _Header[x].Tadis));
                 }
                 catch { }
 
