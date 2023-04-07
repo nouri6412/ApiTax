@@ -175,6 +175,7 @@ namespace ApiTax.Controllers
             List<InvoiceMyValidation> _InvoiceMyValidation = new List<InvoiceMyValidation>();
             List<ApiTax.Models.InvoiceDto> list = new List<ApiTax.Models.InvoiceDto>();
             var list_detail = new List<ApiTax.Models.InvoiceBodyDto>();
+            var list_pay = new List<ApiTax.Models.PaymentDto>();
             for (int x = 0; x < _Header.Count(); x++)
             {
                 if ((inno != _Header[x].Inno && inno != 0) || x == _Header.Count() - 1)
@@ -182,25 +183,33 @@ namespace ApiTax.Controllers
                     if (x == _Header.Count() - 1)
                     {
                         list_detail.Add(_body[x]);
+                        list_pay.Add(_Payments[x]);
                     }
 
                     ApiTax.Models.InvoiceDto _InvoiceDto = new ApiTax.Models.InvoiceDto() { };
+                   
                     if (x > 0)
                     {
                         _InvoiceDto.Header = _Header[x - 1];
+                       _InvoiceDto.Payments = new List<Models.PaymentDto>() { _Payments[x-1] };// روش header
                     }
                     else
                     {
                         _InvoiceDto.Header = _Header[x];
+                        _InvoiceDto.Payments = new List<Models.PaymentDto>() { _Payments[x] };// روش header
                     }
 
                     _InvoiceDto.Body = list_detail;
                     // _InvoiceDto.extension = new Extension();
-                    _InvoiceDto.Payments = _Payments;
+                    //  _InvoiceDto.Payments = list_pay;// روش body
+
                     list_detail = new List<ApiTax.Models.InvoiceBodyDto>();
+                    list_pay = new List<ApiTax.Models.PaymentDto>(); 
+
                     list.Add(_InvoiceDto);
                 }
                 list_detail.Add(_body[x]);
+                list_pay.Add(_Payments[x]);
 
                 inno = _Header[x].Inno;
 
