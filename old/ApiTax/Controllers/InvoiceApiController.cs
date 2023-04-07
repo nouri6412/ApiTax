@@ -174,7 +174,19 @@ namespace ApiTax.Controllers
 
                 try
                 {
-                    _body[x].Tsstam = Math.Floor(Convert.ToDecimal((_body[x].Vam + _body[x].Adis + _body[x].Odam + _body[x].Olam)));
+                    if (type_1 == 1 && type_2 == 7)
+                    {
+
+                    }
+                       else if (type_1 == 1 && type_2 == 6)
+                    {
+                        _body[x].Tsstam = Math.Floor(Convert.ToDecimal((_body[x].Fee + _body[x].Vam )));
+
+                    }
+                    else
+                    {
+                        _body[x].Tsstam = Math.Floor(Convert.ToDecimal((_body[x].Vam + _body[x].Adis + _body[x].Odam + _body[x].Olam)));
+                    }
                 }
                 catch { }
 
