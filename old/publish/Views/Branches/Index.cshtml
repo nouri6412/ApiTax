@@ -10,7 +10,7 @@
 <h2>@page_title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", new { ClientID = Client.ID })
+    @Html.ActionLink("ایجاد کردن", "Create", new { ClientID = Client.ID },new { @class="btn btn-success" })
 </p>
 <table class="table">
     <tr>
@@ -67,5 +67,5 @@
 
 </table>
 <div>
-    @Html.ActionLink("Back to List", "Index", "Clients", new { PersonId = Client.PersonId }, new { })
+    @Html.ActionLink("بازگشت به لیست", "Index", "Clients", new { PersonId = Client.PersonId }, new { })
 </div>

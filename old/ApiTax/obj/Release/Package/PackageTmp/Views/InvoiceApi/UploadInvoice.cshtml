@@ -1,4 +1,14 @@
-﻿<div style="margin-top:50px" class="panel panel-info">
+﻿@{ 
+    int type_1 = ViewBag.type_1;
+    int type_2 = ViewBag.type_2;
+    string page_title = ViewBag.page_title;
+    string excel = type_1.ToString() + "-" + type_2.ToString() + ".xlsx";
+}
+<h3>@page_title</h3>
+<p class="m-3">
+    <a href="~/App_Data/sample/@excel" class="btn btn-info">دانلود فایل نمونه</a>
+</p>
+<div style="margin-top:50px" class="panel panel-info">
     <div class="panel-heading">آپلود فایل صورت حساب</div>
     <div class="panel-body">
         <div id="upload-panel" class="container p-5">
@@ -28,7 +38,7 @@
                 type: 'POST',
                 url: '@Url.Content("~/InvoiceApi/UploadInvoice")',
                 data: {
-                    excel_data: JSON.stringify(data)
+                    excel_data: JSON.stringify(data),type_1:'@type_1.ToString()',type_2:'@type_2.ToString()'
                 },
                 success: function (msg) {
                      $("#upload-panel").css('display','block');

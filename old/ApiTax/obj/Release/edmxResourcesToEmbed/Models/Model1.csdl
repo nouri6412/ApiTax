@@ -40,6 +40,16 @@
     <Property Name="CompanyTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="tb_person" Relationship="Self.FK_tb_person_CompanyType" FromRole="CompanyType" ToRole="tb_person" />
   </EntityType>
+  <EntityType Name="ContactInPerson">
+    <Key>
+      <PropertyRef Name="ContactInPersonID" />
+    </Key>
+    <Property Name="ContactInPersonID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="personID" Type="Int64" />
+    <Property Name="ContactID" Type="Int64" />
+    <NavigationProperty Name="tb_contact" Relationship="Self.FK_ContactInPerson_tb_contact" FromRole="ContactInPerson" ToRole="tb_contact" />
+    <NavigationProperty Name="tb_person" Relationship="Self.FK_ContactInPerson_tb_person" FromRole="ContactInPerson" ToRole="tb_person" />
+  </EntityType>
   <EntityType Name="Curreny">
     <Key>
       <PropertyRef Name="cut" />
@@ -322,6 +332,16 @@
     <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Products" Relationship="Self.FK_Product_TaxableOrFree" FromRole="TaxableOrFree" ToRole="Product" />
   </EntityType>
+  <EntityType Name="tb_bank">
+    <Key>
+      <PropertyRef Name="BankID" />
+    </Key>
+    <Property Name="BankID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ShabaPatern" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tb_person" Relationship="Self.FK_tb_person_tb_bank" FromRole="tb_bank" ToRole="tb_person" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_tb_bank" FromRole="tb_bank" ToRole="User" />
+  </EntityType>
   <EntityType Name="tb_check_send">
     <Key>
       <PropertyRef Name="SendCheckId" />
@@ -337,6 +357,50 @@
     <Property Name="invoiceData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="ResponseStatus" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="tb_send" Relationship="Self.FK_tb_check_send_tb_send" FromRole="tb_check_send" ToRole="tb_send" />
+  </EntityType>
+  <EntityType Name="tb_contact">
+    <Key>
+      <PropertyRef Name="ContactID" />
+    </Key>
+    <Property Name="ContactID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NationalCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="tel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="mobile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="degreeID" Type="Int32" />
+    <Property Name="magorID" Type="Int32" />
+    <NavigationProperty Name="ContactInPerson" Relationship="Self.FK_ContactInPerson_tb_contact" FromRole="tb_contact" ToRole="ContactInPerson" />
+    <NavigationProperty Name="tb_degree" Relationship="Self.FK_tb_contact_tb_degree" FromRole="tb_contact" ToRole="tb_degree" />
+    <NavigationProperty Name="tb_magor" Relationship="Self.FK_tb_contact_tb_magor" FromRole="tb_contact" ToRole="tb_magor" />
+  </EntityType>
+  <EntityType Name="tb_degree">
+    <Key>
+      <PropertyRef Name="degreeID" />
+    </Key>
+    <Property Name="degreeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tb_contact" Relationship="Self.FK_tb_contact_tb_degree" FromRole="tb_degree" ToRole="tb_contact" />
+  </EntityType>
+  <EntityType Name="tb_magor">
+    <Key>
+      <PropertyRef Name="magorID" />
+    </Key>
+    <Property Name="magorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tb_contact" Relationship="Self.FK_tb_contact_tb_magor" FromRole="tb_magor" ToRole="tb_contact" />
+  </EntityType>
+  <EntityType Name="tb_marketing">
+    <Key>
+      <PropertyRef Name="MarketingID" />
+    </Key>
+    <Property Name="MarketingID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="NationalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="RegDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="Self.FK_tb_marketing_User" FromRole="tb_marketing" ToRole="User" />
   </EntityType>
   <EntityType Name="tb_person">
     <Key>
@@ -357,9 +421,13 @@
     <Property Name="RegisterationDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CompanyTypeId" Type="Int32" />
     <Property Name="RegisterNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BankID" Type="Int32" />
+    <Property Name="Shaba" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Clients" Relationship="Self.FK_Client_tb_person" FromRole="tb_person" ToRole="Client" />
     <NavigationProperty Name="CompanyType" Relationship="Self.FK_tb_person_CompanyType" FromRole="tb_person" ToRole="CompanyType" />
+    <NavigationProperty Name="ContactInPerson" Relationship="Self.FK_ContactInPerson_tb_person" FromRole="tb_person" ToRole="ContactInPerson" />
     <NavigationProperty Name="PersonType" Relationship="Self.FK_Person_Person" FromRole="tb_person" ToRole="PersonType" />
+    <NavigationProperty Name="tb_bank" Relationship="Self.FK_tb_person_tb_bank" FromRole="tb_person" ToRole="tb_bank" />
   </EntityType>
   <EntityType Name="tb_send">
     <Key>
@@ -391,9 +459,14 @@
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="PassWord" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="IsActive" Type="Boolean" />
-    <Property Name="StartActive" Type="DateTime" Precision="3" />
-    <Property Name="EndActive" Type="DateTime" Precision="3" />
+    <Property Name="StartActive" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EndActive" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="isAdmin" Type="Boolean" />
+    <Property Name="user_type" Type="Int32" />
+    <Property Name="BankID" Type="Int32" />
+    <Property Name="Shaba" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tb_bank" Relationship="Self.FK_User_tb_bank" FromRole="User" ToRole="tb_bank" />
+    <NavigationProperty Name="tb_marketing" Relationship="Self.FK_tb_marketing_User" FromRole="User" ToRole="tb_marketing" />
     <NavigationProperty Name="tb_send" Relationship="Self.FK_tb_send_User" FromRole="User" ToRole="tb_send" />
     <NavigationProperty Name="UserBranches" Relationship="Self.FK_UserBranch_User" FromRole="User" ToRole="UserBranch" />
   </EntityType>
@@ -464,6 +537,30 @@
       </Principal>
       <Dependent Role="tb_person">
         <PropertyRef Name="CompanyTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactInPerson_tb_contact">
+    <End Role="tb_contact" Type="Self.tb_contact" Multiplicity="1" />
+    <End Role="ContactInPerson" Type="Self.ContactInPerson" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tb_contact">
+        <PropertyRef Name="ContactID" />
+      </Principal>
+      <Dependent Role="ContactInPerson">
+        <PropertyRef Name="ContactInPersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactInPerson_tb_person">
+    <End Role="tb_person" Type="Self.tb_person" Multiplicity="1" />
+    <End Role="ContactInPerson" Type="Self.ContactInPerson" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tb_person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="ContactInPerson">
+        <PropertyRef Name="ContactInPersonID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -719,6 +816,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tb_person_tb_bank">
+    <End Role="tb_bank" Type="Self.tb_bank" Multiplicity="0..1" />
+    <End Role="tb_person" Type="Self.tb_person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_bank">
+        <PropertyRef Name="BankID" />
+      </Principal>
+      <Dependent Role="tb_person">
+        <PropertyRef Name="BankID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_tb_bank">
+    <End Role="tb_bank" Type="Self.tb_bank" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_bank">
+        <PropertyRef Name="BankID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="BankID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tb_check_send_tb_send">
     <End Role="tb_send" Type="Self.tb_send" Multiplicity="0..1" />
     <End Role="tb_check_send" Type="Self.tb_check_send" Multiplicity="*" />
@@ -728,6 +849,42 @@
       </Principal>
       <Dependent Role="tb_check_send">
         <PropertyRef Name="SendId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_contact_tb_degree">
+    <End Role="tb_degree" Type="Self.tb_degree" Multiplicity="0..1" />
+    <End Role="tb_contact" Type="Self.tb_contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_degree">
+        <PropertyRef Name="degreeID" />
+      </Principal>
+      <Dependent Role="tb_contact">
+        <PropertyRef Name="degreeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_contact_tb_magor">
+    <End Role="tb_magor" Type="Self.tb_magor" Multiplicity="0..1" />
+    <End Role="tb_contact" Type="Self.tb_contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_magor">
+        <PropertyRef Name="magorID" />
+      </Principal>
+      <Dependent Role="tb_contact">
+        <PropertyRef Name="magorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_marketing_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="tb_marketing" Type="Self.tb_marketing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="tb_marketing">
+        <PropertyRef Name="UserID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -759,6 +916,7 @@
     <EntitySet Name="Branches" EntityType="Self.Branch" />
     <EntitySet Name="Clients" EntityType="Self.Client" />
     <EntitySet Name="CompanyTypes" EntityType="Self.CompanyType" />
+    <EntitySet Name="ContactInPersons" EntityType="Self.ContactInPerson" />
     <EntitySet Name="Currenies" EntityType="Self.Curreny" />
     <EntitySet Name="ErrorCodes" EntityType="Self.ErrorCode" />
     <EntitySet Name="ErrorTypes" EntityType="Self.ErrorType" />
@@ -779,7 +937,12 @@
     <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
     <EntitySet Name="SpecialOrGenerals" EntityType="Self.SpecialOrGeneral" />
     <EntitySet Name="TaxableOrFrees" EntityType="Self.TaxableOrFree" />
+    <EntitySet Name="tb_bank" EntityType="Self.tb_bank" />
     <EntitySet Name="tb_check_send" EntityType="Self.tb_check_send" />
+    <EntitySet Name="tb_contact" EntityType="Self.tb_contact" />
+    <EntitySet Name="tb_degree" EntityType="Self.tb_degree" />
+    <EntitySet Name="tb_magor" EntityType="Self.tb_magor" />
+    <EntitySet Name="tb_marketing" EntityType="Self.tb_marketing" />
     <EntitySet Name="tb_person" EntityType="Self.tb_person" />
     <EntitySet Name="tb_send" EntityType="Self.tb_send" />
     <EntitySet Name="Users" EntityType="Self.User" />
@@ -803,6 +966,14 @@
     <AssociationSet Name="FK_tb_person_CompanyType" Association="Self.FK_tb_person_CompanyType">
       <End Role="CompanyType" EntitySet="CompanyTypes" />
       <End Role="tb_person" EntitySet="tb_person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactInPerson_tb_contact" Association="Self.FK_ContactInPerson_tb_contact">
+      <End Role="tb_contact" EntitySet="tb_contact" />
+      <End Role="ContactInPerson" EntitySet="ContactInPersons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactInPerson_tb_person" Association="Self.FK_ContactInPerson_tb_person">
+      <End Role="tb_person" EntitySet="tb_person" />
+      <End Role="ContactInPerson" EntitySet="ContactInPersons" />
     </AssociationSet>
     <AssociationSet Name="FK_ErrorCode_ErrorType" Association="Self.FK_ErrorCode_ErrorType">
       <End Role="ErrorType" EntitySet="ErrorTypes" />
@@ -888,9 +1059,29 @@
       <End Role="TaxableOrFree" EntitySet="TaxableOrFrees" />
       <End Role="Product" EntitySet="Products" />
     </AssociationSet>
+    <AssociationSet Name="FK_tb_person_tb_bank" Association="Self.FK_tb_person_tb_bank">
+      <End Role="tb_bank" EntitySet="tb_bank" />
+      <End Role="tb_person" EntitySet="tb_person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_tb_bank" Association="Self.FK_User_tb_bank">
+      <End Role="tb_bank" EntitySet="tb_bank" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
     <AssociationSet Name="FK_tb_check_send_tb_send" Association="Self.FK_tb_check_send_tb_send">
       <End Role="tb_send" EntitySet="tb_send" />
       <End Role="tb_check_send" EntitySet="tb_check_send" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_contact_tb_degree" Association="Self.FK_tb_contact_tb_degree">
+      <End Role="tb_degree" EntitySet="tb_degree" />
+      <End Role="tb_contact" EntitySet="tb_contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_contact_tb_magor" Association="Self.FK_tb_contact_tb_magor">
+      <End Role="tb_magor" EntitySet="tb_magor" />
+      <End Role="tb_contact" EntitySet="tb_contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_marketing_User" Association="Self.FK_tb_marketing_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="tb_marketing" EntitySet="tb_marketing" />
     </AssociationSet>
     <AssociationSet Name="FK_tb_send_User" Association="Self.FK_tb_send_User">
       <End Role="User" EntitySet="Users" />
