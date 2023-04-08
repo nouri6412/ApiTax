@@ -235,8 +235,8 @@ namespace ApiTax.Controllers
                 var taxId = TaxApiService.Instance.TaxIdGenerator.GenerateTaxId(memory_id,
                 randomSerialDecimal, DateTime.Now);
                 _Header[x].Taxid = taxId;
-                _Header[x].Indati2m = now2;
-                _Header[x].Indatim = now ;
+                _Header[x].Indati2m = now;
+                _Header[x].Indatim = now2 ;
                 _Header[x].Tdis = 0;
 
             }
@@ -497,7 +497,7 @@ namespace ApiTax.Controllers
             var taxId = TaxApiService.Instance.TaxIdGenerator.GenerateTaxId(memory_id,
 randomSerialDecimal, DateTime.Now);
 
-            _InvoiceDto.Header.Indatim = now;
+            _InvoiceDto.Header.Indati2m = now;
             _InvoiceDto.Header.Ins = type;
             _InvoiceDto.Header.Irtaxid = _InvoiceDto.Header.Taxid;
             _InvoiceDto.Header.Taxid = taxId;
