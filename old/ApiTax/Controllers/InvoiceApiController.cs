@@ -220,7 +220,7 @@ namespace ApiTax.Controllers
                 var now = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
                 string date1 = "";
                 try {
-                    date1 = _Header[x].Indati2m.ToString().Substring(0, 4) +"/"+ _Header[x].Indati2m.ToString().Substring(4, 2) +"/"+ _Header[x].Indati2m.ToString().Substring(6, 2);
+                    date1 = _Header[x].Indatim.ToString().Substring(0, 4) +"/"+ _Header[x].Indatim.ToString().Substring(4, 2) +"/"+ _Header[x].Indatim.ToString().Substring(6, 2);
                 }
                 catch {
                     MyExportData MyExportData1 = new MyExportData() {  };
@@ -231,12 +231,17 @@ namespace ApiTax.Controllers
                     var output1 = JsonConvert.SerializeObject(MyExportData1);
                     return Json(output1, JsonRequestBehavior.AllowGet);
                 }
-                var now2 = new DateTimeOffset(utility.ToMiladi(date1)).ToUnixTimeMilliseconds();
+                int Hours = DateTime.Now.Hour;
+                int Minutes = DateTime.Now.Minute;
+
+                int Seconds = DateTime.Now.Second;
+
+                var now2 = new DateTimeOffset(utility.ToMiladi(date1).AddHours(Hours).AddMinutes(Minutes).AddSeconds(Seconds)).ToUnixTimeMilliseconds();
                 var taxId = TaxApiService.Instance.TaxIdGenerator.GenerateTaxId(memory_id,
                 randomSerialDecimal, DateTime.Now);
                 _Header[x].Taxid = taxId;
-                _Header[x].Indati2m = now;
-                _Header[x].Indatim = now2 ;
+                _Header[x].Indati2m = now2;
+                _Header[x].Indatim = now;
                 _Header[x].Tdis = 0;
 
             }
