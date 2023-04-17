@@ -66,8 +66,8 @@
                 @Html.ActionLink("مشاهده پاسخ استعلام", "Details", new { id = item.SendCheckId }, new { @class = "btn btn-primary" })
                 @Html.ActionLink("جزئیات", "Details", new { id = item.SendCheckId }, new { @class = "btn btn-primary" })
                 <a class="btn btn-warning" href="#">اصلاح صورت حساب</a>
-                <a class="btn btn-warning" href="#">ابطال صورت حساب</a>
-                <a class="btn btn-warning" href="#">برگشت از فروش</a>
+                <a class="btn btn-warning" href="~/InvoiceApi/edit?id=@item.SendCheckId&type=3">ابطال صورت حساب</a>
+                <a class="btn btn-warning" href="~/InvoiceApi/edit?id=@item.SendCheckId&type=4">برگشت از فروش</a>
 
             </td>
         </tr>

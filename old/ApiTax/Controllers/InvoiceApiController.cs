@@ -492,7 +492,27 @@ namespace ApiTax.Controllers
         }
         public ActionResult Confirmedit(long id=0 ,int type=0)
         {
-            tb_check_send tb_check_send = db.tb_check_send.Where(r=>r.SendCheckId==id).FirstOrDefault();
+            tb_check_send tb_check_send = db.tb_check_send.Where(r => r.SendCheckId == id).FirstOrDefault();
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+
+            CurrentUser = GlobalUser.CurrentUser;
+
+            memory_id = tb_check_send.tb_send.Client.ClientID;
+            var ex_client = db.Clients.Where(r => r.ClientID == memory_id);
+
+            if (ex_client == null || ex_client.Count() == 0)
+            {
+                var error = JsonConvert.SerializeObject(new MyExportData() { state = false, message = "حافظه مالیاتی یافت نشد" });
+                return Json(error, JsonRequestBehavior.AllowGet);
+            }
+
+            _Client = ex_client.FirstOrDefault();
+            init();
+
+
+         
             ApiTax.Models.InvoiceDto _InvoiceDto = JsonConvert.DeserializeObject<ApiTax.Models.InvoiceDto>(tb_check_send.invoiceData);
             var list = new List<ApiTax.Models.InvoiceDto>();
             var random = new Random();
@@ -502,7 +522,7 @@ namespace ApiTax.Controllers
             var taxId = TaxApiService.Instance.TaxIdGenerator.GenerateTaxId(memory_id,
 randomSerialDecimal, DateTime.Now);
 
-            _InvoiceDto.Header.Indati2m = now;
+            _InvoiceDto.Header.Indatim = now;
             _InvoiceDto.Header.Ins = type;
             _InvoiceDto.Header.Irtaxid = _InvoiceDto.Header.Taxid;
             _InvoiceDto.Header.Taxid = taxId;
@@ -512,7 +532,7 @@ randomSerialDecimal, DateTime.Now);
 
 
                 MyExportData.response = send_invoice(list);
-            return RedirectToAction("index");
+            return RedirectToAction("index", "tb_send", new { });
         }
         public void init()
         {
@@ -898,6 +918,14 @@ randomSerialDecimal, DateTime.Now);
             }
             return MyValidation;
 
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
     public class MyValidation
