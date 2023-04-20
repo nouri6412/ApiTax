@@ -1,0 +1,1095 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StoreTerminalSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="BranchID" />
+    </Key>
+    <Property Name="BranchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ManagerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="BranchAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ClientID" Type="Int64" />
+    <Property Name="BranchNum" Type="Int64" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Branch_Client" FromRole="Branch" ToRole="Client" />
+    <NavigationProperty Name="UserBranches" Relationship="Self.FK_UserBranch_Branch" FromRole="Branch" ToRole="UserBranch" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientID" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="PublicKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PrivateKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Econo" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ParticipationID" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+    <Property Name="TraceCode" Type="Int64" />
+    <Property Name="Tins" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PersonId" Type="Int64" />
+    <NavigationProperty Name="Branches" Relationship="Self.FK_Branch_Client" FromRole="Client" ToRole="Branch" />
+    <NavigationProperty Name="tb_person" Relationship="Self.FK_Client_tb_person" FromRole="Client" ToRole="tb_person" />
+    <NavigationProperty Name="tb_send" Relationship="Self.FK_tb_send_Client" FromRole="Client" ToRole="tb_send" />
+  </EntityType>
+  <EntityType Name="CompanyType">
+    <Key>
+      <PropertyRef Name="CompanyTypeId" />
+    </Key>
+    <Property Name="CompanyTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tb_person" Relationship="Self.FK_tb_person_CompanyType" FromRole="CompanyType" ToRole="tb_person" />
+  </EntityType>
+  <EntityType Name="ContactInPerson">
+    <Key>
+      <PropertyRef Name="ContactInPersonID" />
+    </Key>
+    <Property Name="ContactInPersonID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="personID" Type="Int64" />
+    <Property Name="ContactID" Type="Int64" />
+    <NavigationProperty Name="tb_contact" Relationship="Self.FK_ContactInPerson_tb_contact" FromRole="ContactInPerson" ToRole="tb_contact" />
+    <NavigationProperty Name="tb_person" Relationship="Self.FK_ContactInPerson_tb_person" FromRole="ContactInPerson" ToRole="tb_person" />
+  </EntityType>
+  <EntityType Name="Curreny">
+    <Key>
+      <PropertyRef Name="cut" />
+    </Key>
+    <Property Name="Code" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="cut" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="DecimalPlaces" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="Country" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UseArea" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ErrorCode">
+    <Key>
+      <PropertyRef Name="ErrorCodeID" />
+    </Key>
+    <Property Name="ErrorCodeID" Type="Int32" Nullable="false" />
+    <Property Name="ErrorDetail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ErrorDetailPe" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ErrorTypeID" Type="Int32" />
+    <NavigationProperty Name="ErrorType" Relationship="Self.FK_ErrorCode_ErrorType" FromRole="ErrorCode" ToRole="ErrorType" />
+  </EntityType>
+  <EntityType Name="ErrorType">
+    <Key>
+      <PropertyRef Name="ErrorTypeID" />
+    </Key>
+    <Property Name="ErrorTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ErrorCodes" Relationship="Self.FK_ErrorCode_ErrorType" FromRole="ErrorType" ToRole="ErrorCode" />
+  </EntityType>
+  <EntityType Name="FieldPosition">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ftType">
+    <Key>
+      <PropertyRef Name="ftID" />
+    </Key>
+    <Property Name="ftID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="InvoiceHeaders" Relationship="Self.FK_Invoice_ftType" FromRole="ftType" ToRole="InvoiceHeader" />
+  </EntityType>
+  <EntityType Name="InPatern">
+    <Key>
+      <PropertyRef Name="InpID" />
+    </Key>
+    <Property Name="InpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="InvoiceHeaders" Relationship="Self.FK_Invoice_inp" FromRole="InPatern" ToRole="InvoiceHeader" />
+  </EntityType>
+  <EntityType Name="InsType">
+    <Key>
+      <PropertyRef Name="Ins" />
+    </Key>
+    <Property Name="Ins" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="InvoiceHeaders" Relationship="Self.FK_Invoice_InsType" FromRole="InsType" ToRole="InvoiceHeader" />
+  </EntityType>
+  <EntityType Name="InType">
+    <Key>
+      <PropertyRef Name="Inty" />
+    </Key>
+    <Property Name="Inty" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="InvoiceBody">
+    <Key>
+      <PropertyRef Name="InvoiceBodyID" />
+    </Key>
+    <Property Name="InvoiceBodyID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Taxid" Type="Int64" />
+    <Property Name="Sstid" Type="Int64" />
+    <Property Name="Am" Type="Decimal" Precision="21" Scale="8" />
+    <Property Name="Fee" Type="Decimal" Precision="26" Scale="8" />
+    <Property Name="Cfee" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Cut" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="Exr" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Prdis" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Dis" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Adis" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Vra" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="Vam" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Odt" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Odr" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="Odam" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Olt" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Olr" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="Olam" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Concfee" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Spro" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Bros" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Tcpbs" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Vop" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Sstt" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="MuS" Type="Int32" />
+    <Property Name="Tsstam" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Bsrn" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Cop" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="InvoiceHeader" Relationship="Self.FK_InvoiceBody_InvoiceHeader" FromRole="InvoiceBody" ToRole="InvoiceHeader" />
+  </EntityType>
+  <EntityType Name="InvoiceField">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="FieldPositionID" Type="Int32" />
+    <Property Name="Field" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InvoiceTitleEn" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Inp11" Type="Int32" />
+    <Property Name="Inp12" Type="Int32" />
+    <Property Name="Inp13" Type="Int32" />
+    <Property Name="Inp14" Type="Int32" />
+    <Property Name="Inp15" Type="Int32" />
+    <Property Name="Inp16" Type="Int32" />
+    <Property Name="Inp17" Type="Int32" />
+    <Property Name="inp21" Type="Int32" />
+    <Property Name="inp22" Type="Int32" />
+    <Property Name="inp31" Type="Int32" />
+    <NavigationProperty Name="OptionalMode" Relationship="Self.FK_InvoiceField_FieldPosition" FromRole="InvoiceField" ToRole="OptionalMode" />
+    <NavigationProperty Name="OptionalMode1" Relationship="Self.FK_InvoiceField_OptionalMode" FromRole="InvoiceField" ToRole="OptionalMode" />
+    <NavigationProperty Name="OptionalMode2" Relationship="Self.FK_InvoiceField_OptionalMode1" FromRole="InvoiceField" ToRole="OptionalMode" />
+    <NavigationProperty Name="OptionalMode3" Relationship="Self.FK_InvoiceField_OptionalMode2" FromRole="InvoiceField" ToRole="OptionalMode" />
+    <NavigationProperty Name="OptionalMode4" Relationship="Self.FK_InvoiceField_OptionalMode3" FromRole="InvoiceField" ToRole="OptionalMode" />
+    <NavigationProperty Name="OptionalMode5" Relationship="Self.FK_InvoiceField_OptionalMode4" FromRole="InvoiceField" ToRole="OptionalMode" />
+    <NavigationProperty Name="OptionalMode6" Relationship="Self.FK_InvoiceField_OptionalMode5" FromRole="InvoiceField" ToRole="OptionalMode" />
+    <NavigationProperty Name="OptionalMode7" Relationship="Self.FK_InvoiceField_OptionalMode6" FromRole="InvoiceField" ToRole="OptionalMode" />
+    <NavigationProperty Name="OptionalMode8" Relationship="Self.FK_InvoiceField_OptionalMode7" FromRole="InvoiceField" ToRole="OptionalMode" />
+    <NavigationProperty Name="OptionalMode9" Relationship="Self.FK_InvoiceField_OptionalMode8" FromRole="InvoiceField" ToRole="OptionalMode" />
+  </EntityType>
+  <EntityType Name="InvoiceHeader">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+    </Key>
+    <Property Name="InvoiceID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Taxid" Type="String" MaxLength="22" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Inno" Type="Int64" Nullable="false" />
+    <Property Name="Irtaxid" Type="String" MaxLength="22" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Indatim" Type="Int64" Nullable="false" />
+    <Property Name="Indati2m" Type="Int64" />
+    <Property Name="Inp" Type="Int32" Nullable="false" />
+    <Property Name="Tins" Type="String" MaxLength="14" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Ins" Type="Int32" Nullable="false" />
+    <Property Name="Sbc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Crn" Type="Int32" />
+    <Property Name="Scln" Type="Int64" />
+    <Property Name="Scc" Type="Int32" />
+    <Property Name="spc" Type="Int32" />
+    <Property Name="Tinb" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+    <Property Name="Bid" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Bbc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Billid" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Bpc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="ft" Type="Int32" />
+    <Property Name="Bpn" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Setm" Type="Int32" Nullable="false" />
+    <Property Name="Cap" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="Insp" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="tax17" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="Tvam" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="Tprdis" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="Tdis" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="Tadis" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="Todam" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="Tbill" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="tcpbs" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="tonw" Type="Decimal" Precision="19" Scale="3" />
+    <Property Name="torv" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="tocv" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Tob" Type="Int32" />
+    <Property Name="uuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Inty" Type="Int32" />
+    <Property Name="Tvop" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Dpvb" Type="Int32" />
+    <Property Name="InpID" Type="Int32" />
+    <NavigationProperty Name="ftType" Relationship="Self.FK_Invoice_ftType" FromRole="InvoiceHeader" ToRole="ftType" />
+    <NavigationProperty Name="InPatern" Relationship="Self.FK_Invoice_inp" FromRole="InvoiceHeader" ToRole="InPatern" />
+    <NavigationProperty Name="InsType" Relationship="Self.FK_Invoice_InsType" FromRole="InvoiceHeader" ToRole="InsType" />
+    <NavigationProperty Name="InvoiceBodies" Relationship="Self.FK_InvoiceBody_InvoiceHeader" FromRole="InvoiceHeader" ToRole="InvoiceBody" />
+    <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_InvoiceHeader" FromRole="InvoiceHeader" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="muType">
+    <Key>
+      <PropertyRef Name="mu" />
+    </Key>
+    <Property Name="mu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_muType" FromRole="muType" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="OptionalMode">
+    <Key>
+      <PropertyRef Name="OptionalModeID" />
+    </Key>
+    <Property Name="OptionalModeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="InvoiceFields" Relationship="Self.FK_InvoiceField_FieldPosition" FromRole="OptionalMode" ToRole="InvoiceField" />
+    <NavigationProperty Name="InvoiceFields1" Relationship="Self.FK_InvoiceField_OptionalMode" FromRole="OptionalMode" ToRole="InvoiceField" />
+    <NavigationProperty Name="InvoiceFields2" Relationship="Self.FK_InvoiceField_OptionalMode1" FromRole="OptionalMode" ToRole="InvoiceField" />
+    <NavigationProperty Name="InvoiceFields3" Relationship="Self.FK_InvoiceField_OptionalMode2" FromRole="OptionalMode" ToRole="InvoiceField" />
+    <NavigationProperty Name="InvoiceFields4" Relationship="Self.FK_InvoiceField_OptionalMode3" FromRole="OptionalMode" ToRole="InvoiceField" />
+    <NavigationProperty Name="InvoiceFields5" Relationship="Self.FK_InvoiceField_OptionalMode4" FromRole="OptionalMode" ToRole="InvoiceField" />
+    <NavigationProperty Name="InvoiceFields6" Relationship="Self.FK_InvoiceField_OptionalMode5" FromRole="OptionalMode" ToRole="InvoiceField" />
+    <NavigationProperty Name="InvoiceFields7" Relationship="Self.FK_InvoiceField_OptionalMode6" FromRole="OptionalMode" ToRole="InvoiceField" />
+    <NavigationProperty Name="InvoiceFields8" Relationship="Self.FK_InvoiceField_OptionalMode7" FromRole="OptionalMode" ToRole="InvoiceField" />
+    <NavigationProperty Name="InvoiceFields9" Relationship="Self.FK_InvoiceField_OptionalMode8" FromRole="OptionalMode" ToRole="InvoiceField" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="pmtID" />
+    </Key>
+    <Property Name="pmtID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Taxid" Type="Int64" />
+    <Property Name="pdt" Type="DateTime" Precision="3" />
+    <Property Name="PaymentInstrumentID" Type="Int64" />
+    <Property Name="Iinn" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Acn" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Trmn" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Trn" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Pcn" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Pid" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="SetmID" Type="Int32" />
+    <NavigationProperty Name="InvoiceHeader" Relationship="Self.FK_Payment_InvoiceHeader" FromRole="Payment" ToRole="InvoiceHeader" />
+  </EntityType>
+  <EntityType Name="PersonType">
+    <Key>
+      <PropertyRef Name="PersonTypeID" />
+    </Key>
+    <Property Name="PersonTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tb_person" Relationship="Self.FK_Person_Person" FromRole="PersonType" ToRole="tb_person" />
+  </EntityType>
+  <EntityType Name="pmtType">
+    <Key>
+      <PropertyRef Name="pmtID" />
+    </Key>
+    <Property Name="pmtID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sstid" Type="Int64" Nullable="false" />
+    <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Vat" Type="Int32" />
+    <Property Name="VatCustomPurposes" Type="Int32" />
+    <Property Name="sstt" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+    <Property Name="TypeID" Type="Int32" />
+    <Property Name="SpecialOrGeneralID" Type="Int32" />
+    <Property Name="TaxableOrFreeID" Type="Int32" />
+    <Property Name="mu" Type="Int32" />
+    <NavigationProperty Name="muType" Relationship="Self.FK_Product_muType" FromRole="Product" ToRole="muType" />
+    <NavigationProperty Name="ProductType" Relationship="Self.FK_Product_ProductType" FromRole="Product" ToRole="ProductType" />
+    <NavigationProperty Name="SpecialOrGeneral" Relationship="Self.FK_Product_SpecialOrGeneral" FromRole="Product" ToRole="SpecialOrGeneral" />
+    <NavigationProperty Name="TaxableOrFree" Relationship="Self.FK_Product_TaxableOrFree" FromRole="Product" ToRole="TaxableOrFree" />
+  </EntityType>
+  <EntityType Name="ProductType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_ProductType" FromRole="ProductType" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="SpecialOrGeneral">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_SpecialOrGeneral" FromRole="SpecialOrGeneral" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="TaxableOrFree">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_TaxableOrFree" FromRole="TaxableOrFree" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="tb_bank">
+    <Key>
+      <PropertyRef Name="BankID" />
+    </Key>
+    <Property Name="BankID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ShabaPatern" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tb_person" Relationship="Self.FK_tb_person_tb_bank" FromRole="tb_bank" ToRole="tb_person" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_tb_bank" FromRole="tb_bank" ToRole="User" />
+  </EntityType>
+  <EntityType Name="tb_check_send">
+    <Key>
+      <PropertyRef Name="SendCheckId" />
+    </Key>
+    <Property Name="SendCheckId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Response" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CheckResponse" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CheckDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SendId" Type="Int64" />
+    <Property Name="state" Type="Int32" />
+    <Property Name="UID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ReferenceNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="invoiceData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ResponseStatus" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tb_send" Relationship="Self.FK_tb_check_send_tb_send" FromRole="tb_check_send" ToRole="tb_send" />
+  </EntityType>
+  <EntityType Name="tb_contact">
+    <Key>
+      <PropertyRef Name="ContactID" />
+    </Key>
+    <Property Name="ContactID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NationalCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="tel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="mobile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="degreeID" Type="Int32" />
+    <Property Name="magorID" Type="Int32" />
+    <NavigationProperty Name="ContactInPerson" Relationship="Self.FK_ContactInPerson_tb_contact" FromRole="tb_contact" ToRole="ContactInPerson" />
+    <NavigationProperty Name="tb_degree" Relationship="Self.FK_tb_contact_tb_degree" FromRole="tb_contact" ToRole="tb_degree" />
+    <NavigationProperty Name="tb_magor" Relationship="Self.FK_tb_contact_tb_magor" FromRole="tb_contact" ToRole="tb_magor" />
+  </EntityType>
+  <EntityType Name="tb_degree">
+    <Key>
+      <PropertyRef Name="degreeID" />
+    </Key>
+    <Property Name="degreeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tb_contact" Relationship="Self.FK_tb_contact_tb_degree" FromRole="tb_degree" ToRole="tb_contact" />
+  </EntityType>
+  <EntityType Name="tb_magor">
+    <Key>
+      <PropertyRef Name="magorID" />
+    </Key>
+    <Property Name="magorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tb_contact" Relationship="Self.FK_tb_contact_tb_magor" FromRole="tb_magor" ToRole="tb_contact" />
+  </EntityType>
+  <EntityType Name="tb_marketing">
+    <Key>
+      <PropertyRef Name="MarketingID" />
+    </Key>
+    <Property Name="MarketingID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="NationalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="RegDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="Self.FK_tb_marketing_User" FromRole="tb_marketing" ToRole="User" />
+  </EntityType>
+  <EntityType Name="tb_person">
+    <Key>
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="PersonID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NatioinalCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="PersonTypeId" Type="Int32" />
+    <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Lname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ComapnyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Zipcode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="RegisterationDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyTypeId" Type="Int32" />
+    <Property Name="RegisterNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BankID" Type="Int32" />
+    <Property Name="Shaba" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clients" Relationship="Self.FK_Client_tb_person" FromRole="tb_person" ToRole="Client" />
+    <NavigationProperty Name="CompanyType" Relationship="Self.FK_tb_person_CompanyType" FromRole="tb_person" ToRole="CompanyType" />
+    <NavigationProperty Name="ContactInPerson" Relationship="Self.FK_ContactInPerson_tb_person" FromRole="tb_person" ToRole="ContactInPerson" />
+    <NavigationProperty Name="PersonType" Relationship="Self.FK_Person_Person" FromRole="tb_person" ToRole="PersonType" />
+    <NavigationProperty Name="tb_bank" Relationship="Self.FK_tb_person_tb_bank" FromRole="tb_person" ToRole="tb_bank" />
+  </EntityType>
+  <EntityType Name="tb_send">
+    <Key>
+      <PropertyRef Name="SendId" />
+    </Key>
+    <Property Name="SendId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="InvoicePack" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ResponcePack" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CheckPack" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SendDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="state" Type="Int32" />
+    <Property Name="ClientID" Type="Int64" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_tb_send_Client" FromRole="tb_send" ToRole="Client" />
+    <NavigationProperty Name="tb_check_send" Relationship="Self.FK_tb_check_send_tb_send" FromRole="tb_send" ToRole="tb_check_send" />
+    <NavigationProperty Name="User" Relationship="Self.FK_tb_send_User" FromRole="tb_send" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NationalCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PassWord" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="StartActive" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EndActive" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="isAdmin" Type="Boolean" />
+    <Property Name="user_type" Type="Int32" />
+    <Property Name="BankID" Type="Int32" />
+    <Property Name="Shaba" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tb_bank" Relationship="Self.FK_User_tb_bank" FromRole="User" ToRole="tb_bank" />
+    <NavigationProperty Name="tb_marketing" Relationship="Self.FK_tb_marketing_User" FromRole="User" ToRole="tb_marketing" />
+    <NavigationProperty Name="tb_send" Relationship="Self.FK_tb_send_User" FromRole="User" ToRole="tb_send" />
+    <NavigationProperty Name="UserBranches" Relationship="Self.FK_UserBranch_User" FromRole="User" ToRole="UserBranch" />
+  </EntityType>
+  <EntityType Name="UserBranch">
+    <Key>
+      <PropertyRef Name="UserBranchId" />
+    </Key>
+    <Property Name="UserBranchId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="BrancheID" Type="Int32" />
+    <NavigationProperty Name="Branch" Relationship="Self.FK_UserBranch_Branch" FromRole="UserBranch" ToRole="Branch" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserBranch_User" FromRole="UserBranch" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Branch_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Branch" Type="Self.Branch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Branch">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserBranch_Branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+    <End Role="UserBranch" Type="Self.UserBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="UserBranch">
+        <PropertyRef Name="BrancheID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Client_tb_person">
+    <End Role="tb_person" Type="Self.tb_person" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_send_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="tb_send" Type="Self.tb_send" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tb_send">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_person_CompanyType">
+    <End Role="CompanyType" Type="Self.CompanyType" Multiplicity="0..1" />
+    <End Role="tb_person" Type="Self.tb_person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyType">
+        <PropertyRef Name="CompanyTypeId" />
+      </Principal>
+      <Dependent Role="tb_person">
+        <PropertyRef Name="CompanyTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactInPerson_tb_contact">
+    <End Role="tb_contact" Type="Self.tb_contact" Multiplicity="1" />
+    <End Role="ContactInPerson" Type="Self.ContactInPerson" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tb_contact">
+        <PropertyRef Name="ContactID" />
+      </Principal>
+      <Dependent Role="ContactInPerson">
+        <PropertyRef Name="ContactInPersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactInPerson_tb_person">
+    <End Role="tb_person" Type="Self.tb_person" Multiplicity="1" />
+    <End Role="ContactInPerson" Type="Self.ContactInPerson" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tb_person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="ContactInPerson">
+        <PropertyRef Name="ContactInPersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ErrorCode_ErrorType">
+    <End Role="ErrorType" Type="Self.ErrorType" Multiplicity="0..1" />
+    <End Role="ErrorCode" Type="Self.ErrorCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ErrorType">
+        <PropertyRef Name="ErrorTypeID" />
+      </Principal>
+      <Dependent Role="ErrorCode">
+        <PropertyRef Name="ErrorTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_ftType">
+    <End Role="ftType" Type="Self.ftType" Multiplicity="0..1" />
+    <End Role="InvoiceHeader" Type="Self.InvoiceHeader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ftType">
+        <PropertyRef Name="ftID" />
+      </Principal>
+      <Dependent Role="InvoiceHeader">
+        <PropertyRef Name="ft" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_inp">
+    <End Role="InPatern" Type="Self.InPatern" Multiplicity="1" />
+    <End Role="InvoiceHeader" Type="Self.InvoiceHeader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InPatern">
+        <PropertyRef Name="InpID" />
+      </Principal>
+      <Dependent Role="InvoiceHeader">
+        <PropertyRef Name="Inp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_InsType">
+    <End Role="InsType" Type="Self.InsType" Multiplicity="1" />
+    <End Role="InvoiceHeader" Type="Self.InvoiceHeader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InsType">
+        <PropertyRef Name="Ins" />
+      </Principal>
+      <Dependent Role="InvoiceHeader">
+        <PropertyRef Name="Ins" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceBody_InvoiceHeader">
+    <End Role="InvoiceHeader" Type="Self.InvoiceHeader" Multiplicity="0..1" />
+    <End Role="InvoiceBody" Type="Self.InvoiceBody" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceHeader">
+        <PropertyRef Name="InvoiceID" />
+      </Principal>
+      <Dependent Role="InvoiceBody">
+        <PropertyRef Name="Taxid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_FieldPosition">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="Inp11" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="Inp12" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode1">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="Inp13" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode2">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="Inp14" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode3">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="Inp15" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode4">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="Inp16" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode5">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="Inp17" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode6">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="inp21" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode7">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="inp22" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode8">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="inp31" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_InvoiceHeader">
+    <End Role="InvoiceHeader" Type="Self.InvoiceHeader" Multiplicity="0..1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceHeader">
+        <PropertyRef Name="InvoiceID" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="Taxid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_muType">
+    <End Role="muType" Type="Self.muType" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="muType">
+        <PropertyRef Name="mu" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="mu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_Person">
+    <End Role="PersonType" Type="Self.PersonType" Multiplicity="0..1" />
+    <End Role="tb_person" Type="Self.tb_person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonType">
+        <PropertyRef Name="PersonTypeID" />
+      </Principal>
+      <Dependent Role="tb_person">
+        <PropertyRef Name="PersonTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_ProductType">
+    <End Role="ProductType" Type="Self.ProductType" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_SpecialOrGeneral">
+    <End Role="SpecialOrGeneral" Type="Self.SpecialOrGeneral" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SpecialOrGeneral">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="SpecialOrGeneralID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_TaxableOrFree">
+    <End Role="TaxableOrFree" Type="Self.TaxableOrFree" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaxableOrFree">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="TaxableOrFreeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_person_tb_bank">
+    <End Role="tb_bank" Type="Self.tb_bank" Multiplicity="0..1" />
+    <End Role="tb_person" Type="Self.tb_person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_bank">
+        <PropertyRef Name="BankID" />
+      </Principal>
+      <Dependent Role="tb_person">
+        <PropertyRef Name="BankID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_tb_bank">
+    <End Role="tb_bank" Type="Self.tb_bank" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_bank">
+        <PropertyRef Name="BankID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="BankID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_check_send_tb_send">
+    <End Role="tb_send" Type="Self.tb_send" Multiplicity="0..1" />
+    <End Role="tb_check_send" Type="Self.tb_check_send" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_send">
+        <PropertyRef Name="SendId" />
+      </Principal>
+      <Dependent Role="tb_check_send">
+        <PropertyRef Name="SendId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_contact_tb_degree">
+    <End Role="tb_degree" Type="Self.tb_degree" Multiplicity="0..1" />
+    <End Role="tb_contact" Type="Self.tb_contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_degree">
+        <PropertyRef Name="degreeID" />
+      </Principal>
+      <Dependent Role="tb_contact">
+        <PropertyRef Name="degreeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_contact_tb_magor">
+    <End Role="tb_magor" Type="Self.tb_magor" Multiplicity="0..1" />
+    <End Role="tb_contact" Type="Self.tb_contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_magor">
+        <PropertyRef Name="magorID" />
+      </Principal>
+      <Dependent Role="tb_contact">
+        <PropertyRef Name="magorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_marketing_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="tb_marketing" Type="Self.tb_marketing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="tb_marketing">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_send_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="tb_send" Type="Self.tb_send" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="tb_send">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserBranch_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="UserBranch" Type="Self.UserBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserBranch">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StoreTerminalSystemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Branches" EntityType="Self.Branch" />
+    <EntitySet Name="Clients" EntityType="Self.Client" />
+    <EntitySet Name="CompanyTypes" EntityType="Self.CompanyType" />
+    <EntitySet Name="ContactInPersons" EntityType="Self.ContactInPerson" />
+    <EntitySet Name="Currenies" EntityType="Self.Curreny" />
+    <EntitySet Name="ErrorCodes" EntityType="Self.ErrorCode" />
+    <EntitySet Name="ErrorTypes" EntityType="Self.ErrorType" />
+    <EntitySet Name="FieldPositions" EntityType="Self.FieldPosition" />
+    <EntitySet Name="ftTypes" EntityType="Self.ftType" />
+    <EntitySet Name="InPaterns" EntityType="Self.InPatern" />
+    <EntitySet Name="InsTypes" EntityType="Self.InsType" />
+    <EntitySet Name="InTypes" EntityType="Self.InType" />
+    <EntitySet Name="InvoiceBodies" EntityType="Self.InvoiceBody" />
+    <EntitySet Name="InvoiceFields" EntityType="Self.InvoiceField" />
+    <EntitySet Name="InvoiceHeaders" EntityType="Self.InvoiceHeader" />
+    <EntitySet Name="muTypes" EntityType="Self.muType" />
+    <EntitySet Name="OptionalModes" EntityType="Self.OptionalMode" />
+    <EntitySet Name="Payments" EntityType="Self.Payment" />
+    <EntitySet Name="PersonTypes" EntityType="Self.PersonType" />
+    <EntitySet Name="pmtTypes" EntityType="Self.pmtType" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
+    <EntitySet Name="SpecialOrGenerals" EntityType="Self.SpecialOrGeneral" />
+    <EntitySet Name="TaxableOrFrees" EntityType="Self.TaxableOrFree" />
+    <EntitySet Name="tb_bank" EntityType="Self.tb_bank" />
+    <EntitySet Name="tb_check_send" EntityType="Self.tb_check_send" />
+    <EntitySet Name="tb_contact" EntityType="Self.tb_contact" />
+    <EntitySet Name="tb_degree" EntityType="Self.tb_degree" />
+    <EntitySet Name="tb_magor" EntityType="Self.tb_magor" />
+    <EntitySet Name="tb_marketing" EntityType="Self.tb_marketing" />
+    <EntitySet Name="tb_person" EntityType="Self.tb_person" />
+    <EntitySet Name="tb_send" EntityType="Self.tb_send" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserBranches" EntityType="Self.UserBranch" />
+    <AssociationSet Name="FK_Branch_Client" Association="Self.FK_Branch_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Branch" EntitySet="Branches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserBranch_Branch" Association="Self.FK_UserBranch_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="UserBranch" EntitySet="UserBranches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Client_tb_person" Association="Self.FK_Client_tb_person">
+      <End Role="tb_person" EntitySet="tb_person" />
+      <End Role="Client" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_send_Client" Association="Self.FK_tb_send_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="tb_send" EntitySet="tb_send" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_person_CompanyType" Association="Self.FK_tb_person_CompanyType">
+      <End Role="CompanyType" EntitySet="CompanyTypes" />
+      <End Role="tb_person" EntitySet="tb_person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactInPerson_tb_contact" Association="Self.FK_ContactInPerson_tb_contact">
+      <End Role="tb_contact" EntitySet="tb_contact" />
+      <End Role="ContactInPerson" EntitySet="ContactInPersons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactInPerson_tb_person" Association="Self.FK_ContactInPerson_tb_person">
+      <End Role="tb_person" EntitySet="tb_person" />
+      <End Role="ContactInPerson" EntitySet="ContactInPersons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ErrorCode_ErrorType" Association="Self.FK_ErrorCode_ErrorType">
+      <End Role="ErrorType" EntitySet="ErrorTypes" />
+      <End Role="ErrorCode" EntitySet="ErrorCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_ftType" Association="Self.FK_Invoice_ftType">
+      <End Role="ftType" EntitySet="ftTypes" />
+      <End Role="InvoiceHeader" EntitySet="InvoiceHeaders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_inp" Association="Self.FK_Invoice_inp">
+      <End Role="InPatern" EntitySet="InPaterns" />
+      <End Role="InvoiceHeader" EntitySet="InvoiceHeaders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_InsType" Association="Self.FK_Invoice_InsType">
+      <End Role="InsType" EntitySet="InsTypes" />
+      <End Role="InvoiceHeader" EntitySet="InvoiceHeaders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceBody_InvoiceHeader" Association="Self.FK_InvoiceBody_InvoiceHeader">
+      <End Role="InvoiceHeader" EntitySet="InvoiceHeaders" />
+      <End Role="InvoiceBody" EntitySet="InvoiceBodies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_FieldPosition" Association="Self.FK_InvoiceField_FieldPosition">
+      <End Role="OptionalMode" EntitySet="OptionalModes" />
+      <End Role="InvoiceField" EntitySet="InvoiceFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode" Association="Self.FK_InvoiceField_OptionalMode">
+      <End Role="OptionalMode" EntitySet="OptionalModes" />
+      <End Role="InvoiceField" EntitySet="InvoiceFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode1" Association="Self.FK_InvoiceField_OptionalMode1">
+      <End Role="OptionalMode" EntitySet="OptionalModes" />
+      <End Role="InvoiceField" EntitySet="InvoiceFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode2" Association="Self.FK_InvoiceField_OptionalMode2">
+      <End Role="OptionalMode" EntitySet="OptionalModes" />
+      <End Role="InvoiceField" EntitySet="InvoiceFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode3" Association="Self.FK_InvoiceField_OptionalMode3">
+      <End Role="OptionalMode" EntitySet="OptionalModes" />
+      <End Role="InvoiceField" EntitySet="InvoiceFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode4" Association="Self.FK_InvoiceField_OptionalMode4">
+      <End Role="OptionalMode" EntitySet="OptionalModes" />
+      <End Role="InvoiceField" EntitySet="InvoiceFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode5" Association="Self.FK_InvoiceField_OptionalMode5">
+      <End Role="OptionalMode" EntitySet="OptionalModes" />
+      <End Role="InvoiceField" EntitySet="InvoiceFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode6" Association="Self.FK_InvoiceField_OptionalMode6">
+      <End Role="OptionalMode" EntitySet="OptionalModes" />
+      <End Role="InvoiceField" EntitySet="InvoiceFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode7" Association="Self.FK_InvoiceField_OptionalMode7">
+      <End Role="OptionalMode" EntitySet="OptionalModes" />
+      <End Role="InvoiceField" EntitySet="InvoiceFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode8" Association="Self.FK_InvoiceField_OptionalMode8">
+      <End Role="OptionalMode" EntitySet="OptionalModes" />
+      <End Role="InvoiceField" EntitySet="InvoiceFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_InvoiceHeader" Association="Self.FK_Payment_InvoiceHeader">
+      <End Role="InvoiceHeader" EntitySet="InvoiceHeaders" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_muType" Association="Self.FK_Product_muType">
+      <End Role="muType" EntitySet="muTypes" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_Person" Association="Self.FK_Person_Person">
+      <End Role="PersonType" EntitySet="PersonTypes" />
+      <End Role="tb_person" EntitySet="tb_person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_ProductType" Association="Self.FK_Product_ProductType">
+      <End Role="ProductType" EntitySet="ProductTypes" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_SpecialOrGeneral" Association="Self.FK_Product_SpecialOrGeneral">
+      <End Role="SpecialOrGeneral" EntitySet="SpecialOrGenerals" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_TaxableOrFree" Association="Self.FK_Product_TaxableOrFree">
+      <End Role="TaxableOrFree" EntitySet="TaxableOrFrees" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_person_tb_bank" Association="Self.FK_tb_person_tb_bank">
+      <End Role="tb_bank" EntitySet="tb_bank" />
+      <End Role="tb_person" EntitySet="tb_person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_tb_bank" Association="Self.FK_User_tb_bank">
+      <End Role="tb_bank" EntitySet="tb_bank" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_check_send_tb_send" Association="Self.FK_tb_check_send_tb_send">
+      <End Role="tb_send" EntitySet="tb_send" />
+      <End Role="tb_check_send" EntitySet="tb_check_send" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_contact_tb_degree" Association="Self.FK_tb_contact_tb_degree">
+      <End Role="tb_degree" EntitySet="tb_degree" />
+      <End Role="tb_contact" EntitySet="tb_contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_contact_tb_magor" Association="Self.FK_tb_contact_tb_magor">
+      <End Role="tb_magor" EntitySet="tb_magor" />
+      <End Role="tb_contact" EntitySet="tb_contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_marketing_User" Association="Self.FK_tb_marketing_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="tb_marketing" EntitySet="tb_marketing" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_send_User" Association="Self.FK_tb_send_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="tb_send" EntitySet="tb_send" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserBranch_User" Association="Self.FK_UserBranch_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserBranch" EntitySet="UserBranches" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

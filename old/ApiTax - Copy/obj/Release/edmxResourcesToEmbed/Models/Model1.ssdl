@@ -1,0 +1,1039 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StoreTerminalSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="BranchID" />
+    </Key>
+    <Property Name="BranchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchName" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="ManagerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="BranchAddress" Type="nvarchar" MaxLength="200" />
+    <Property Name="ClientID" Type="bigint" />
+    <Property Name="BranchNum" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClientID" Type="nchar" MaxLength="6" Nullable="false" />
+    <Property Name="PublicKey" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PrivateKey" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Econo" Type="nvarchar" MaxLength="14" Nullable="false" />
+    <Property Name="ParticipationID" Type="nchar" MaxLength="11" />
+    <Property Name="TraceCode" Type="bigint" />
+    <Property Name="Tins" Type="nvarchar" MaxLength="20" />
+    <Property Name="PersonId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="CompanyType">
+    <Key>
+      <PropertyRef Name="CompanyTypeId" />
+    </Key>
+    <Property Name="CompanyTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyTypeName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ContactInPerson">
+    <Key>
+      <PropertyRef Name="ContactInPersonID" />
+    </Key>
+    <Property Name="ContactInPersonID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="personID" Type="bigint" />
+    <Property Name="ContactID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Curreny">
+    <Key>
+      <PropertyRef Name="cut" />
+    </Key>
+    <Property Name="Code" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="cut" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="DecimalPlaces" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="Country" Type="nvarchar" MaxLength="500" />
+    <Property Name="UseArea" Type="nvarchar" MaxLength="3000" />
+  </EntityType>
+  <EntityType Name="ErrorCode">
+    <Key>
+      <PropertyRef Name="ErrorCodeID" />
+    </Key>
+    <Property Name="ErrorCodeID" Type="int" Nullable="false" />
+    <Property Name="ErrorDetail" Type="nvarchar" MaxLength="50" />
+    <Property Name="ErrorDetailPe" Type="nvarchar" MaxLength="200" />
+    <Property Name="ErrorTypeID" Type="int" />
+  </EntityType>
+  <EntityType Name="ErrorType">
+    <Key>
+      <PropertyRef Name="ErrorTypeID" />
+    </Key>
+    <Property Name="ErrorTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="FieldPosition">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ftType">
+    <Key>
+      <PropertyRef Name="ftID" />
+    </Key>
+    <Property Name="ftID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="InPatern">
+    <Key>
+      <PropertyRef Name="InpID" />
+    </Key>
+    <Property Name="InpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="InsType">
+    <Key>
+      <PropertyRef Name="Ins" />
+    </Key>
+    <Property Name="Ins" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="InType">
+    <Key>
+      <PropertyRef Name="Inty" />
+    </Key>
+    <Property Name="Inty" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="InvoiceBody">
+    <Key>
+      <PropertyRef Name="InvoiceBodyID" />
+    </Key>
+    <Property Name="InvoiceBodyID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Taxid" Type="bigint" />
+    <Property Name="Sstid" Type="bigint" />
+    <Property Name="Am" Type="decimal" Precision="21" Scale="8" />
+    <Property Name="Fee" Type="decimal" Precision="26" Scale="8" />
+    <Property Name="Cfee" Type="decimal" Precision="19" Scale="4" />
+    <Property Name="Cut" Type="nchar" MaxLength="3" />
+    <Property Name="Exr" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Prdis" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Dis" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Adis" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Vra" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="Vam" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Odt" Type="nvarchar" MaxLength="255" />
+    <Property Name="Odr" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="Odam" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Olt" Type="nvarchar" MaxLength="255" />
+    <Property Name="Olr" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="Olam" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Concfee" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Spro" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Bros" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Tcpbs" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Vop" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Sstt" Type="nchar" MaxLength="10" />
+    <Property Name="MuS" Type="int" />
+    <Property Name="Tsstam" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Bsrn" Type="nchar" MaxLength="10" />
+    <Property Name="Cop" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="InvoiceField">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="InvoiceTitle" Type="nvarchar" MaxLength="200" />
+    <Property Name="FieldPositionID" Type="int" />
+    <Property Name="Field" Type="nvarchar" MaxLength="50" />
+    <Property Name="InvoiceTitleEn" Type="nvarchar" MaxLength="200" />
+    <Property Name="Inp11" Type="int" />
+    <Property Name="Inp12" Type="int" />
+    <Property Name="Inp13" Type="int" />
+    <Property Name="Inp14" Type="int" />
+    <Property Name="Inp15" Type="int" />
+    <Property Name="Inp16" Type="int" />
+    <Property Name="Inp17" Type="int" />
+    <Property Name="inp21" Type="int" />
+    <Property Name="inp22" Type="int" />
+    <Property Name="inp31" Type="int" />
+  </EntityType>
+  <EntityType Name="InvoiceHeader">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+    </Key>
+    <Property Name="InvoiceID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Taxid" Type="varchar" MaxLength="22" Nullable="false" />
+    <Property Name="Inno" Type="bigint" Nullable="false" />
+    <Property Name="Irtaxid" Type="varchar" MaxLength="22" Nullable="false" />
+    <Property Name="Indatim" Type="bigint" Nullable="false" />
+    <Property Name="Indati2m" Type="bigint" />
+    <Property Name="Inp" Type="int" Nullable="false" />
+    <Property Name="Tins" Type="nchar" MaxLength="14" Nullable="false" />
+    <Property Name="Ins" Type="int" Nullable="false" />
+    <Property Name="Sbc" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Crn" Type="int" />
+    <Property Name="Scln" Type="bigint" />
+    <Property Name="Scc" Type="int" />
+    <Property Name="spc" Type="int" />
+    <Property Name="Tinb" Type="nchar" MaxLength="14" />
+    <Property Name="Bid" Type="nchar" MaxLength="15" />
+    <Property Name="Bbc" Type="nchar" MaxLength="10" />
+    <Property Name="Billid" Type="nchar" MaxLength="15" />
+    <Property Name="Bpc" Type="nchar" MaxLength="10" />
+    <Property Name="ft" Type="int" />
+    <Property Name="Bpn" Type="nvarchar" MaxLength="20" />
+    <Property Name="Setm" Type="int" Nullable="false" />
+    <Property Name="Cap" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="Insp" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="tax17" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="Tvam" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="Tprdis" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="Tdis" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="Tadis" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="Todam" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="Tbill" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="tcpbs" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="tonw" Type="decimal" Precision="19" Scale="3" />
+    <Property Name="torv" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="tocv" Type="decimal" Precision="19" Scale="4" />
+    <Property Name="Tob" Type="int" />
+    <Property Name="uuid" Type="nvarchar" MaxLength="50" />
+    <Property Name="Inty" Type="int" />
+    <Property Name="Tvop" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Dpvb" Type="int" />
+    <Property Name="InpID" Type="int" />
+  </EntityType>
+  <EntityType Name="muType">
+    <Key>
+      <PropertyRef Name="mu" />
+    </Key>
+    <Property Name="mu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OptionalMode">
+    <Key>
+      <PropertyRef Name="OptionalModeID" />
+    </Key>
+    <Property Name="OptionalModeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="pmtID" />
+    </Key>
+    <Property Name="pmtID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Taxid" Type="bigint" />
+    <Property Name="pdt" Type="datetime" />
+    <Property Name="PaymentInstrumentID" Type="bigint" />
+    <Property Name="Iinn" Type="nchar" MaxLength="10" />
+    <Property Name="Acn" Type="nchar" MaxLength="10" />
+    <Property Name="Trmn" Type="nchar" MaxLength="10" />
+    <Property Name="Trn" Type="nchar" MaxLength="10" />
+    <Property Name="Pcn" Type="nchar" MaxLength="10" />
+    <Property Name="Pid" Type="nchar" MaxLength="10" />
+    <Property Name="SetmID" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'StoreTerminalSystem.dbo.PaymentInstrument' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PaymentInstrument">
+          <Property Name="PaymentInstrumentID" Type="int" />
+          <Property Name="ClientID" Type="bigint" />
+          <Property Name="iinn" Type="varchar" MaxLength="9" />
+          <Property Name="Trmn" Type="varchar" MaxLength="8" />
+          <Property Name="Trn" Type="varchar" MaxLength="14" />
+          <Property Name="acn" Type="varchar" MaxLength="14" />
+        </EntityType>-->
+  <EntityType Name="PersonType">
+    <Key>
+      <PropertyRef Name="PersonTypeID" />
+    </Key>
+    <Property Name="PersonTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="pmtType">
+    <Key>
+      <PropertyRef Name="pmtID" />
+    </Key>
+    <Property Name="pmtID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sstid" Type="bigint" Nullable="false" />
+    <Property Name="Date" Type="nvarchar" MaxLength="50" />
+    <Property Name="Vat" Type="int" />
+    <Property Name="VatCustomPurposes" Type="int" />
+    <Property Name="sstt" Type="nvarchar" MaxLength="800" />
+    <Property Name="TypeID" Type="int" />
+    <Property Name="SpecialOrGeneralID" Type="int" />
+    <Property Name="TaxableOrFreeID" Type="int" />
+    <Property Name="mu" Type="int" />
+  </EntityType>
+  <EntityType Name="ProductType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'StoreTerminalSystem.dbo.SettlementMethod' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SettlementMethod">
+          <Property Name="SetmID" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
+  <EntityType Name="SpecialOrGeneral">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TaxableOrFree">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_bank">
+    <Key>
+      <PropertyRef Name="BankID" />
+    </Key>
+    <Property Name="BankID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="200" />
+    <Property Name="ShabaPatern" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_check_send">
+    <Key>
+      <PropertyRef Name="SendCheckId" />
+    </Key>
+    <Property Name="SendCheckId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Response" Type="text" />
+    <Property Name="CheckResponse" Type="text" />
+    <Property Name="CheckDate" Type="nvarchar" MaxLength="50" />
+    <Property Name="SendId" Type="bigint" />
+    <Property Name="state" Type="int" />
+    <Property Name="UID" Type="nvarchar" MaxLength="200" />
+    <Property Name="ReferenceNumber" Type="nvarchar" MaxLength="200" />
+    <Property Name="invoiceData" Type="text" />
+    <Property Name="ResponseStatus" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="tb_contact">
+    <Key>
+      <PropertyRef Name="ContactID" />
+    </Key>
+    <Property Name="ContactID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NationalCode" Type="nvarchar" MaxLength="20" />
+    <Property Name="Fullname" Type="nvarchar" MaxLength="100" />
+    <Property Name="tel" Type="nvarchar" MaxLength="100" />
+    <Property Name="mobile" Type="nvarchar" MaxLength="100" />
+    <Property Name="address" Type="nvarchar" MaxLength="200" />
+    <Property Name="degreeID" Type="int" />
+    <Property Name="magorID" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_degree">
+    <Key>
+      <PropertyRef Name="degreeID" />
+    </Key>
+    <Property Name="degreeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_magor">
+    <Key>
+      <PropertyRef Name="magorID" />
+    </Key>
+    <Property Name="magorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_marketing">
+    <Key>
+      <PropertyRef Name="MarketingID" />
+    </Key>
+    <Property Name="MarketingID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="NationalCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="title" Type="nvarchar" MaxLength="50" />
+    <Property Name="note" Type="text" />
+    <Property Name="RegDate" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_person">
+    <Key>
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="PersonID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NatioinalCode" Type="nvarchar" MaxLength="15" />
+    <Property Name="PersonTypeId" Type="int" />
+    <Property Name="Fname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Lname" Type="nvarchar" MaxLength="50" />
+    <Property Name="FatherName" Type="nvarchar" MaxLength="50" />
+    <Property Name="BirthDate" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="100" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="100" />
+    <Property Name="ComapnyName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Zipcode" Type="nvarchar" MaxLength="20" />
+    <Property Name="RegisterationDate" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompanyTypeId" Type="int" />
+    <Property Name="RegisterNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankID" Type="int" />
+    <Property Name="Shaba" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_send">
+    <Key>
+      <PropertyRef Name="SendId" />
+    </Key>
+    <Property Name="SendId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UID" Type="nvarchar" MaxLength="100" />
+    <Property Name="InvoicePack" Type="text" />
+    <Property Name="ResponcePack" Type="text" />
+    <Property Name="CheckPack" Type="text" />
+    <Property Name="SendDate" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="state" Type="int" />
+    <Property Name="ClientID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NationalCode" Type="nvarchar" MaxLength="15" />
+    <Property Name="Fname" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="11" />
+    <Property Name="FatherName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="PassWord" Type="nvarchar" MaxLength="200" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="StartActive" Type="nvarchar" MaxLength="50" />
+    <Property Name="EndActive" Type="nvarchar" MaxLength="50" />
+    <Property Name="isAdmin" Type="bit" />
+    <Property Name="user_type" Type="int" />
+    <Property Name="BankID" Type="int" />
+    <Property Name="Shaba" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserBranch">
+    <Key>
+      <PropertyRef Name="UserBranchId" />
+    </Key>
+    <Property Name="UserBranchId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="BrancheID" Type="int" />
+  </EntityType>
+  <Association Name="FK_Branch_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Branch" Type="Self.Branch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Branch">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Client_tb_person">
+    <End Role="tb_person" Type="Self.tb_person" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactInPerson_tb_contact">
+    <End Role="tb_contact" Type="Self.tb_contact" Multiplicity="1" />
+    <End Role="ContactInPerson" Type="Self.ContactInPerson" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tb_contact">
+        <PropertyRef Name="ContactID" />
+      </Principal>
+      <Dependent Role="ContactInPerson">
+        <PropertyRef Name="ContactInPersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactInPerson_tb_person">
+    <End Role="tb_person" Type="Self.tb_person" Multiplicity="1" />
+    <End Role="ContactInPerson" Type="Self.ContactInPerson" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tb_person">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="ContactInPerson">
+        <PropertyRef Name="ContactInPersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ErrorCode_ErrorType">
+    <End Role="ErrorType" Type="Self.ErrorType" Multiplicity="0..1" />
+    <End Role="ErrorCode" Type="Self.ErrorCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ErrorType">
+        <PropertyRef Name="ErrorTypeID" />
+      </Principal>
+      <Dependent Role="ErrorCode">
+        <PropertyRef Name="ErrorTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_ftType">
+    <End Role="ftType" Type="Self.ftType" Multiplicity="0..1" />
+    <End Role="InvoiceHeader" Type="Self.InvoiceHeader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ftType">
+        <PropertyRef Name="ftID" />
+      </Principal>
+      <Dependent Role="InvoiceHeader">
+        <PropertyRef Name="ft" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_inp">
+    <End Role="InPatern" Type="Self.InPatern" Multiplicity="1" />
+    <End Role="InvoiceHeader" Type="Self.InvoiceHeader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InPatern">
+        <PropertyRef Name="InpID" />
+      </Principal>
+      <Dependent Role="InvoiceHeader">
+        <PropertyRef Name="Inp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_InsType">
+    <End Role="InsType" Type="Self.InsType" Multiplicity="1" />
+    <End Role="InvoiceHeader" Type="Self.InvoiceHeader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InsType">
+        <PropertyRef Name="Ins" />
+      </Principal>
+      <Dependent Role="InvoiceHeader">
+        <PropertyRef Name="Ins" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceBody_InvoiceHeader">
+    <End Role="InvoiceHeader" Type="Self.InvoiceHeader" Multiplicity="0..1" />
+    <End Role="InvoiceBody" Type="Self.InvoiceBody" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceHeader">
+        <PropertyRef Name="InvoiceID" />
+      </Principal>
+      <Dependent Role="InvoiceBody">
+        <PropertyRef Name="Taxid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_FieldPosition">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="Inp11" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="Inp12" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode1">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="Inp13" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode2">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="Inp14" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode3">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="Inp15" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode4">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="Inp16" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode5">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="Inp17" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode6">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="inp21" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode7">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="inp22" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvoiceField_OptionalMode8">
+    <End Role="OptionalMode" Type="Self.OptionalMode" Multiplicity="0..1" />
+    <End Role="InvoiceField" Type="Self.InvoiceField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OptionalMode">
+        <PropertyRef Name="OptionalModeID" />
+      </Principal>
+      <Dependent Role="InvoiceField">
+        <PropertyRef Name="inp31" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_InvoiceHeader">
+    <End Role="InvoiceHeader" Type="Self.InvoiceHeader" Multiplicity="0..1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceHeader">
+        <PropertyRef Name="InvoiceID" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="Taxid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_Person">
+    <End Role="PersonType" Type="Self.PersonType" Multiplicity="0..1" />
+    <End Role="tb_person" Type="Self.tb_person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonType">
+        <PropertyRef Name="PersonTypeID" />
+      </Principal>
+      <Dependent Role="tb_person">
+        <PropertyRef Name="PersonTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_muType">
+    <End Role="muType" Type="Self.muType" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="muType">
+        <PropertyRef Name="mu" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="mu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_ProductType">
+    <End Role="ProductType" Type="Self.ProductType" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_SpecialOrGeneral">
+    <End Role="SpecialOrGeneral" Type="Self.SpecialOrGeneral" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SpecialOrGeneral">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="SpecialOrGeneralID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_TaxableOrFree">
+    <End Role="TaxableOrFree" Type="Self.TaxableOrFree" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaxableOrFree">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="TaxableOrFreeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_check_send_tb_send">
+    <End Role="tb_send" Type="Self.tb_send" Multiplicity="0..1" />
+    <End Role="tb_check_send" Type="Self.tb_check_send" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_send">
+        <PropertyRef Name="SendId" />
+      </Principal>
+      <Dependent Role="tb_check_send">
+        <PropertyRef Name="SendId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_contact_tb_degree">
+    <End Role="tb_degree" Type="Self.tb_degree" Multiplicity="0..1" />
+    <End Role="tb_contact" Type="Self.tb_contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_degree">
+        <PropertyRef Name="degreeID" />
+      </Principal>
+      <Dependent Role="tb_contact">
+        <PropertyRef Name="degreeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_contact_tb_magor">
+    <End Role="tb_magor" Type="Self.tb_magor" Multiplicity="0..1" />
+    <End Role="tb_contact" Type="Self.tb_contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_magor">
+        <PropertyRef Name="magorID" />
+      </Principal>
+      <Dependent Role="tb_contact">
+        <PropertyRef Name="magorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_marketing_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="tb_marketing" Type="Self.tb_marketing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="tb_marketing">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_person_CompanyType">
+    <End Role="CompanyType" Type="Self.CompanyType" Multiplicity="0..1" />
+    <End Role="tb_person" Type="Self.tb_person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyType">
+        <PropertyRef Name="CompanyTypeId" />
+      </Principal>
+      <Dependent Role="tb_person">
+        <PropertyRef Name="CompanyTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_person_tb_bank">
+    <End Role="tb_bank" Type="Self.tb_bank" Multiplicity="0..1" />
+    <End Role="tb_person" Type="Self.tb_person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_bank">
+        <PropertyRef Name="BankID" />
+      </Principal>
+      <Dependent Role="tb_person">
+        <PropertyRef Name="BankID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_send_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="tb_send" Type="Self.tb_send" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tb_send">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_send_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="tb_send" Type="Self.tb_send" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="tb_send">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_tb_bank">
+    <End Role="tb_bank" Type="Self.tb_bank" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_bank">
+        <PropertyRef Name="BankID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="BankID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserBranch_Branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+    <End Role="UserBranch" Type="Self.UserBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="UserBranch">
+        <PropertyRef Name="BrancheID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserBranch_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="UserBranch" Type="Self.UserBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserBranch">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StoreTerminalSystemModelStoreContainer">
+    <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyType" EntityType="Self.CompanyType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContactInPerson" EntityType="Self.ContactInPerson" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Curreny" EntityType="Self.Curreny" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ErrorCode" EntityType="Self.ErrorCode" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ErrorType" EntityType="Self.ErrorType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FieldPosition" EntityType="Self.FieldPosition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ftType" EntityType="Self.ftType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InPatern" EntityType="Self.InPatern" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InsType" EntityType="Self.InsType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InType" EntityType="Self.InType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InvoiceBody" EntityType="Self.InvoiceBody" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InvoiceField" EntityType="Self.InvoiceField" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InvoiceHeader" EntityType="Self.InvoiceHeader" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="muType" EntityType="Self.muType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OptionalMode" EntityType="Self.OptionalMode" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PersonType" EntityType="Self.PersonType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pmtType" EntityType="Self.pmtType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductType" EntityType="Self.ProductType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SpecialOrGeneral" EntityType="Self.SpecialOrGeneral" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaxableOrFree" EntityType="Self.TaxableOrFree" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_bank" EntityType="Self.tb_bank" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_check_send" EntityType="Self.tb_check_send" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_contact" EntityType="Self.tb_contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_degree" EntityType="Self.tb_degree" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_magor" EntityType="Self.tb_magor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_marketing" EntityType="Self.tb_marketing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_person" EntityType="Self.tb_person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_send" EntityType="Self.tb_send" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserBranch" EntityType="Self.UserBranch" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Branch_Client" Association="Self.FK_Branch_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Branch" EntitySet="Branch" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Client_tb_person" Association="Self.FK_Client_tb_person">
+      <End Role="tb_person" EntitySet="tb_person" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactInPerson_tb_contact" Association="Self.FK_ContactInPerson_tb_contact">
+      <End Role="tb_contact" EntitySet="tb_contact" />
+      <End Role="ContactInPerson" EntitySet="ContactInPerson" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactInPerson_tb_person" Association="Self.FK_ContactInPerson_tb_person">
+      <End Role="tb_person" EntitySet="tb_person" />
+      <End Role="ContactInPerson" EntitySet="ContactInPerson" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ErrorCode_ErrorType" Association="Self.FK_ErrorCode_ErrorType">
+      <End Role="ErrorType" EntitySet="ErrorType" />
+      <End Role="ErrorCode" EntitySet="ErrorCode" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_ftType" Association="Self.FK_Invoice_ftType">
+      <End Role="ftType" EntitySet="ftType" />
+      <End Role="InvoiceHeader" EntitySet="InvoiceHeader" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_inp" Association="Self.FK_Invoice_inp">
+      <End Role="InPatern" EntitySet="InPatern" />
+      <End Role="InvoiceHeader" EntitySet="InvoiceHeader" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_InsType" Association="Self.FK_Invoice_InsType">
+      <End Role="InsType" EntitySet="InsType" />
+      <End Role="InvoiceHeader" EntitySet="InvoiceHeader" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceBody_InvoiceHeader" Association="Self.FK_InvoiceBody_InvoiceHeader">
+      <End Role="InvoiceHeader" EntitySet="InvoiceHeader" />
+      <End Role="InvoiceBody" EntitySet="InvoiceBody" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_FieldPosition" Association="Self.FK_InvoiceField_FieldPosition">
+      <End Role="OptionalMode" EntitySet="OptionalMode" />
+      <End Role="InvoiceField" EntitySet="InvoiceField" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode" Association="Self.FK_InvoiceField_OptionalMode">
+      <End Role="OptionalMode" EntitySet="OptionalMode" />
+      <End Role="InvoiceField" EntitySet="InvoiceField" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode1" Association="Self.FK_InvoiceField_OptionalMode1">
+      <End Role="OptionalMode" EntitySet="OptionalMode" />
+      <End Role="InvoiceField" EntitySet="InvoiceField" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode2" Association="Self.FK_InvoiceField_OptionalMode2">
+      <End Role="OptionalMode" EntitySet="OptionalMode" />
+      <End Role="InvoiceField" EntitySet="InvoiceField" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode3" Association="Self.FK_InvoiceField_OptionalMode3">
+      <End Role="OptionalMode" EntitySet="OptionalMode" />
+      <End Role="InvoiceField" EntitySet="InvoiceField" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode4" Association="Self.FK_InvoiceField_OptionalMode4">
+      <End Role="OptionalMode" EntitySet="OptionalMode" />
+      <End Role="InvoiceField" EntitySet="InvoiceField" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode5" Association="Self.FK_InvoiceField_OptionalMode5">
+      <End Role="OptionalMode" EntitySet="OptionalMode" />
+      <End Role="InvoiceField" EntitySet="InvoiceField" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode6" Association="Self.FK_InvoiceField_OptionalMode6">
+      <End Role="OptionalMode" EntitySet="OptionalMode" />
+      <End Role="InvoiceField" EntitySet="InvoiceField" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode7" Association="Self.FK_InvoiceField_OptionalMode7">
+      <End Role="OptionalMode" EntitySet="OptionalMode" />
+      <End Role="InvoiceField" EntitySet="InvoiceField" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InvoiceField_OptionalMode8" Association="Self.FK_InvoiceField_OptionalMode8">
+      <End Role="OptionalMode" EntitySet="OptionalMode" />
+      <End Role="InvoiceField" EntitySet="InvoiceField" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_InvoiceHeader" Association="Self.FK_Payment_InvoiceHeader">
+      <End Role="InvoiceHeader" EntitySet="InvoiceHeader" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_Person" Association="Self.FK_Person_Person">
+      <End Role="PersonType" EntitySet="PersonType" />
+      <End Role="tb_person" EntitySet="tb_person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_muType" Association="Self.FK_Product_muType">
+      <End Role="muType" EntitySet="muType" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_ProductType" Association="Self.FK_Product_ProductType">
+      <End Role="ProductType" EntitySet="ProductType" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_SpecialOrGeneral" Association="Self.FK_Product_SpecialOrGeneral">
+      <End Role="SpecialOrGeneral" EntitySet="SpecialOrGeneral" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_TaxableOrFree" Association="Self.FK_Product_TaxableOrFree">
+      <End Role="TaxableOrFree" EntitySet="TaxableOrFree" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_check_send_tb_send" Association="Self.FK_tb_check_send_tb_send">
+      <End Role="tb_send" EntitySet="tb_send" />
+      <End Role="tb_check_send" EntitySet="tb_check_send" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_contact_tb_degree" Association="Self.FK_tb_contact_tb_degree">
+      <End Role="tb_degree" EntitySet="tb_degree" />
+      <End Role="tb_contact" EntitySet="tb_contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_contact_tb_magor" Association="Self.FK_tb_contact_tb_magor">
+      <End Role="tb_magor" EntitySet="tb_magor" />
+      <End Role="tb_contact" EntitySet="tb_contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_marketing_User" Association="Self.FK_tb_marketing_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="tb_marketing" EntitySet="tb_marketing" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_person_CompanyType" Association="Self.FK_tb_person_CompanyType">
+      <End Role="CompanyType" EntitySet="CompanyType" />
+      <End Role="tb_person" EntitySet="tb_person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_person_tb_bank" Association="Self.FK_tb_person_tb_bank">
+      <End Role="tb_bank" EntitySet="tb_bank" />
+      <End Role="tb_person" EntitySet="tb_person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_send_Client" Association="Self.FK_tb_send_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="tb_send" EntitySet="tb_send" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_send_User" Association="Self.FK_tb_send_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="tb_send" EntitySet="tb_send" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_tb_bank" Association="Self.FK_User_tb_bank">
+      <End Role="tb_bank" EntitySet="tb_bank" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserBranch_Branch" Association="Self.FK_UserBranch_Branch">
+      <End Role="Branch" EntitySet="Branch" />
+      <End Role="UserBranch" EntitySet="UserBranch" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserBranch_User" Association="Self.FK_UserBranch_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserBranch" EntitySet="UserBranch" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

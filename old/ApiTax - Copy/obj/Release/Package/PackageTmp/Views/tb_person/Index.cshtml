@@ -1,0 +1,176 @@
+﻿@model IEnumerable<ApiTax.Models.tb_person>
+
+@{
+    ViewBag.Title = "Index";
+    int type = ViewBag.type;
+}
+
+@if (type == 0)
+{
+    <h2>لیست اشخاص حقیقی</h2>
+}
+else
+{
+    <h2>لیست  اشخاص حقوقی</h2>
+}
+
+
+
+
+<p>
+    @Html.ActionLink("ایجاد کردن", "Create", new { type = type },new { @class="btn btn-success" })
+</p>
+<div class="container m-2">
+    <a class="btn btn-primary" href="tb_person?type=0">حقیقی</a> |   <a class="btn btn-primary" href="tb_person?type=1">حقوقی</a>
+</div>
+
+@if (type == 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NatioinalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FatherName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zipcode)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NatioinalCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FatherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mobile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Zipcode)
+                </td>
+                <td>
+                    
+                    @Html.ActionLink("حافظه های مالیاتی", "Index","Clients", new { PersonID = item.PersonID },new { }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PersonID, type = 0 }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.PersonID, type = 0 }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PersonID, type = 0 })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ComapnyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zipcode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegisterationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegisterNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyType.CompanyTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonType.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ComapnyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mobile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Zipcode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegisterationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegisterNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyType.CompanyTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PersonType.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PersonID, type = 1 }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.PersonID, type = 1 }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PersonID, type = 1 })
+                </td>
+            </tr>
+        }
+
+    </table>
+}

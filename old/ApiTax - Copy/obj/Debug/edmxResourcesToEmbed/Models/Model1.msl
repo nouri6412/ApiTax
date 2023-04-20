@@ -1,0 +1,447 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StoreTerminalSystemModelStoreContainer" CdmEntityContainer="StoreTerminalSystemEntities">
+    <EntitySetMapping Name="Branches">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.Branch">
+        <MappingFragment StoreEntitySet="Branch">
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="ManagerName" ColumnName="ManagerName" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="BranchAddress" ColumnName="BranchAddress" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="BranchNum" ColumnName="BranchNum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="PublicKey" ColumnName="PublicKey" />
+          <ScalarProperty Name="PrivateKey" ColumnName="PrivateKey" />
+          <ScalarProperty Name="Econo" ColumnName="Econo" />
+          <ScalarProperty Name="ParticipationID" ColumnName="ParticipationID" />
+          <ScalarProperty Name="TraceCode" ColumnName="TraceCode" />
+          <ScalarProperty Name="Tins" ColumnName="Tins" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyTypes">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.CompanyType">
+        <MappingFragment StoreEntitySet="CompanyType">
+          <ScalarProperty Name="CompanyTypeId" ColumnName="CompanyTypeId" />
+          <ScalarProperty Name="CompanyTypeName" ColumnName="CompanyTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactInPersons">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.ContactInPerson">
+        <MappingFragment StoreEntitySet="ContactInPerson">
+          <ScalarProperty Name="ContactInPersonID" ColumnName="ContactInPersonID" />
+          <ScalarProperty Name="personID" ColumnName="personID" />
+          <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Currenies">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.Curreny">
+        <MappingFragment StoreEntitySet="Curreny">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="cut" ColumnName="cut" />
+          <ScalarProperty Name="DecimalPlaces" ColumnName="DecimalPlaces" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="UseArea" ColumnName="UseArea" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ErrorCodes">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.ErrorCode">
+        <MappingFragment StoreEntitySet="ErrorCode">
+          <ScalarProperty Name="ErrorCodeID" ColumnName="ErrorCodeID" />
+          <ScalarProperty Name="ErrorDetail" ColumnName="ErrorDetail" />
+          <ScalarProperty Name="ErrorDetailPe" ColumnName="ErrorDetailPe" />
+          <ScalarProperty Name="ErrorTypeID" ColumnName="ErrorTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ErrorTypes">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.ErrorType">
+        <MappingFragment StoreEntitySet="ErrorType">
+          <ScalarProperty Name="ErrorTypeID" ColumnName="ErrorTypeID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FieldPositions">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.FieldPosition">
+        <MappingFragment StoreEntitySet="FieldPosition">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ftTypes">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.ftType">
+        <MappingFragment StoreEntitySet="ftType">
+          <ScalarProperty Name="ftID" ColumnName="ftID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InPaterns">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.InPatern">
+        <MappingFragment StoreEntitySet="InPatern">
+          <ScalarProperty Name="InpID" ColumnName="InpID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InsTypes">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.InsType">
+        <MappingFragment StoreEntitySet="InsType">
+          <ScalarProperty Name="Ins" ColumnName="Ins" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InTypes">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.InType">
+        <MappingFragment StoreEntitySet="InType">
+          <ScalarProperty Name="Inty" ColumnName="Inty" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceBodies">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.InvoiceBody">
+        <MappingFragment StoreEntitySet="InvoiceBody">
+          <ScalarProperty Name="InvoiceBodyID" ColumnName="InvoiceBodyID" />
+          <ScalarProperty Name="Taxid" ColumnName="Taxid" />
+          <ScalarProperty Name="Sstid" ColumnName="Sstid" />
+          <ScalarProperty Name="Am" ColumnName="Am" />
+          <ScalarProperty Name="Fee" ColumnName="Fee" />
+          <ScalarProperty Name="Cfee" ColumnName="Cfee" />
+          <ScalarProperty Name="Cut" ColumnName="Cut" />
+          <ScalarProperty Name="Exr" ColumnName="Exr" />
+          <ScalarProperty Name="Prdis" ColumnName="Prdis" />
+          <ScalarProperty Name="Dis" ColumnName="Dis" />
+          <ScalarProperty Name="Adis" ColumnName="Adis" />
+          <ScalarProperty Name="Vra" ColumnName="Vra" />
+          <ScalarProperty Name="Vam" ColumnName="Vam" />
+          <ScalarProperty Name="Odt" ColumnName="Odt" />
+          <ScalarProperty Name="Odr" ColumnName="Odr" />
+          <ScalarProperty Name="Odam" ColumnName="Odam" />
+          <ScalarProperty Name="Olt" ColumnName="Olt" />
+          <ScalarProperty Name="Olr" ColumnName="Olr" />
+          <ScalarProperty Name="Olam" ColumnName="Olam" />
+          <ScalarProperty Name="Concfee" ColumnName="Concfee" />
+          <ScalarProperty Name="Spro" ColumnName="Spro" />
+          <ScalarProperty Name="Bros" ColumnName="Bros" />
+          <ScalarProperty Name="Tcpbs" ColumnName="Tcpbs" />
+          <ScalarProperty Name="Vop" ColumnName="Vop" />
+          <ScalarProperty Name="Sstt" ColumnName="Sstt" />
+          <ScalarProperty Name="MuS" ColumnName="MuS" />
+          <ScalarProperty Name="Tsstam" ColumnName="Tsstam" />
+          <ScalarProperty Name="Bsrn" ColumnName="Bsrn" />
+          <ScalarProperty Name="Cop" ColumnName="Cop" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceFields">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.InvoiceField">
+        <MappingFragment StoreEntitySet="InvoiceField">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="InvoiceTitle" ColumnName="InvoiceTitle" />
+          <ScalarProperty Name="FieldPositionID" ColumnName="FieldPositionID" />
+          <ScalarProperty Name="Field" ColumnName="Field" />
+          <ScalarProperty Name="InvoiceTitleEn" ColumnName="InvoiceTitleEn" />
+          <ScalarProperty Name="Inp11" ColumnName="Inp11" />
+          <ScalarProperty Name="Inp12" ColumnName="Inp12" />
+          <ScalarProperty Name="Inp13" ColumnName="Inp13" />
+          <ScalarProperty Name="Inp14" ColumnName="Inp14" />
+          <ScalarProperty Name="Inp15" ColumnName="Inp15" />
+          <ScalarProperty Name="Inp16" ColumnName="Inp16" />
+          <ScalarProperty Name="Inp17" ColumnName="Inp17" />
+          <ScalarProperty Name="inp21" ColumnName="inp21" />
+          <ScalarProperty Name="inp22" ColumnName="inp22" />
+          <ScalarProperty Name="inp31" ColumnName="inp31" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InvoiceHeaders">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.InvoiceHeader">
+        <MappingFragment StoreEntitySet="InvoiceHeader">
+          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+          <ScalarProperty Name="Taxid" ColumnName="Taxid" />
+          <ScalarProperty Name="Inno" ColumnName="Inno" />
+          <ScalarProperty Name="Irtaxid" ColumnName="Irtaxid" />
+          <ScalarProperty Name="Indatim" ColumnName="Indatim" />
+          <ScalarProperty Name="Indati2m" ColumnName="Indati2m" />
+          <ScalarProperty Name="Inp" ColumnName="Inp" />
+          <ScalarProperty Name="Tins" ColumnName="Tins" />
+          <ScalarProperty Name="Ins" ColumnName="Ins" />
+          <ScalarProperty Name="Sbc" ColumnName="Sbc" />
+          <ScalarProperty Name="Crn" ColumnName="Crn" />
+          <ScalarProperty Name="Scln" ColumnName="Scln" />
+          <ScalarProperty Name="Scc" ColumnName="Scc" />
+          <ScalarProperty Name="spc" ColumnName="spc" />
+          <ScalarProperty Name="Tinb" ColumnName="Tinb" />
+          <ScalarProperty Name="Bid" ColumnName="Bid" />
+          <ScalarProperty Name="Bbc" ColumnName="Bbc" />
+          <ScalarProperty Name="Billid" ColumnName="Billid" />
+          <ScalarProperty Name="Bpc" ColumnName="Bpc" />
+          <ScalarProperty Name="ft" ColumnName="ft" />
+          <ScalarProperty Name="Bpn" ColumnName="Bpn" />
+          <ScalarProperty Name="Setm" ColumnName="Setm" />
+          <ScalarProperty Name="Cap" ColumnName="Cap" />
+          <ScalarProperty Name="Insp" ColumnName="Insp" />
+          <ScalarProperty Name="tax17" ColumnName="tax17" />
+          <ScalarProperty Name="Tvam" ColumnName="Tvam" />
+          <ScalarProperty Name="Tprdis" ColumnName="Tprdis" />
+          <ScalarProperty Name="Tdis" ColumnName="Tdis" />
+          <ScalarProperty Name="Tadis" ColumnName="Tadis" />
+          <ScalarProperty Name="Todam" ColumnName="Todam" />
+          <ScalarProperty Name="Tbill" ColumnName="Tbill" />
+          <ScalarProperty Name="tcpbs" ColumnName="tcpbs" />
+          <ScalarProperty Name="tonw" ColumnName="tonw" />
+          <ScalarProperty Name="torv" ColumnName="torv" />
+          <ScalarProperty Name="tocv" ColumnName="tocv" />
+          <ScalarProperty Name="Tob" ColumnName="Tob" />
+          <ScalarProperty Name="uuid" ColumnName="uuid" />
+          <ScalarProperty Name="Inty" ColumnName="Inty" />
+          <ScalarProperty Name="Tvop" ColumnName="Tvop" />
+          <ScalarProperty Name="Dpvb" ColumnName="Dpvb" />
+          <ScalarProperty Name="InpID" ColumnName="InpID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="muTypes">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.muType">
+        <MappingFragment StoreEntitySet="muType">
+          <ScalarProperty Name="mu" ColumnName="mu" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OptionalModes">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.OptionalMode">
+        <MappingFragment StoreEntitySet="OptionalMode">
+          <ScalarProperty Name="OptionalModeID" ColumnName="OptionalModeID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.Payment">
+        <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="pmtID" ColumnName="pmtID" />
+          <ScalarProperty Name="Taxid" ColumnName="Taxid" />
+          <ScalarProperty Name="pdt" ColumnName="pdt" />
+          <ScalarProperty Name="PaymentInstrumentID" ColumnName="PaymentInstrumentID" />
+          <ScalarProperty Name="Iinn" ColumnName="Iinn" />
+          <ScalarProperty Name="Acn" ColumnName="Acn" />
+          <ScalarProperty Name="Trmn" ColumnName="Trmn" />
+          <ScalarProperty Name="Trn" ColumnName="Trn" />
+          <ScalarProperty Name="Pcn" ColumnName="Pcn" />
+          <ScalarProperty Name="Pid" ColumnName="Pid" />
+          <ScalarProperty Name="SetmID" ColumnName="SetmID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonTypes">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.PersonType">
+        <MappingFragment StoreEntitySet="PersonType">
+          <ScalarProperty Name="PersonTypeID" ColumnName="PersonTypeID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pmtTypes">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.pmtType">
+        <MappingFragment StoreEntitySet="pmtType">
+          <ScalarProperty Name="pmtID" ColumnName="pmtID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="sstid" ColumnName="sstid" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Vat" ColumnName="Vat" />
+          <ScalarProperty Name="VatCustomPurposes" ColumnName="VatCustomPurposes" />
+          <ScalarProperty Name="sstt" ColumnName="sstt" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="SpecialOrGeneralID" ColumnName="SpecialOrGeneralID" />
+          <ScalarProperty Name="TaxableOrFreeID" ColumnName="TaxableOrFreeID" />
+          <ScalarProperty Name="mu" ColumnName="mu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductTypes">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.ProductType">
+        <MappingFragment StoreEntitySet="ProductType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SpecialOrGenerals">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.SpecialOrGeneral">
+        <MappingFragment StoreEntitySet="SpecialOrGeneral">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaxableOrFrees">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.TaxableOrFree">
+        <MappingFragment StoreEntitySet="TaxableOrFree">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_bank">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.tb_bank">
+        <MappingFragment StoreEntitySet="tb_bank">
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="ShabaPatern" ColumnName="ShabaPatern" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_check_send">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.tb_check_send">
+        <MappingFragment StoreEntitySet="tb_check_send">
+          <ScalarProperty Name="SendCheckId" ColumnName="SendCheckId" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+          <ScalarProperty Name="CheckResponse" ColumnName="CheckResponse" />
+          <ScalarProperty Name="CheckDate" ColumnName="CheckDate" />
+          <ScalarProperty Name="SendId" ColumnName="SendId" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="ReferenceNumber" ColumnName="ReferenceNumber" />
+          <ScalarProperty Name="invoiceData" ColumnName="invoiceData" />
+          <ScalarProperty Name="ResponseStatus" ColumnName="ResponseStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_contact">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.tb_contact">
+        <MappingFragment StoreEntitySet="tb_contact">
+          <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+          <ScalarProperty Name="NationalCode" ColumnName="NationalCode" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="degreeID" ColumnName="degreeID" />
+          <ScalarProperty Name="magorID" ColumnName="magorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_degree">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.tb_degree">
+        <MappingFragment StoreEntitySet="tb_degree">
+          <ScalarProperty Name="degreeID" ColumnName="degreeID" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_magor">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.tb_magor">
+        <MappingFragment StoreEntitySet="tb_magor">
+          <ScalarProperty Name="magorID" ColumnName="magorID" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_marketing">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.tb_marketing">
+        <MappingFragment StoreEntitySet="tb_marketing">
+          <ScalarProperty Name="MarketingID" ColumnName="MarketingID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="NationalCode" ColumnName="NationalCode" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_person">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.tb_person">
+        <MappingFragment StoreEntitySet="tb_person">
+          <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+          <ScalarProperty Name="NatioinalCode" ColumnName="NatioinalCode" />
+          <ScalarProperty Name="PersonTypeId" ColumnName="PersonTypeId" />
+          <ScalarProperty Name="Fname" ColumnName="Fname" />
+          <ScalarProperty Name="Lname" ColumnName="Lname" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="ComapnyName" ColumnName="ComapnyName" />
+          <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+          <ScalarProperty Name="RegisterationDate" ColumnName="RegisterationDate" />
+          <ScalarProperty Name="CompanyTypeId" ColumnName="CompanyTypeId" />
+          <ScalarProperty Name="RegisterNumber" ColumnName="RegisterNumber" />
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="Shaba" ColumnName="Shaba" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_send">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.tb_send">
+        <MappingFragment StoreEntitySet="tb_send">
+          <ScalarProperty Name="SendId" ColumnName="SendId" />
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="InvoicePack" ColumnName="InvoicePack" />
+          <ScalarProperty Name="ResponcePack" ColumnName="ResponcePack" />
+          <ScalarProperty Name="CheckPack" ColumnName="CheckPack" />
+          <ScalarProperty Name="SendDate" ColumnName="SendDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="NationalCode" ColumnName="NationalCode" />
+          <ScalarProperty Name="Fname" ColumnName="Fname" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="StartActive" ColumnName="StartActive" />
+          <ScalarProperty Name="EndActive" ColumnName="EndActive" />
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+          <ScalarProperty Name="user_type" ColumnName="user_type" />
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="Shaba" ColumnName="Shaba" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserBranches">
+      <EntityTypeMapping TypeName="StoreTerminalSystemModel.UserBranch">
+        <MappingFragment StoreEntitySet="UserBranch">
+          <ScalarProperty Name="UserBranchId" ColumnName="UserBranchId" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="BrancheID" ColumnName="BrancheID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

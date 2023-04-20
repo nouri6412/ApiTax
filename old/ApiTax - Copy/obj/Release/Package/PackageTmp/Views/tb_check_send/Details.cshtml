@@ -1,0 +1,81 @@
+﻿@model ApiTax.Models.tb_check_send
+
+@{
+    ViewBag.Title = "Details";
+
+   
+}
+
+<h2>پاسخ استعلام</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            تاریخ استعلام
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckDate)
+        </dd>
+
+        <dt>
+            وضعیت استعلام
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.state)
+        </dd>
+
+        <dt>
+            شناسه یکتای صورت حساب
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UID)
+        </dd>
+
+        <dt>
+            شناسه مرجع
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReferenceNumber)
+        </dd>
+
+
+    </dl>
+    <hr />
+    <h3>صورت حساب </h3>
+    <div id="json-invoice-data">
+
+    </div>
+    <hr />
+    <h3> پاسخ استعلام </h3>
+    <div id="json-invoice-res">
+
+    </div>
+</div>
+<p>
+    @Html.ActionLink("بازگشت به لیست", "Index",new {send_id=Model.SendId })
+</p>
+
+<script type="text/javascript">
+
+
+
+    var invoice_data =  @Html.Raw(Model.invoiceData);
+    var response_data = @Html.Raw(Model.CheckResponse);
+
+
+           		var jsonViewer = new JSONViewer();
+        document.querySelector("#json-invoice-data").appendChild(jsonViewer.getContainer());
+        jsonViewer.showJSON(invoice_data, null, 1);
+
+              		var jsonViewer1 = new JSONViewer();
+        document.querySelector("#json-invoice-res").appendChild(jsonViewer1.getContainer());
+    jsonViewer1.showJSON(response_data, null, 1);
+    console.log(response_data);
+
+</script>

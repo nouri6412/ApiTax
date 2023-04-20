@@ -1,0 +1,338 @@
+﻿@model ApiTax.Models.InvoiceHeader
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>InvoiceHeader</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Taxid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Taxid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Irtaxid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Irtaxid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Indatim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Indatim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Indati2m)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Indati2m)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tins)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tins)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sbc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sbc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Scln)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Scln)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Scc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Scc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.spc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.spc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tinb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tinb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bbc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bbc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Billid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Billid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bpc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bpc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bpn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bpn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Setm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Setm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Insp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Insp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tax17)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tax17)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tvam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tvam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tprdis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tprdis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tdis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tdis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tadis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tadis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Todam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Todam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tbill)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tbill)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tcpbs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tcpbs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tonw)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tonw)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.torv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.torv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tocv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tocv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tob)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tob)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.uuid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.uuid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tvop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tvop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dpvb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dpvb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InpID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InpID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ftType.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ftType.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InPatern.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InPatern.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InsType.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InsType.Title)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.InvoiceID }) |
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</p>

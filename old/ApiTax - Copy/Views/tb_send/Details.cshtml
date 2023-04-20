@@ -1,0 +1,68 @@
+﻿@model ApiTax.Models.tb_send
+@using ApiTax.Models;
+
+@{
+    StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
+    ViewBag.Title = "لاگ ارسال";
+}
+
+<h2>لاگ ارسال</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SendDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SendDate)
+        </dd>
+
+        <dt>
+            کاربر
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Fname)   @Html.DisplayFor(model => model.User.LastName)
+        </dd>
+
+        <dt>
+            حافظه مالیاتی
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.ClientID)  @Html.DisplayFor(model => model.Client.tb_person.Fname)  @Html.DisplayFor(model => model.Client.tb_person.Lname)  @Html.DisplayFor(model => model.Client.tb_person.ComapnyName)
+        </dd>
+
+    </dl>
+    <hr />
+    <h3>صورت حساب ها</h3>
+    <div id="json-invoice-data">
+
+    </div>
+</div>
+<script type="text/javascript">
+    
+ 
+
+    var invoice_data =  @Html.Raw(Model.InvoicePack);
+    var response_data = @Html.Raw(Model.ResponcePack);
+ 
+
+    for (var x = 0; x < invoice_data.length;x++) {
+        invoice_data[x]['response_from_server'] = response_data[x];
+           		var jsonViewer = new JSONViewer();
+        document.querySelector("#json-invoice-data").appendChild(jsonViewer.getContainer());
+        jsonViewer.showJSON(invoice_data[x], null, 1);
+
+    }
+
+    console.log(response_data);
+   
+</script>
+<p>
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</p>

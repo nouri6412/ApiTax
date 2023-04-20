@@ -1,0 +1,267 @@
+﻿@model IEnumerable<ApiTax.Models.InvoiceHeader>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("ایجاد کردن", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Taxid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Inno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Irtaxid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Indatim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Indati2m)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tins)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sbc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Crn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Scln)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Scc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.spc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tinb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bbc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Billid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bpc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bpn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Setm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Insp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tax17)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tvam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tprdis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tdis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tadis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Todam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tbill)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tcpbs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tonw)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.torv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tocv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tob)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.uuid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Inty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tvop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dpvb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InpID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ftType.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InPatern.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InsType.Title)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Taxid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Inno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Irtaxid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Indatim)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Indati2m)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tins)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sbc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Crn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Scln)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Scc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.spc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tinb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bbc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Billid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bpc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bpn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Setm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cap)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Insp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tax17)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tvam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tprdis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tdis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tadis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Todam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tbill)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tcpbs)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tonw)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.torv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tocv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tob)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.uuid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Inty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tvop)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dpvb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InpID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ftType.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InPatern.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InsType.Title)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.InvoiceID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.InvoiceID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.InvoiceID })
+        </td>
+    </tr>
+}
+
+</table>
