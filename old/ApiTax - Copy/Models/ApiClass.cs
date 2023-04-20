@@ -74,7 +74,8 @@ namespace ApiTax.Models
                 rsaParameters.Modulus =
                 rsaKeyParameters.Modulus.ToByteArrayUnsigned();
                 rsaParameters.Exponent =
-                rsaKeyParameters.Exponent.ToByteArrayUnsigned();
+                rsaKeyParameters.Exponent.ToByteArrayUnsigned();
+
                 RSACng rsa = new RSACng();
                 rsa.ImportParameters(rsaParameters);
                 var get_b = Encoding.UTF8.GetBytes(stringToBeEncrypted
@@ -92,7 +93,7 @@ namespace ApiTax.Models
                 }
                 return base64;
             }
-            catch (Exception e)
+            catch
             {
                 return "error";
             }

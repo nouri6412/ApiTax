@@ -28,7 +28,7 @@ namespace ApiTax.Controllers
         public Client _Client;
         func func;
         public string memory_id = "";
-        ITaxApis _api;
+      
         // GET: InvoiceApi
         public ActionResult Index()
         {
@@ -65,7 +65,7 @@ namespace ApiTax.Controllers
             var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/FA.CER.CER"));
             func = new func();
             //  _api= func.initApi("A1211P", fileContents);
-            _api = func.initApi(_Client.ClientID, _Client.PrivateKey);
+      
 
         }
    
