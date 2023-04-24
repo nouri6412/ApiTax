@@ -30,24 +30,54 @@
 
 <script type="text/javascript">
     var Main_Data = [];
+    function save_respone(res_data) {
+
+  
+            //  JSON.stringify(data)
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Content("~/InvoiceApi/UploadInvoice")',
+                data: {
+                    data: res_data
+                },
+                success: function (msg) {
+                    console.log(msg);
+                
+                },
+                error: function (error) {
+                     $("#result").html("خطا در ارسال اطلاعات به سرور");
+                           $("#upload-panel").css('display','block');
+                    //Message
+                    console.error(error.responseText);
+                }
+            });
+    }
+
     function send_data_excel_ajax(data) {
         $("#result").html("لطفا منتظر بمانید");
         $("#upload-panel").css('display','none');
             //  JSON.stringify(data)
             $.ajax({
                 type: 'POST',
-                url: '@Url.Content("~/InvoiceApi/UploadInvoice")',
+                url: 'http://payasystem.mrtrip.ir/InvoiceApi/UploadInvoice',
                 data: {
-                    excel_data: JSON.stringify(data),type_1:'@type_1.ToString()',type_2:'@type_2.ToString()'
+                    user: "{username:'100',password:'123456',clientID:'A1211P'}", excel_data: JSON.stringify(data),type_1:'@type_1.ToString()',type_2:'@type_2.ToString()'
                 },
                 success: function (msg) {
+                    console.log(msg);
                      $("#upload-panel").css('display','block');
                     var jss = msg;
                    // console.log(jss);
                       var res=JSON.parse(jss);
                     console.log(res);
-                    $("#result").html('');
-                           		var jsonViewer = new JSONViewer();
+                    
+                    var res1 = JSON.parse(res.response);
+                    console.log(res1);
+                      save_respone(res.response);
+                    res.response= JSON.parse(res1.json_result);
+                  
+                    var jsonViewer = new JSONViewer();
+                     $("#result").html("");
         document.querySelector("#result").appendChild(jsonViewer.getContainer());
         jsonViewer.showJSON(res, null, 1);
                    // console.log(jss);
@@ -59,7 +89,9 @@
                     console.error(error.responseText);
                 }
             });
-        }
+    }
+
+   
 
         function import_excel_to_database() {
             var data = [];

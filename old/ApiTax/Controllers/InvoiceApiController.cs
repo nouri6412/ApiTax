@@ -20,7 +20,7 @@ using TaxCollectData.Library.Abstraction;
 
 namespace ApiTax.Controllers
 {
-    [Authorize]
+   
     public class InvoiceApiController : Controller
     {
         private StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
@@ -36,6 +36,8 @@ namespace ApiTax.Controllers
 
             return View();
         }
+
+        [Authorize]
         public ActionResult UploadInvoice(int? type, int? sub_type, string title)
         {
             ViewBag.type_1 = type;
@@ -44,16 +46,20 @@ namespace ApiTax.Controllers
             return View();
         }
 
+
         [HttpPost]
+
         public JsonResult UploadInvoice(FormCollection formCollection)
         {
 
+            var userJson = formCollection["user"];
 
             InitRequest InitRequest = new InitRequest();
-            InitRequest.init(User);
+            InitRequest.init(User, userJson);
 
             CurrentUser = GlobalUser.CurrentUser;
 
+          
 
             var json = formCollection["excel_data"];
             List<ApiTax.Models.InvoiceBodyDto> _body = JsonConvert.DeserializeObject<List<ApiTax.Models.InvoiceBodyDto>>(json);
@@ -61,15 +67,19 @@ namespace ApiTax.Controllers
             List<ApiTax.Models.PaymentDto> _Payments = JsonConvert.DeserializeObject<List<ApiTax.Models.PaymentDto>>(json);
             List<ExtraJsonData> _ExtraJsonData = JsonConvert.DeserializeObject<List<ExtraJsonData>>(json);
             memory_id = _ExtraJsonData[0].ClientID;
-            var ex_client = db.Clients.Where(r => r.ClientID == memory_id);
 
-            if (ex_client == null || ex_client.Count() == 0)
-            {
-                var error = JsonConvert.SerializeObject(new MyExportData() { state = false, message = "حافظه مالیاتی یافت نشد" });
-                return Json(error, JsonRequestBehavior.AllowGet);
-            }
+      
+                var ex_client = db.Clients.Where(r => r.ClientID == memory_id);
 
-            _Client = ex_client.FirstOrDefault();
+                if (ex_client == null || ex_client.Count() == 0)
+                {
+                    var error = JsonConvert.SerializeObject(new MyExportData() { state = false, message = "حافظه مالیاتی یافت نشد" });
+                    return Json(error, JsonRequestBehavior.AllowGet);
+                }
+
+                _Client = ex_client.FirstOrDefault();
+      
+
             init();
 
             var random = new Random();
@@ -219,14 +229,16 @@ namespace ApiTax.Controllers
                 long randomSerialDecimal = random.Next(999999999);
                 var now = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
                 string date1 = "";
-                try {
-                    date1 = _Header[x].Indatim.ToString().Substring(0, 4) +"/"+ _Header[x].Indatim.ToString().Substring(4, 2) +"/"+ _Header[x].Indatim.ToString().Substring(6, 2);
+                try
+                {
+                    date1 = _Header[x].Indatim.ToString().Substring(0, 4) + "/" + _Header[x].Indatim.ToString().Substring(4, 2) + "/" + _Header[x].Indatim.ToString().Substring(6, 2);
                 }
-                catch {
-                    MyExportData MyExportData1 = new MyExportData() {  };
+                catch
+                {
+                    MyExportData MyExportData1 = new MyExportData() { };
 
                     MyExportData1.state = false;
-                    MyExportData1.message = "{error:'invalid data in row "+(x+1)+"'}";
+                    MyExportData1.message = "{error:'invalid data in row " + (x + 1) + "'}";
 
                     var output1 = JsonConvert.SerializeObject(MyExportData1);
                     return Json(output1, JsonRequestBehavior.AllowGet);
@@ -490,12 +502,12 @@ namespace ApiTax.Controllers
             ViewBag.type = type;
             return View();
         }
-        public ActionResult Confirmedit(long id=0 ,int type=0)
+        public ActionResult Confirmedit(string _user=null, long id=0 ,int type=0)
         {
             tb_check_send tb_check_send = db.tb_check_send.Where(r => r.SendCheckId == id).FirstOrDefault();
 
             InitRequest InitRequest = new InitRequest();
-            InitRequest.init(User);
+            InitRequest.init(User, _user);
 
             CurrentUser = GlobalUser.CurrentUser;
 
@@ -529,8 +541,6 @@ randomSerialDecimal, DateTime.Now);
             list.Add(_InvoiceDto);
             MyExportData MyExportData = new MyExportData() { list = list };
 
-
-
                 MyExportData.response = send_invoice(list);
             return RedirectToAction("index", "tb_send", new { });
         }
@@ -546,6 +556,7 @@ randomSerialDecimal, DateTime.Now);
         {
             try
             {
+                ApiObject _ApiObject = new ApiObject() {  tb_check_send=new List<tb_check_send>()};
                 var json = JsonConvert.SerializeObject(list_send);
                 var settings = new JsonSerializerSettings
                 {
@@ -570,8 +581,16 @@ randomSerialDecimal, DateTime.Now);
                         UserID = CurrentUser.UserID,
                         ClientID = _Client.ID
                     };
-                    db.tb_send.Add(_tb_send);
-                    db.SaveChanges();
+
+                   if(GlobalUser._ObjectUser.is_api)
+                    {
+                        _ApiObject.tb_send = _tb_send;
+                    }
+                   else
+                    {
+                        db.tb_send.Add(_tb_send);
+                        db.SaveChanges();
+                    }
 
                     List<ResponcePack> responseData = JsonConvert.DeserializeObject<List<ResponcePack>>(json_result, settings);
 
@@ -590,13 +609,28 @@ randomSerialDecimal, DateTime.Now);
                             SendId = _tb_send.SendId,
                             state = 0
                         };
-                        db.tb_check_send.Add(_tb_check_send);
-                        db.SaveChanges();
+                        if (GlobalUser._ObjectUser.is_api)
+                        {
+                            _ApiObject.tb_check_send.Add(_tb_check_send);
+                        }
+                        else
+                        {
+                            db.tb_check_send.Add(_tb_check_send);
+                            db.SaveChanges();
+                        }
+
                         list_check.Add(_tb_check_send);
                     }
 
 
-                    func.check_send(list_check, db);
+                    _ApiObject.check_result= func.check_send(list_check, db);
+                    if (GlobalUser._ObjectUser.is_api)
+                    {
+                        _ApiObject.json_result = json_result;
+
+                        json_result = JsonConvert.SerializeObject(_ApiObject);
+                    }
+
 
                     return json_result;
                 }
@@ -942,6 +976,22 @@ randomSerialDecimal, DateTime.Now);
         public bool state { get; set; }
         public string message { get; set; }
 
+    }
+
+    public class ObjectUser
+    {
+        public string username { get; set; }
+        public string password { get; set; }
+    }
+
+    [Serializable]
+    public class ApiObject
+    {
+        public tb_send tb_send { get; set; }
+        public List<tb_check_send> tb_check_send { get; set; }
+
+        public string json_result { get; set; }
+        public string check_result { get; set; }
     }
 
 

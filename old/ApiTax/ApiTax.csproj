@@ -306,6 +306,7 @@
     <Compile Include="Controllers\tb_sendController.cs" />
     <Compile Include="Controllers\UserBranchesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Models\AllowCrossSiteJsonAttribute.cs" />
     <Compile Include="Models\Branch.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

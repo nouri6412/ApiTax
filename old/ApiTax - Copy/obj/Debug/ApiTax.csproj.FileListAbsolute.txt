@@ -750,7 +750,6 @@ C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\obj\Debug\ApiTax.csproj.CopyC
 C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\obj\Debug\ApiTax.dll
 C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\obj\Debug\ApiTax.pdb
 C:\Users\Sadegh\Documents\GitHub\ApiTax\old\ApiTax\obj\Debug\ApiTax.csprojAssemblyReference.cache
-E:\git\ApiTax\old\ApiTax - Copy\obj\Debug\ApiTax.csproj.AssemblyReference.cache
 E:\git\ApiTax\old\ApiTax - Copy\obj\Debug\ApiTax.csproj.ResolveComReference.cache
 E:\git\ApiTax\old\ApiTax - Copy\obj\Debug\ApiTax.csproj.CoreCompileInputs.cache
 E:\git\ApiTax\old\ApiTax - Copy\obj\Debug\ApiTax.dll
@@ -940,3 +939,4 @@ E:\git\ApiTax\old\ApiTax - Copy\bin\tr\Microsoft.VisualStudio.Validation.resourc
 E:\git\ApiTax\old\ApiTax - Copy\bin\zh-Hans\Microsoft.VisualStudio.Validation.resources.dll
 E:\git\ApiTax\old\ApiTax - Copy\bin\zh-Hant\Microsoft.VisualStudio.Validation.resources.dll
 E:\git\ApiTax\old\ApiTax - Copy\obj\Debug\ApiTax.csproj.CopyComplete
+E:\git\ApiTax\old\ApiTax - Copy\obj\Debug\ApiTax.csprojAssemblyReference.cache

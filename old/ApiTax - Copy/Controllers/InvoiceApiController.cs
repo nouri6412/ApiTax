@@ -17,6 +17,7 @@ using TaxCollectData.Library.Dto.Config;
 using TaxCollectData.Library.Dto.Content;
 using System.Reflection;
 using TaxCollectData.Library.Abstraction;
+using System.Data.Entity;
 
 namespace ApiTax.Controllers
 {
@@ -48,9 +49,62 @@ namespace ApiTax.Controllers
         public JsonResult UploadInvoice(FormCollection formCollection)
         {
 
+            var settings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                MissingMemberHandling = MissingMemberHandling.Ignore
+            };
+
+            InitRequest InitRequest = new InitRequest();
+            InitRequest.init(User);
+
+            CurrentUser = GlobalUser.CurrentUser;
 
 
-           // var output = JsonConvert.SerializeObject(new );
+
+            var json = formCollection["data"];
+
+            var data = JsonConvert.DeserializeObject<ApiObject>(json, settings);
+
+                db.tb_send.Add(data.tb_send);
+                db.SaveChanges();
+  
+            var list_check = new List<tb_check_send>();
+        
+            for (int x = 0; x < data.tb_check_send.Count(); x++)
+            {
+                data.tb_check_send[x].SendId = data.tb_send.SendId;
+                    db.tb_check_send.Add(data.tb_check_send[x]);
+                    db.SaveChanges();
+
+
+                list_check.Add(data.tb_check_send[x]);
+            }
+            try
+            {
+                var inquiryResultModels = JsonConvert.DeserializeObject<List<InquiryResultModel>>(data.check_result, settings);
+
+                foreach (var it in inquiryResultModels)
+                {
+                    var items = list_check.Where(r => r.UID == it.Uid);
+                    if (items != null && items.Count() > 0)
+                    {
+                        var item = items.FirstOrDefault();
+                        var response = it.Data.ToString();
+                        var status = it.Status;
+                        item.state = 1;
+                        item.ResponseStatus = status;
+                        item.CheckResponse = response;
+                        item.CheckDate = DateTime.Now.Date.Year.ToString() + "-" + DateTime.Now.Date.Month.ToString() + "-" + DateTime.Now.Date.Day.ToString();
+                        db.Entry(item).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch { }
+
+
+            // var output = JsonConvert.SerializeObject(new );
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
@@ -117,5 +171,14 @@ namespace ApiTax.Controllers
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+    }
+    [Serializable]
+    public class ApiObject
+    {
+        public tb_send tb_send { get; set; }
+        public List<tb_check_send> tb_check_send { get; set; }
+
+        public string json_result { get; set; }
+        public string check_result { get; set; }
     }
 }

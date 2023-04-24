@@ -20,7 +20,7 @@ namespace ApiTax.Controllers
 {
     public class HomeController : Controller
     {
-        private StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
+   
         public ActionResult Index()
         {
 
@@ -54,7 +54,9 @@ namespace ApiTax.Controllers
         {
             //if (ModelState.IsValid)
             //{
-            if (IsValid(userr.NationalCode, userr.PassWord))
+
+            func func = new func();
+            if (func.IsValid(userr.NationalCode, userr.PassWord))
             {               
                 FormsAuthentication.SetAuthCookie(userr.NationalCode, true);
      
@@ -73,29 +75,6 @@ namespace ApiTax.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private bool IsValid(string email, string password)
-        {
-         
-            bool IsValid = false;
 
-            var user = db.Users.FirstOrDefault(u => u.NationalCode == email);
-            if (user != null)
-            {
-                if (user.PassWord == password)
-                {
-                    IsValid = true;
-                }
-            }
-
-            return IsValid;
-        }
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }
