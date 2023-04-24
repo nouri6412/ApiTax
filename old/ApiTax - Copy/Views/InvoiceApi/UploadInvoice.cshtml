@@ -59,7 +59,7 @@
             //  JSON.stringify(data)
             $.ajax({
                 type: 'POST',
-                url: 'http://payasystem.mrtrip.ir/InvoiceApi/UploadInvoice',
+                url: 'https://payasystem.mrtrip.ir/InvoiceApi/UploadInvoice',
                 data: {
                     user: "{username:'100',password:'123456',clientID:'A1211P'}", excel_data: JSON.stringify(data),type_1:'@type_1.ToString()',type_2:'@type_2.ToString()'
                 },
