@@ -27,6 +27,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("صفحه اصلی", "Index", "Home")</li>
+                    <li>@Html.ActionLink(" دریافت Key", "Index", "Csr")</li>
                     @if (Request.IsAuthenticated)
                     {
                         InitRequest InitRequest = new InitRequest();

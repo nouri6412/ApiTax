@@ -1,0 +1,82 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "تولید Csr";
+    List<string> error = ViewBag.error as List<string>;
+}
+
+@if (error.Count() > 0)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var item in error)
+            {
+                <li>@item</li>
+            }
+        </ul>
+    </div>
+}
+
+<form action="~/csr/get_file" method="post">
+    <div class="form-horizontal">
+        <h4>فرم دریافت csr</h4>
+        <hr />
+        <div class="form-group">
+            <label class="control-label col-md-2">نوع متقاضی - O</label>
+            <div class="col-md-10">
+                <select id="in_o" name="in_o" class="form-control">
+                    @if (ViewBag.in_o == "Governmental")
+                    {
+                        <option selected value="Governmental">Governmental</option>
+                        <option value="Non-Governmental">Non-Governmental</option>
+                    }
+                    else if (ViewBag.in_o == "Non-Governmental")
+                    {
+                        <option value="Governmental">Governmental</option>
+                        <option selected value="Non-Governmental">Non-Governmental</option>
+                    }
+                    else
+                    {
+                        <option value="Governmental">Governmental</option>
+                        <option value="Non-Governmental">Non-Governmental</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">نام سازمان - OU</label>
+            <div class="col-md-10">
+                <input id="in_ou" name="in_ou" type="text" value="@ViewBag.in_ou" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">نام کامل سازمان - CN</label>
+            <div class="col-md-10">
+                <input id="in_cn" name="in_cn" type="text" value="@ViewBag.in_cn" placeholder="Organization Unit [Stamp]" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">  پست الکترونیکی  - E</label>
+            <div class="col-md-10">
+                <input id="in_e" name="in_e" type="text" value="@ViewBag.in_e" placeholder="email@example.com" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">  شناسه ملی شرکت  - SERIALNUMBER</label>
+            <div class="col-md-10">
+                <input id="in_sn" name="in_sn" type="text" value="@ViewBag.in_sn" placeholder="email@example.com" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="دریافت فایل" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+<style>
+    input, select, textarea {
+    max-width: 357px;
+    width: 300px;
+}
+</style>
