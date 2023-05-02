@@ -749,7 +749,6 @@ E:\git\ApiTax\old\ApiTax\obj\Debug\ApiTax.csproj.CoreCompileInputs.cache
 E:\git\ApiTax\old\ApiTax\obj\Debug\ApiTax.csproj.CopyComplete
 E:\git\ApiTax\old\ApiTax\obj\Debug\ApiTax.dll
 E:\git\ApiTax\old\ApiTax\obj\Debug\ApiTax.pdb
-E:\git\ApiTax\old\ApiTax\obj\Debug\ApiTax.csprojAssemblyReference.cache
 E:\git\ApiTax\old\ApiTax\bin\DotNetZip.dll
 E:\git\ApiTax\old\ApiTax\bin\DotNetZip.pdb
 E:\git\ApiTax\old\ApiTax\bin\DotNetZip.xml
