@@ -41,9 +41,7 @@ namespace ApiTax.Controllers
         public ActionResult Index()
         {
             // 1. Generate RSA Key Pair (2048bits)
-            //  string html = System.IO.File.ReadAllText();
-            //var certificate = new X509Certificate2(Server.MapPath("~/App_Data/Ulduz Seyr Iranian [Stamp].crt"));
-            //byte[] publicKey = certificate.PublicKey.EncodedKeyValue.RawData;  
+
             ViewBag.in_o = "";
             ViewBag.in_ou = "";
             ViewBag.in_cn = "";
@@ -160,6 +158,9 @@ namespace ApiTax.Controllers
             //  "text/plain",
             //   string.Format("{0}.txt", 1));
             #endregion
+         
+            var certificate = new X509Certificate2(Server.MapPath("~/App_Data/Ulduz Seyr Iranian [Stamp].crt"));
+            byte[] publicKey = certificate.PublicKey.EncodedKeyValue.RawData;
 
             string in_o = formCollection["in_o"];
             string in_ou = formCollection["in_ou"];
