@@ -159,8 +159,8 @@ namespace ApiTax.Controllers
             //   string.Format("{0}.txt", 1));
             #endregion
          
-            var certificate = new X509Certificate2(Server.MapPath("~/App_Data/Ulduz Seyr Iranian [Stamp].crt"));
-            byte[] publicKey = certificate.PublicKey.EncodedKeyValue.RawData;
+            //var certificate = new X509Certificate2(Server.MapPath("~/App_Data/Ulduz Seyr Iranian [Stamp].crt"));
+            //byte[] publicKey = certificate.PublicKey.EncodedKeyValue.RawData;
 
             string in_o = formCollection["in_o"];
             string in_ou = formCollection["in_ou"];
