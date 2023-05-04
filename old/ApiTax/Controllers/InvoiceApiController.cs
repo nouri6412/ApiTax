@@ -79,6 +79,17 @@ namespace ApiTax.Controllers
 
                 _Client = ex_client.FirstOrDefault();
       
+            if(_Header.Count()>50)
+            {
+                MyExportData MyExportData1 = new MyExportData() { };
+
+                MyExportData1.state = false;
+                MyExportData1.message = "{error:'تعداد ردیف های مجاز برای ارسال 50 می باشد '}";
+
+                var output1 = JsonConvert.SerializeObject(MyExportData1);
+                return Json(output1, JsonRequestBehavior.AllowGet);
+            }
+
 
             init();
 
