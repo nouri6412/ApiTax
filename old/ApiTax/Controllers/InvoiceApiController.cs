@@ -78,6 +78,11 @@ namespace ApiTax.Controllers
                 }
 
                 _Client = ex_client.FirstOrDefault();
+
+            if(_ExtraJsonData[0].PKEY != null && _ExtraJsonData[0].PKEY.Trim().Length>0)
+            {
+                _Client.PrivateKey = _ExtraJsonData[0].PKEY.Trim();
+            }
       
             if(_Header.Count()>50)
             {
@@ -229,10 +234,10 @@ namespace ApiTax.Controllers
                 #endregion
             } ///body
 
-            for (int x = 0; x < _Header.Count(); x++)
-            {
+            //for (int x = 0; x < _Header.Count(); x++)
+            //{
 
-            }///payment
+            //}///payment
 
             for (int x = 0; x < _Header.Count(); x++)
             {
@@ -557,7 +562,7 @@ randomSerialDecimal, DateTime.Now);
         }
         public void init()
         {
-            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/FA.CER.CER"));
+            //var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/FA.CER.CER"));
             func = new func();
             //  _api= func.initApi("A1211P", fileContents);
             _api = func.initApi(_Client.ClientID, _Client.PrivateKey);
@@ -1016,6 +1021,7 @@ randomSerialDecimal, DateTime.Now);
     public class ExtraJsonData
     {
         public string ClientID { get; set; }
+        public string PKEY { get; set; }
     }
 
     public class Users
