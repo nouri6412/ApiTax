@@ -274,7 +274,7 @@ namespace ApiTax.Controllers
             {
                 if ((inno != _Header[x].Inno && inno != 0) || x == _Header.Count() - 1)
                 {
-                    if (x == _Header.Count() - 1)
+                    if (x == _Header.Count() - 1 && inno == _Header[x].Inno)
                     {
                         list_detail.Add(_body[x]);
                         list_pay.Add(_Payments[x]);
@@ -296,14 +296,32 @@ namespace ApiTax.Controllers
                     _InvoiceDto.Body = list_detail;
                     // _InvoiceDto.extension = new Extension();
                     //  _InvoiceDto.Payments = list_pay;// روش body
-
-                    list_detail = new List<ApiTax.Models.InvoiceBodyDto>();
-                    list_pay = new List<ApiTax.Models.PaymentDto>(); 
+                    
+                    if(x != _Header.Count() - 1)
+                    {
+                        list_detail = new List<ApiTax.Models.InvoiceBodyDto>();
+                        list_pay = new List<ApiTax.Models.PaymentDto>();
+                    } 
 
                     list.Add(_InvoiceDto);
                 }
                 list_detail.Add(_body[x]);
                 list_pay.Add(_Payments[x]);
+
+                if (x == _Header.Count() - 1 && inno != _Header[x].Inno)
+                {
+                    ApiTax.Models.InvoiceDto _InvoiceDto = new ApiTax.Models.InvoiceDto() { };
+
+                    list_detail = new List<ApiTax.Models.InvoiceBodyDto>();
+
+                    list_detail.Add(_body[x]);
+
+                    _InvoiceDto.Body = list_detail;
+
+                    _InvoiceDto.Header = _Header[x];
+                    _InvoiceDto.Payments = new List<Models.PaymentDto>() { _Payments[x] };// روش header
+                    list.Add(_InvoiceDto);
+                }
 
                 inno = _Header[x].Inno;
 
@@ -345,6 +363,7 @@ namespace ApiTax.Controllers
                         _InvoiceMyValidation.Add(MyValidation.InvoiceMyValidation);
                     }
                 }
+
 
             }
 
