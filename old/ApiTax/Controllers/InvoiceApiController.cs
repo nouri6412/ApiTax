@@ -272,6 +272,8 @@ namespace ApiTax.Controllers
             var list_pay = new List<ApiTax.Models.PaymentDto>();
             for (int x = 0; x < _Header.Count(); x++)
             {
+                Boolean is_added = false;
+
                 if ((inno != _Header[x].Inno && inno != 0) || x == _Header.Count() - 1)
                 {
                     if (x == _Header.Count() - 1 && inno == _Header[x].Inno)
@@ -301,14 +303,14 @@ namespace ApiTax.Controllers
                     {
                         list_detail = new List<ApiTax.Models.InvoiceBodyDto>();
                         list_pay = new List<ApiTax.Models.PaymentDto>();
-                    } 
-
+                    }
+                    is_added = true;
                     list.Add(_InvoiceDto);
                 }
                 list_detail.Add(_body[x]);
                 list_pay.Add(_Payments[x]);
 
-                if (x == _Header.Count() - 1 && inno != _Header[x].Inno)
+                if (x == _Header.Count() - 1 && inno != _Header[x].Inno && is_added == false)
                 {
                     ApiTax.Models.InvoiceDto _InvoiceDto = new ApiTax.Models.InvoiceDto() { };
 
