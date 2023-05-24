@@ -246,7 +246,7 @@ namespace ApiTax.Controllers
                     MyExportData MyExportData1 = new MyExportData() { };
 
                     MyExportData1.state = false;
-                    MyExportData1.message = "{error:'invalid data in row " + (x + 1) + "'}";
+                    MyExportData1.message = "{\"error\":\"invalid data in row " + (x + 1) + "\"}";
 
                     var output1 = JsonConvert.SerializeObject(MyExportData1);
                     return Json(output1, JsonRequestBehavior.AllowGet);
@@ -376,7 +376,7 @@ namespace ApiTax.Controllers
                 MyExportData MyExportData1 = new MyExportData() { };
 
                 MyExportData1.state = false;
-                MyExportData1.message = "{error:'تعداد فاکتور های مجاز برای ارسال 10 می باشد '}";
+                MyExportData1.message = "{\"error\":\"تعداد فاکتور های مجاز برای ارسال 10 می باشد \"}";
 
                 var output1 = JsonConvert.SerializeObject(MyExportData1);
                 return Json(output1, JsonRequestBehavior.AllowGet);
@@ -520,7 +520,7 @@ namespace ApiTax.Controllers
 
             MyExportData MyExportData = new MyExportData() { list = list, list_error = _InvoiceMyValidation };
 
-            MyExportData.response = "{error:'invalid data'}";
+            MyExportData.response = "{\"error\":\"invalid data\"}";
 
             if (MyExportData.list_error.Count() == 0)
             {
@@ -529,7 +529,7 @@ namespace ApiTax.Controllers
             else
             {
                 MyExportData.state = false;
-                MyExportData.message = "{error:'invalid data'}";
+                MyExportData.message = "{\"error\":\"invalid data\"}";
             }
 
             var output = JsonConvert.SerializeObject(MyExportData);
@@ -541,7 +541,7 @@ namespace ApiTax.Controllers
                 MyExportData MyExportData1 = new MyExportData() { };
 
                 MyExportData1.state = false;
-                MyExportData1.message = "{error:'"+ex.Message+"'}";
+                MyExportData1.message = "{\"error\":\""+ex.Message+"\"}";
 
                 var output1 = JsonConvert.SerializeObject(MyExportData1);
                 return Json(output1, JsonRequestBehavior.AllowGet);
@@ -689,7 +689,7 @@ randomSerialDecimal, DateTime.Now);
                 }
             }
             catch { }
-            return "{error:'not sended'}";
+            return "{\"error\":\"not sended\"}";
         }
         #region old upload
         //        [HttpPost]

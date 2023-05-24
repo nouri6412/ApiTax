@@ -41,16 +41,23 @@
                     excel_data: JSON.stringify(data),type_1:'@type_1.ToString()',type_2:'@type_2.ToString()'
                 },
                 success: function (msg) {
-                     var jss = msg;
+                    var jss = msg;
                     console.log(msg);
 
                      $("#upload-panel").css('display','block');
                    
-                      var res=JSON.parse(jss);
+                    var res=JSON.parse(jss);
                     console.log(res);
-                        
-                    res.response = JSON.parse(res.response);
+                    console.log(res.response.error);
 
+                    console.log('step 1');
+                    if (res.response.error) {
+                          console.log('step 2');
+                    }
+                    else {
+                    res.response = JSON.parse(res.response);
+                    }
+                     console.log('step 3');
                     $("#result").html('');
                            		var jsonViewer = new JSONViewer();
         document.querySelector("#result").appendChild(jsonViewer.getContainer());
