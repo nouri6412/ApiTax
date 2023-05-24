@@ -51,6 +51,8 @@ namespace ApiTax.Controllers
 
         public JsonResult UploadInvoice(FormCollection formCollection)
         {
+            try
+            {
 
             var userJson = formCollection["user"];
 
@@ -532,7 +534,20 @@ namespace ApiTax.Controllers
 
             var output = JsonConvert.SerializeObject(MyExportData);
             return Json(output, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                MyExportData MyExportData1 = new MyExportData() { };
+
+                MyExportData1.state = false;
+                MyExportData1.message = "{error:'"+ex.Message+"'}";
+
+                var output1 = JsonConvert.SerializeObject(MyExportData1);
+                return Json(output1, JsonRequestBehavior.AllowGet);
+            }
         }
+
 
         public ActionResult edit(long id = 0, int type = 0)
         {
