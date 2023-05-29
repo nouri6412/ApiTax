@@ -64,7 +64,7 @@ namespace ApiTax.Controllers
                 return HttpNotFound();
             }
 
-            var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/FA.CER.CER"));
+          //  var fileContents = System.IO.File.ReadAllText(Server.MapPath(@"~/App_Data/FA.CER.CER"));
             func func = new func();
             _api= func.initApi(tb_check_send.tb_send.Client.ClientID, tb_check_send.tb_send.Client.PrivateKey);
 

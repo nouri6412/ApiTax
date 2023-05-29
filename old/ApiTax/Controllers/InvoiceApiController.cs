@@ -20,7 +20,7 @@ using TaxCollectData.Library.Abstraction;
 
 namespace ApiTax.Controllers
 {
-   
+
     public class InvoiceApiController : Controller
     {
         private StoreTerminalSystemEntities db = new StoreTerminalSystemEntities();
@@ -54,23 +54,23 @@ namespace ApiTax.Controllers
             try
             {
 
-            var userJson = formCollection["user"];
+                var userJson = formCollection["user"];
 
-            InitRequest InitRequest = new InitRequest();
-            InitRequest.init(User, userJson);
+                InitRequest InitRequest = new InitRequest();
+                InitRequest.init(User, userJson);
 
-            CurrentUser = GlobalUser.CurrentUser;
+                CurrentUser = GlobalUser.CurrentUser;
 
-          
 
-            var json = formCollection["excel_data"];
-            List<ApiTax.Models.InvoiceBodyDto> _body = JsonConvert.DeserializeObject<List<ApiTax.Models.InvoiceBodyDto>>(json);
-            List<ApiTax.Models.InvoiceHeaderDto> _Header = JsonConvert.DeserializeObject<List<ApiTax.Models.InvoiceHeaderDto>>(json);
-            List<ApiTax.Models.PaymentDto> _Payments = JsonConvert.DeserializeObject<List<ApiTax.Models.PaymentDto>>(json);
-            List<ExtraJsonData> _ExtraJsonData = JsonConvert.DeserializeObject<List<ExtraJsonData>>(json);
-            memory_id = _ExtraJsonData[0].ClientID;
 
-      
+                var json = formCollection["excel_data"];
+                List<ApiTax.Models.InvoiceBodyDto> _body = JsonConvert.DeserializeObject<List<ApiTax.Models.InvoiceBodyDto>>(json);
+                List<ApiTax.Models.InvoiceHeaderDto> _Header = JsonConvert.DeserializeObject<List<ApiTax.Models.InvoiceHeaderDto>>(json);
+                List<ApiTax.Models.PaymentDto> _Payments = JsonConvert.DeserializeObject<List<ApiTax.Models.PaymentDto>>(json);
+                List<ExtraJsonData> _ExtraJsonData = JsonConvert.DeserializeObject<List<ExtraJsonData>>(json);
+                memory_id = _ExtraJsonData[0].ClientID;
+
+
                 var ex_client = db.Clients.Where(r => r.ClientID == memory_id);
 
                 if (ex_client == null || ex_client.Count() == 0)
@@ -81,459 +81,464 @@ namespace ApiTax.Controllers
 
                 _Client = ex_client.FirstOrDefault();
 
-            if(_ExtraJsonData[0].PKEY != null && _ExtraJsonData[0].PKEY.Trim().Length>0)
-            {
-                _Client.PrivateKey = _ExtraJsonData[0].PKEY.Trim();
-            }
-     
-
-
-            init();
-
-            var random = new Random();
-
-            int? type_1 = Convert.ToInt32(formCollection["type_1"]);
-            int? type_2 = Convert.ToInt32(formCollection["type_2"]);
-
-
-            for (int x = 0; x < _Header.Count(); x++)
-            {
-                #region ضربدر ها
-
-                try
+                if (_ExtraJsonData[0].PKEY != null && _ExtraJsonData[0].PKEY.Trim().Length > 0)
                 {
-                    _body[x].Prdis =Math.Floor(Convert.ToDecimal( Convert.ToDecimal(_body[x].Am) * _body[x].Fee));
+                    _Client.PrivateKey = _ExtraJsonData[0].PKEY.Trim();
                 }
-                catch { }
 
-                ////
 
-                try
+
+                init();
+
+                var random = new Random();
+
+                int? type_1 = Convert.ToInt32(formCollection["type_1"]);
+                int? type_2 = Convert.ToInt32(formCollection["type_2"]);
+
+
+                for (int x = 0; x < _Header.Count(); x++)
                 {
-                    _body[x].Adis =Math.Floor(Convert.ToDecimal( _body[x].Prdis - _body[x].Dis));
-                }
-                catch { }
+                    #region ضربدر ها
 
-
-
-
-                ////
-                ///
-
-                try
-                {
-                     if (type_1 == 1 && type_2 == 3)
-                    {
-                        ///الگوی طلا و جواهر
-                        _body[x].Odam = Math.Floor(Convert.ToDecimal((_body[x].Consfee + _body[x].Spro + _body[x].Bros)));
-                    }
-
-
-                }
-                catch { }
-
-                try
-                {
-                    if (type_1 == 1 && type_2 == 7)
-                    {
-                        ///صادراتی از اکسل بر می دارد
-                    }
-                    else if (type_1 == 1 && type_2 == 3)
-                    {
-                        ///الگوی طلا و جواهر
-                        _body[x].Odam =Math.Floor( Convert.ToDecimal( (_body[x].Tcpbs * _body[x].Odr)/100));
-                    }
-                    else
-                    {
-                        _body[x].Odam =Math.Floor( Convert.ToDecimal( (_body[x].Adis * _body[x].Odr)/100));
-                    }
-
-               
-                }
-                catch { }
-
-                try
-                {
-                    if (type_1 == 1 && type_2 == 7)
-                    {
-                        ///صادراتی از اکسل بر می دارد
-                    }
-                    else if (type_1 == 1 && type_2 == 3)
-                    {
-                        ///الگوی طلا و جواهر
-                        _body[x].Odam = Math.Floor(Convert.ToDecimal((_body[x].Tcpbs * _body[x].Olr) / 100));
-                    }
-                    else
-                    {
-                        _body[x].Olam = Math.Floor(Convert.ToDecimal((_body[x].Adis * _body[x].Olr) / 100));
-                    }
-                }
-                catch { }
-
-                ////
-
-                if (type_1 == 1 && type_2 == 3)
-                {
                     try
                     {
-                        _body[x].Adis =Math.Floor( Convert.ToDecimal( _body[x].Prdis + _body[x].Consfee + _body[x].Spro + _body[x].Bros - _body[x].Dis));
+                        _body[x].Prdis = Math.Floor(Convert.ToDecimal(Convert.ToDecimal(_body[x].Am) * _body[x].Fee));
                     }
                     catch { }
-                }
 
-                ////
+                    ////
 
-                try
-                {
-                    decimal Vam =Math.Floor(Convert.ToDecimal((_body[x].Adis * _body[x].Vra) /100));
-                    _body[x].Vam = Vam;
-                }
-                catch { }
-
-                try
-                {
-                    if (type_1 == 1 && type_2 == 7)
+                    try
                     {
+                        _body[x].Adis = Math.Floor(Convert.ToDecimal(_body[x].Prdis - _body[x].Dis));
+                    }
+                    catch { }
+
+
+
+
+                    ////
+                    ///
+
+                    try
+                    {
+                        if (type_1 == 1 && type_2 == 3)
+                        {
+                            ///الگوی طلا و جواهر
+                            _body[x].Odam = Math.Floor(Convert.ToDecimal((_body[x].Consfee + _body[x].Spro + _body[x].Bros)));
+                        }
+
 
                     }
-                       else if (type_1 == 1 && type_2 == 6)
+                    catch { }
+
+                    try
                     {
-                        _body[x].Tsstam = Math.Floor(Convert.ToDecimal((_body[x].Fee + _body[x].Vam )));
+                        if (type_1 == 1 && type_2 == 7)
+                        {
+                            ///صادراتی از اکسل بر می دارد
+                        }
+                        else if (type_1 == 1 && type_2 == 3)
+                        {
+                            ///الگوی طلا و جواهر
+                            _body[x].Odam = Math.Floor(Convert.ToDecimal((_body[x].Tcpbs * _body[x].Odr) / 100));
+                        }
+                        else
+                        {
+                            _body[x].Odam = Math.Floor(Convert.ToDecimal((_body[x].Adis * _body[x].Odr) / 100));
+                        }
+
 
                     }
-                    else
+                    catch { }
+
+                    try
                     {
-                        _body[x].Tsstam = Math.Floor(Convert.ToDecimal((_body[x].Vam + _body[x].Adis + _body[x].Odam + _body[x].Olam)));
+                        if (type_1 == 1 && type_2 == 7)
+                        {
+                            ///صادراتی از اکسل بر می دارد
+                        }
+                        else if (type_1 == 1 && type_2 == 3)
+                        {
+                            ///الگوی طلا و جواهر
+                            _body[x].Odam = Math.Floor(Convert.ToDecimal((_body[x].Tcpbs * _body[x].Olr) / 100));
+                        }
+                        else
+                        {
+                            _body[x].Olam = Math.Floor(Convert.ToDecimal((_body[x].Adis * _body[x].Olr) / 100));
+                        }
                     }
-                }
-                catch { }
+                    catch { }
 
-                try
+                    ////
+
+                    if (type_1 == 1 && type_2 == 3)
+                    {
+                        try
+                        {
+                            _body[x].Adis = Math.Floor(Convert.ToDecimal(_body[x].Prdis + _body[x].Consfee + _body[x].Spro + _body[x].Bros - _body[x].Dis));
+                        }
+                        catch { }
+                    }
+
+                    ////
+
+                    try
+                    {
+                        decimal Vam = Math.Floor(Convert.ToDecimal((_body[x].Adis * _body[x].Vra) / 100));
+                        _body[x].Vam = Vam;
+                    }
+                    catch { }
+
+                    try
+                    {
+                        if (type_1 == 1 && type_2 == 7)
+                        {
+
+                        }
+                        else if (type_1 == 1 && type_2 == 6)
+                        {
+                            _body[x].Tsstam = Math.Floor(Convert.ToDecimal((_body[x].Fee + _body[x].Vam)));
+
+                        }
+                        else
+                        {
+                            _body[x].Tsstam = Math.Floor(Convert.ToDecimal((_body[x].Vam + _body[x].Adis + _body[x].Odam + _body[x].Olam)));
+                        }
+                    }
+                    catch { }
+
+                    try
+                    {
+                        _body[x].Cop = Math.Floor(Convert.ToDecimal((_body[x].Tsstam * _Header[x].Cap) / _Header[x].Tadis));
+                    }
+                    catch { }
+
+
+                    try
+                    {
+                        _body[x].Vop = Math.Floor(Convert.ToDecimal((_body[x].Vam * _Header[x].Cap) / _Header[x].Tadis)).ToString();
+                    }
+                    catch { }
+
+
+
+                    #endregion
+                } ///body
+
+                //for (int x = 0; x < _Header.Count(); x++)
+                //{
+
+                //}///payment
+
+                for (int x = 0; x < _Header.Count(); x++)
                 {
-                    _body[x].Cop = Math.Floor(Convert.ToDecimal((_body[x].Tsstam * _Header[x].Cap) / _Header[x].Tadis));
+
+                    long randomSerialDecimal = random.Next(999999999);
+                    var now = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
+                    string date1 = "";
+                    try
+                    {
+                        date1 = _Header[x].Indatim.ToString().Substring(0, 4) + "/" + _Header[x].Indatim.ToString().Substring(4, 2) + "/" + _Header[x].Indatim.ToString().Substring(6, 2);
+                    }
+                    catch
+                    {
+                        MyExportData MyExportData1 = new MyExportData() { };
+
+                        MyExportData1.state = false;
+                        MyExportData1.message = "{\"error\":\"invalid data in row " + (x + 1) + "\"}";
+
+                        var output1 = JsonConvert.SerializeObject(MyExportData1);
+                        return Json(output1, JsonRequestBehavior.AllowGet);
+                    }
+                    int Hours = DateTime.Now.Hour;
+                    int Minutes = DateTime.Now.Minute;
+
+                    int Seconds = DateTime.Now.Second;
+
+                    var now2 = new DateTimeOffset(utility.ToMiladi(date1).AddHours(Hours).AddMinutes(Minutes).AddSeconds(Seconds)).ToUnixTimeMilliseconds();
+                    var taxId = TaxApiService.Instance.TaxIdGenerator.GenerateTaxId(memory_id,
+                    randomSerialDecimal, DateTime.Now);
+                    _Header[x].Taxid = taxId;
+                    _Header[x].Indati2m = now2;
+                    _Header[x].Indatim = now;
+                    _Header[x].Tdis = 0;
+
                 }
-                catch { }
 
+                long? inno = 0;
 
-                try
+                List<InvoiceMyValidation> _InvoiceMyValidation = new List<InvoiceMyValidation>();
+                List<ApiTax.Models.InvoiceDto> list = new List<ApiTax.Models.InvoiceDto>();
+                var list_detail = new List<ApiTax.Models.InvoiceBodyDto>();
+                var list_pay = new List<ApiTax.Models.PaymentDto>();
+                for (int x = 0; x < _Header.Count(); x++)
                 {
-                    _body[x].Vop = Math.Floor(Convert.ToDecimal((_body[x].Vam * _Header[x].Cap) / _Header[x].Tadis)).ToString();
-                }
-                catch { }
+                    Boolean is_added = false;
+                    Boolean is_added_detail = false;
 
+                    if ((inno != _Header[x].Inno && inno != 0) || x == _Header.Count() - 1)
+                    {
+                        if (x == _Header.Count() - 1 && inno == _Header[x].Inno)
+                        {
+                            list_detail.Add(_body[x]);
+                            list_pay.Add(_Payments[x]);
+                            is_added_detail = true;
+                        }
 
+                        ApiTax.Models.InvoiceDto _InvoiceDto = new ApiTax.Models.InvoiceDto() { };
 
-                #endregion
-            } ///body
+                        if (x > 0)
+                        {
+                            _InvoiceDto.Header = _Header[x - 1];
+                            _InvoiceDto.Payments = new List<Models.PaymentDto>() { _Payments[x - 1] };// روش header
+                        }
+                        else
+                        {
+                            _InvoiceDto.Header = _Header[x];
+                            _InvoiceDto.Payments = new List<Models.PaymentDto>() { _Payments[x] };// روش header
+                        }
 
-            //for (int x = 0; x < _Header.Count(); x++)
-            //{
+                        _InvoiceDto.Body = list_detail;
+                        // _InvoiceDto.extension = new Extension();
+                        //  _InvoiceDto.Payments = list_pay;// روش body
 
-            //}///payment
-
-            for (int x = 0; x < _Header.Count(); x++)
-            {
-
-                long randomSerialDecimal = random.Next(999999999);
-                var now = new DateTimeOffset(DateTime.Now).ToUnixTimeMilliseconds();
-                string date1 = "";
-                try
-                {
-                    date1 = _Header[x].Indatim.ToString().Substring(0, 4) + "/" + _Header[x].Indatim.ToString().Substring(4, 2) + "/" + _Header[x].Indatim.ToString().Substring(6, 2);
-                }
-                catch
-                {
-                    MyExportData MyExportData1 = new MyExportData() { };
-
-                    MyExportData1.state = false;
-                    MyExportData1.message = "{\"error\":\"invalid data in row " + (x + 1) + "\"}";
-
-                    var output1 = JsonConvert.SerializeObject(MyExportData1);
-                    return Json(output1, JsonRequestBehavior.AllowGet);
-                }
-                int Hours = DateTime.Now.Hour;
-                int Minutes = DateTime.Now.Minute;
-
-                int Seconds = DateTime.Now.Second;
-
-                var now2 = new DateTimeOffset(utility.ToMiladi(date1).AddHours(Hours).AddMinutes(Minutes).AddSeconds(Seconds)).ToUnixTimeMilliseconds();
-                var taxId = TaxApiService.Instance.TaxIdGenerator.GenerateTaxId(memory_id,
-                randomSerialDecimal, DateTime.Now);
-                _Header[x].Taxid = taxId;
-                _Header[x].Indati2m = now2;
-                _Header[x].Indatim = now;
-                _Header[x].Tdis = 0;
-
-            }
-
-            long? inno = 0;
-
-            List<InvoiceMyValidation> _InvoiceMyValidation = new List<InvoiceMyValidation>();
-            List<ApiTax.Models.InvoiceDto> list = new List<ApiTax.Models.InvoiceDto>();
-            var list_detail = new List<ApiTax.Models.InvoiceBodyDto>();
-            var list_pay = new List<ApiTax.Models.PaymentDto>();
-            for (int x = 0; x < _Header.Count(); x++)
-            {
-                Boolean is_added = false;
-
-                if ((inno != _Header[x].Inno && inno != 0) || x == _Header.Count() - 1)
-                {
-                    if (x == _Header.Count() - 1 && inno == _Header[x].Inno)
+                        if (x != _Header.Count() - 1)
+                        {
+                            list_detail = new List<ApiTax.Models.InvoiceBodyDto>();
+                            list_pay = new List<ApiTax.Models.PaymentDto>();
+                        }
+                        is_added = true;
+                        list.Add(_InvoiceDto);
+                    }
+                    if(is_added_detail==false)
                     {
                         list_detail.Add(_body[x]);
                         list_pay.Add(_Payments[x]);
                     }
 
-                    ApiTax.Models.InvoiceDto _InvoiceDto = new ApiTax.Models.InvoiceDto() { };
-                   
-                    if (x > 0)
+                    if (x == _Header.Count() - 1 && inno != _Header[x].Inno && is_added == false)
                     {
-                        _InvoiceDto.Header = _Header[x - 1];
-                       _InvoiceDto.Payments = new List<Models.PaymentDto>() { _Payments[x-1] };// روش header
-                    }
-                    else
-                    {
+                        ApiTax.Models.InvoiceDto _InvoiceDto = new ApiTax.Models.InvoiceDto() { };
+
+                        list_detail = new List<ApiTax.Models.InvoiceBodyDto>();
+
+                        list_detail.Add(_body[x]);
+
+                        _InvoiceDto.Body = list_detail;
+
                         _InvoiceDto.Header = _Header[x];
                         _InvoiceDto.Payments = new List<Models.PaymentDto>() { _Payments[x] };// روش header
+                        list.Add(_InvoiceDto);
                     }
 
-                    _InvoiceDto.Body = list_detail;
-                    // _InvoiceDto.extension = new Extension();
-                    //  _InvoiceDto.Payments = list_pay;// روش body
-                    
-                    if(x != _Header.Count() - 1)
+                    inno = _Header[x].Inno;
+
+                    //int? type_1 = _Header[x].Inty;
+                    //int? type_2 = _Header[x].Inp;
+
+
+                    _Header[x].Inty = type_1;
+
+                    _Header[x].Inp = type_2;
+                    int? _sbc = _Header[x].Sbc;
+
+
+                    string ClientID = _ExtraJsonData[x].ClientID;
+
+                    foreach (PropertyInfo propertyInfo in _Header[x].GetType().GetProperties())
                     {
-                        list_detail = new List<ApiTax.Models.InvoiceBodyDto>();
-                        list_pay = new List<ApiTax.Models.PaymentDto>();
-                    }
-                    is_added = true;
-                    list.Add(_InvoiceDto);
-                }
-                list_detail.Add(_body[x]);
-                list_pay.Add(_Payments[x]);
-
-                if (x == _Header.Count() - 1 && inno != _Header[x].Inno && is_added == false)
-                {
-                    ApiTax.Models.InvoiceDto _InvoiceDto = new ApiTax.Models.InvoiceDto() { };
-
-                    list_detail = new List<ApiTax.Models.InvoiceBodyDto>();
-
-                    list_detail.Add(_body[x]);
-
-                    _InvoiceDto.Body = list_detail;
-
-                    _InvoiceDto.Header = _Header[x];
-                    _InvoiceDto.Payments = new List<Models.PaymentDto>() { _Payments[x] };// روش header
-                    list.Add(_InvoiceDto);
-                }
-
-                inno = _Header[x].Inno;
-
-                //int? type_1 = _Header[x].Inty;
-                //int? type_2 = _Header[x].Inp;
-
-
-                _Header[x].Inty = type_1;
-
-                _Header[x].Inp = type_2;
-                int? _sbc = _Header[x].Sbc;
-
-
-                string ClientID = _ExtraJsonData[x].ClientID;
-
-                foreach (PropertyInfo propertyInfo in _Header[x].GetType().GetProperties())
-                {
-                    MyValidation MyValidation = getValidation(propertyInfo, x, type_1, type_2, _Header[x], ClientID, _sbc);
-                    if (MyValidation.InvoiceMyValidation.row > -1)
-                    {
-                        _InvoiceMyValidation.Add(MyValidation.InvoiceMyValidation);
-                    }
-                }
-
-                foreach (PropertyInfo propertyInfo in _body[x].GetType().GetProperties())
-                {
-                    MyValidation MyValidation = getValidation(propertyInfo, x, type_1, type_2, _body[x], ClientID, _sbc);
-                    if (MyValidation.InvoiceMyValidation.row > -1)
-                    {
-                        _InvoiceMyValidation.Add(MyValidation.InvoiceMyValidation);
-                    }
-                }
-
-                foreach (PropertyInfo propertyInfo in _Payments[x].GetType().GetProperties())
-                {
-                    MyValidation MyValidation = getValidation(propertyInfo, x, type_1, type_2, _Payments[x], ClientID, _sbc);
-                    if (MyValidation.InvoiceMyValidation.row > -1)
-                    {
-                        _InvoiceMyValidation.Add(MyValidation.InvoiceMyValidation);
-                    }
-                }
-
-
-            }
-
-            if (list.Count() > 10)
-            {
-                MyExportData MyExportData1 = new MyExportData() { };
-
-                MyExportData1.state = false;
-                MyExportData1.message = "{\"error\":\"تعداد فاکتور های مجاز برای ارسال 10 می باشد \"}";
-
-                var output1 = JsonConvert.SerializeObject(MyExportData1);
-                return Json(output1, JsonRequestBehavior.AllowGet);
-            }
-
-            foreach (var item in list)
-            {
-                #region جمع ها  
-                try
-                {
-                    if (type_1 == 1 && type_2 == 7)
-                    {
-                        /// صادرات از اکسل می گیرد
-                    }
-                    else
-                    {
-                        item.Header.Tbill = 0;
-                    }
-                      
-                    foreach (var it in item.Body)
-                    {
-                        try
+                        MyValidation MyValidation = getValidation(propertyInfo, x, type_1, type_2, _Header[x], ClientID, _sbc);
+                        if (MyValidation.InvoiceMyValidation.row > -1)
                         {
-                            if(type_1==1 && type_2==7)
+                            _InvoiceMyValidation.Add(MyValidation.InvoiceMyValidation);
+                        }
+                    }
+
+                    foreach (PropertyInfo propertyInfo in _body[x].GetType().GetProperties())
+                    {
+                        MyValidation MyValidation = getValidation(propertyInfo, x, type_1, type_2, _body[x], ClientID, _sbc);
+                        if (MyValidation.InvoiceMyValidation.row > -1)
+                        {
+                            _InvoiceMyValidation.Add(MyValidation.InvoiceMyValidation);
+                        }
+                    }
+
+                    foreach (PropertyInfo propertyInfo in _Payments[x].GetType().GetProperties())
+                    {
+                        MyValidation MyValidation = getValidation(propertyInfo, x, type_1, type_2, _Payments[x], ClientID, _sbc);
+                        if (MyValidation.InvoiceMyValidation.row > -1)
+                        {
+                            _InvoiceMyValidation.Add(MyValidation.InvoiceMyValidation);
+                        }
+                    }
+
+
+                }
+
+                if (list.Count() > 10)
+                {
+                    MyExportData MyExportData1 = new MyExportData() { };
+
+                    MyExportData1.state = false;
+                    MyExportData1.message = "{\"error\":\"تعداد فاکتور های مجاز برای ارسال 10 می باشد \"}";
+
+                    var output1 = JsonConvert.SerializeObject(MyExportData1);
+                    return Json(output1, JsonRequestBehavior.AllowGet);
+                }
+
+                foreach (var item in list)
+                {
+                    #region جمع ها  
+                    try
+                    {
+                        if (type_1 == 1 && type_2 == 7)
+                        {
+                            /// صادرات از اکسل می گیرد
+                        }
+                        else
+                        {
+                            item.Header.Tbill = 0;
+                        }
+
+                        foreach (var it in item.Body)
+                        {
+                            try
                             {
-                                ///صادراتی از اکسل بر می دارد
+                                if (type_1 == 1 && type_2 == 7)
+                                {
+                                    ///صادراتی از اکسل بر می دارد
+                                }
+                                else
+                                {
+                                    item.Header.Tbill += Convert.ToDecimal(it.Tsstam);
+                                }
                             }
-                            else
+                            catch { }
+                        }
+                        item.Header.Tbill = Math.Floor(Convert.ToDecimal(item.Header.Tbill));
+                    }
+                    catch { }
+
+                    try
+                    {
+                        item.Header.Tvop = 0;
+                        foreach (var it in item.Body)
+                        {
+                            try
                             {
-                                item.Header.Tbill += Convert.ToDecimal(it.Tsstam);
+                                item.Header.Tvop += Convert.ToDecimal(it.Vop);
                             }
+                            catch { }
                         }
-                        catch { }
-                    }
-                    item.Header.Tbill = Math.Floor(Convert.ToDecimal(item.Header.Tbill));
-                }
-                catch { }
+                        item.Header.Tvop = Math.Floor(Convert.ToDecimal(item.Header.Tvop));
 
-                try
-                {
-                    item.Header.Tvop = 0;
-                    foreach (var it in item.Body)
+                    }
+                    catch { }
+
+                    try
                     {
-                        try
+                        item.Header.Tdis = 0;
+                        foreach (var it in item.Body)
                         {
-                            item.Header.Tvop += Convert.ToDecimal(it.Vop);
+                            try
+                            {
+                                item.Header.Tdis += Convert.ToDecimal(it.Dis);
+                            }
+                            catch { }
                         }
-                        catch { }
+                        item.Header.Tdis = Math.Floor(Convert.ToDecimal(item.Header.Tdis));
                     }
-                    item.Header.Tvop = Math.Floor(Convert.ToDecimal(item.Header.Tvop));
+                    catch { }
 
-                }
-                catch { }
-
-                try
-                {
-                    item.Header.Tdis = 0;
-                    foreach (var it in item.Body)
+                    try
                     {
-                        try
+                        item.Header.Tprdis = 0;
+                        foreach (var it in item.Body)
                         {
-                            item.Header.Tdis += Convert.ToDecimal(it.Dis);
+                            try
+                            {
+                                item.Header.Tprdis += Convert.ToDecimal(it.Prdis);
+                            }
+                            catch { }
                         }
-                        catch { }
+                        item.Header.Tprdis = Math.Floor(Convert.ToDecimal(item.Header.Tprdis));
                     }
-                    item.Header.Tdis = Math.Floor(Convert.ToDecimal(item.Header.Tdis));
-                }
-                catch { }
+                    catch { }
 
-                try
-                {
-                    item.Header.Tprdis = 0;
-                    foreach (var it in item.Body)
+                    try
                     {
-                        try
+                        item.Header.Tvam = 0;
+                        foreach (var it in item.Body)
                         {
-                            item.Header.Tprdis +=Convert.ToDecimal(it.Prdis);
+                            try
+                            {
+                                item.Header.Tvam += Convert.ToDecimal(it.Vam);
+                            }
+                            catch { }
                         }
-                        catch { }
+                        item.Header.Tvam = Math.Floor(Convert.ToDecimal(item.Header.Tvam));
                     }
-                    item.Header.Tprdis = Math.Floor(Convert.ToDecimal(item.Header.Tprdis));
-                }
-                catch { }
+                    catch { }
 
-                try
-                {
-                    item.Header.Tvam = 0;
-                    foreach (var it in item.Body)
+                    try
                     {
-                        try
+                        item.Header.Tadis = 0;
+                        foreach (var it in item.Body)
                         {
-                            item.Header.Tvam += Convert.ToDecimal(it.Vam);
+                            try
+                            {
+                                item.Header.Tadis += Convert.ToDecimal(it.Adis);
+                            }
+                            catch { }
                         }
-                        catch { }
+                        item.Header.Tadis = Math.Floor(Convert.ToDecimal(item.Header.Tadis));
                     }
-                    item.Header.Tvam = Math.Floor(Convert.ToDecimal(item.Header.Tvam));
-                }
-                catch { }
+                    catch { }
 
-                try
-                {
-                    item.Header.Tadis = 0;
-                    foreach (var it in item.Body)
+                    try
                     {
-                        try
+                        item.Header.Todam = 0;
+                        foreach (var it in item.Body)
                         {
-                            item.Header.Tadis += Convert.ToDecimal(it.Adis);
+                            try
+                            {
+                                item.Header.Todam += Convert.ToDecimal(it.Odam);
+                            }
+                            catch { }
                         }
-                        catch { }
-                    }
-                    item.Header.Tadis = Math.Floor(Convert.ToDecimal(item.Header.Tadis));
-                }
-                catch { }
+                        item.Header.Todam = Math.Floor(Convert.ToDecimal(item.Header.Todam));
 
-                try
-                {
-                    item.Header.Todam = 0;
-                    foreach (var it in item.Body)
+                    }
+                    catch { }
+
+                    try
                     {
-                        try
-                        {
-                            item.Header.Todam += Convert.ToDecimal(it.Odam);
-                        }
-                        catch { }
+                        item.Header.Cap = item.Header.Tbill - item.Header.Insp - item.Header.Tvam - item.Header.Todam;
+                        item.Header.Cap = Math.Floor(Convert.ToDecimal(item.Header.Cap));
                     }
-                    item.Header.Todam = Math.Floor(Convert.ToDecimal(item.Header.Todam));
+                    catch { }
 
+
+                    #endregion
                 }
-                catch { }
 
-                try
+                MyExportData MyExportData = new MyExportData() { list = list, list_error = _InvoiceMyValidation };
+
+                MyExportData.response = "{\"error\":\"invalid data\"}";
+
+                if (MyExportData.list_error.Count() == 0)
                 {
-                    item.Header.Cap = item.Header.Tbill - item.Header.Insp - item.Header.Tvam - item.Header.Todam;
-                    item.Header.Cap = Math.Floor(Convert.ToDecimal(item.Header.Cap));
+                    MyExportData.response = send_invoice(list);
                 }
-                catch { }
+                else
+                {
+                    MyExportData.state = false;
+                    MyExportData.message = "{\"error\":\"invalid data\"}";
+                }
 
-
-                #endregion
-            }
-
-            MyExportData MyExportData = new MyExportData() { list = list, list_error = _InvoiceMyValidation };
-
-            MyExportData.response = "{\"error\":\"invalid data\"}";
-
-            if (MyExportData.list_error.Count() == 0)
-            {
-                MyExportData.response = send_invoice(list);
-            }
-            else
-            {
-                MyExportData.state = false;
-                MyExportData.message = "{\"error\":\"invalid data\"}";
-            }
-
-            var output = JsonConvert.SerializeObject(MyExportData);
-            return Json(output, JsonRequestBehavior.AllowGet);
+                var output = JsonConvert.SerializeObject(MyExportData);
+                return Json(output, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
@@ -541,7 +546,7 @@ namespace ApiTax.Controllers
                 MyExportData MyExportData1 = new MyExportData() { };
 
                 MyExportData1.state = false;
-                MyExportData1.message = "{\"error\":\""+ex.Message+"\"}";
+                MyExportData1.message = "{\"error\":\"" + ex.Message + "\"}";
 
                 var output1 = JsonConvert.SerializeObject(MyExportData1);
                 return Json(output1, JsonRequestBehavior.AllowGet);
@@ -555,7 +560,7 @@ namespace ApiTax.Controllers
             ViewBag.type = type;
             return View();
         }
-        public ActionResult Confirmedit(string _user=null, long id=0 ,int type=0)
+        public ActionResult Confirmedit(string _user = null, long id = 0, int type = 0)
         {
             tb_check_send tb_check_send = db.tb_check_send.Where(r => r.SendCheckId == id).FirstOrDefault();
 
@@ -577,7 +582,7 @@ namespace ApiTax.Controllers
             init();
 
 
-         
+
             ApiTax.Models.InvoiceDto _InvoiceDto = JsonConvert.DeserializeObject<ApiTax.Models.InvoiceDto>(tb_check_send.invoiceData);
             var list = new List<ApiTax.Models.InvoiceDto>();
             var random = new Random();
@@ -594,7 +599,7 @@ randomSerialDecimal, DateTime.Now);
             list.Add(_InvoiceDto);
             MyExportData MyExportData = new MyExportData() { list = list };
 
-                MyExportData.response = send_invoice(list);
+            MyExportData.response = send_invoice(list);
             return RedirectToAction("index", "tb_send", new { });
         }
         public void init()
@@ -609,7 +614,7 @@ randomSerialDecimal, DateTime.Now);
         {
             try
             {
-                ApiObject _ApiObject = new ApiObject() {  tb_check_send=new List<tb_check_send>()};
+                ApiObject _ApiObject = new ApiObject() { tb_check_send = new List<tb_check_send>() };
                 var json = JsonConvert.SerializeObject(list_send);
                 var settings = new JsonSerializerSettings
                 {
@@ -635,11 +640,11 @@ randomSerialDecimal, DateTime.Now);
                         ClientID = _Client.ID
                     };
 
-                   if(GlobalUser._ObjectUser.is_api)
+                    if (GlobalUser._ObjectUser.is_api)
                     {
                         _ApiObject.tb_send = _tb_send;
                     }
-                   else
+                    else
                     {
                         db.tb_send.Add(_tb_send);
                         db.SaveChanges();
@@ -676,7 +681,7 @@ randomSerialDecimal, DateTime.Now);
                     }
 
 
-                    _ApiObject.check_result= func.check_send(list_check, db);
+                    _ApiObject.check_result = func.check_send(list_check, db);
                     if (GlobalUser._ObjectUser.is_api)
                     {
                         _ApiObject.json_result = json_result;
