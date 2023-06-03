@@ -255,13 +255,14 @@ namespace ApiTax.Controllers
                     int Minutes = DateTime.Now.Minute;
 
                     int Seconds = DateTime.Now.Second;
+                    DateTime Indatim = utility.ToMiladi(date1).AddHours(Hours).AddMinutes(Minutes).AddSeconds(Seconds);
 
-                    var now2 = new DateTimeOffset(utility.ToMiladi(date1).AddHours(Hours).AddMinutes(Minutes).AddSeconds(Seconds)).ToUnixTimeMilliseconds();
+                    var now2 = new DateTimeOffset(Indatim).ToUnixTimeMilliseconds();
                     var taxId = TaxApiService.Instance.TaxIdGenerator.GenerateTaxId(memory_id,
-                    randomSerialDecimal, DateTime.Now);
+                    randomSerialDecimal, Indatim);
                     _Header[x].Taxid = taxId;
-                    _Header[x].Indati2m = now2;
-                    _Header[x].Indatim = now;
+                    _Header[x].Indati2m = now;
+                    _Header[x].Indatim = now2;
                     _Header[x].Tdis = 0;
 
                 }
