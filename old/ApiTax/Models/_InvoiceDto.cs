@@ -50,39 +50,43 @@ namespace ApiTax.Models
     public class InvoiceHeaderDto 
     {
 
-        public int? Crn { get; set; }
-        public decimal? Insp { get; set; }
-        public string Bid { get; set; }
-        public decimal? Cap { get; set; }
-        public string Tins { get; set; }
-        public int? Setm { get; set; }
-        public long? Scln { get; set; }
-        public string Irtaxid { get; set; }
-        public long? Inno { get; set; }
-        public int? Ft { get; set; }
-        public int? Inty { get; set; }
-        public long? Indatim { get; set; }
-        public long? Indati2m { get; set; }
-        public decimal? Tvop { get; set; }
-        public int? Dpvb { get; set; }
+        public decimal Tocv { get; set; }
         public string Bpc { get; set; }
-        public decimal? Tvam { get; set; }
-        public string Bbc { get; set; }
-        public int? Sbc { get; set; }
+        public string Sbc { get; set; }
         public string Tinb { get; set; }
-        public int? Tob { get; set; }
-        public decimal? Tbill { get; set; }
-        public decimal? Todam { get; set; }
-        public decimal? Tax17 { get; set; }
-        public string Bpn { get; set; }
-        public decimal? Tdis { get; set; }
-        public decimal? Tprdis { get; set; }
-        public string Billid { get; set; }
-        public int? Ins { get; set; }
-        public string Scc { get; set; }
-        public int? Inp { get; set; }
+        public string Bid { get; set; }
+        public int Tob { get; set; }
+        public string Tins { get; set; }
+        public int Ins { get; set; }
+        public int Inp { get; set; }
+        public string Irtaxid { get; set; }
+        public string Inno { get; set; }
+        public int Inty { get; set; }
+        public long Indati2m { get; set; }
+        public long Indatim { get; set; }
         public string Taxid { get; set; }
-        public decimal? Tadis { get; set; }
+        public string Bbc { get; set; }
+        public string Bpn { get; set; }
+        public int Ft { get; set; }
+        public int Setm { get; set; }
+        public decimal Tonw { get; set; }
+        public int Cdcd { get; set; }
+        public string Cdcn { get; set; }
+        public decimal Tax17 { get; set; }
+        public decimal Tvop { get; set; }
+        public decimal Insp { get; set; }
+        public decimal Cap { get; set; }
+        public string Scln { get; set; }
+        public decimal Torv { get; set; }
+        public decimal Todam { get; set; }
+        public decimal Tvam { get; set; }
+        public decimal Tadis { get; set; }
+        public decimal Tdis { get; set; }
+        public decimal Tprdis { get; set; }
+        public string Billid { get; set; }
+        public string Crn { get; set; }
+        public string Scc { get; set; }
+        public decimal Tbill { get; set; }
     }
 
     public class PaymentDto 

@@ -92,8 +92,8 @@ namespace ApiTax.Controllers
 
                 var random = new Random();
 
-                int? type_1 = Convert.ToInt32(formCollection["type_1"]);
-                int? type_2 = Convert.ToInt32(formCollection["type_2"]);
+                int type_1 = Convert.ToInt32(formCollection["type_1"]);
+                int type_2 = Convert.ToInt32(formCollection["type_2"]);
 
 
                 for (int x = 0; x < _Header.Count(); x++)
@@ -267,7 +267,7 @@ namespace ApiTax.Controllers
 
                 }
 
-                long? inno = 0;
+                string inno = "0";
 
                 List<InvoiceMyValidation> _InvoiceMyValidation = new List<InvoiceMyValidation>();
                 List<ApiTax.Models.InvoiceDto> list = new List<ApiTax.Models.InvoiceDto>();
@@ -278,7 +278,7 @@ namespace ApiTax.Controllers
                     Boolean is_added = false;
                     Boolean is_added_detail = false;
 
-                    if ((inno != _Header[x].Inno && inno != 0) || x == _Header.Count() - 1)
+                    if ((inno != _Header[x].Inno && inno != "0") || x == _Header.Count() - 1)
                     {
                         if (x == _Header.Count() - 1 && inno == _Header[x].Inno)
                         {
@@ -342,7 +342,7 @@ namespace ApiTax.Controllers
                     _Header[x].Inty = type_1;
 
                     _Header[x].Inp = type_2;
-                    int? _sbc = _Header[x].Sbc;
+                    string _sbc = _Header[x].Sbc;
 
 
                     string ClientID = _ExtraJsonData[x].ClientID;
@@ -623,7 +623,7 @@ randomSerialDecimal, DateTime.Now);
                     MissingMemberHandling = MissingMemberHandling.Ignore
                 };
                 List<TaxCollectData.Library.Dto.Content.InvoiceDto> invoices = JsonConvert.DeserializeObject<List<TaxCollectData.Library.Dto.Content.InvoiceDto>>(json, settings);
-                var responseModel = _api.SendInvoices(invoices);
+                var responseModel = _api.SendInvoices(invoices,null);
 
                 if (responseModel != null && responseModel.Status == 200)
                 {
@@ -848,7 +848,7 @@ randomSerialDecimal, DateTime.Now);
             return View();
         }
 
-        MyValidation getValidation(PropertyInfo propertyInfo, int x, int? _Inty, int? _Inp, object obj, string _ClientID, int? sbc)
+        MyValidation getValidation(PropertyInfo propertyInfo, int x, int? _Inty, int? _Inp, object obj, string _ClientID, string sbc)
         {
 
             MyValidation MyValidation = new MyValidation();
@@ -993,7 +993,17 @@ randomSerialDecimal, DateTime.Now);
                         message = "شما مجاز به آپلود اطلاعات چندین حافظه مالیاتی در یک فایل نیستید"
                     };
                 }
-                var az = db.UserBranches.Where(r => r.UserID == CurrentUser.UserID && r.Branch.BranchNum == sbc && r.Branch.Client.ClientID == _ClientID);
+
+                long sbc_sbc = 0;
+                try
+                {
+                    sbc_sbc = long.Parse(sbc);
+                }
+                catch
+                {
+
+                }
+                var az = db.UserBranches.Where(r => r.UserID == CurrentUser.UserID && r.Branch.BranchNum == sbc_sbc && r.Branch.Client.ClientID == _ClientID);
                 if (az != null)
                 {
                     if (az.ToList().Count() == 0)

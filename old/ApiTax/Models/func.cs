@@ -9,6 +9,8 @@ using TaxCollectData.Library.Business;
 using TaxCollectData.Library.Dto.Config;
 using TaxCollectData.Library.Dto.Content;
 using System.Web.Routing;
+using TaxCollectData.Library.Dto.Properties;
+using TaxCollectData.Library.Enums;
 
 namespace ApiTax.Models
 {
@@ -90,7 +92,11 @@ namespace ApiTax.Models
       public  ITaxApis _api;
         public ITaxApis initApi(string memory_id, string key)
         {
-            TaxApiService.Instance.Init(memory_id, new SignatoryConfig(key, null), "https://tp.tax.gov.ir/req/api/self-tsp");
+
+            TaxApiService.Instance.Init(memory_id,
+          new SignatoryConfig(key, null),
+          new NormalProperties(ClientType.SELF_TSP));
+
             var info = TaxApiService.Instance.TaxApis.GetServerInformation();
             var token = TaxApiService.Instance.TaxApis.RequestToken();
 
