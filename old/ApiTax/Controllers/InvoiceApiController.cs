@@ -852,28 +852,28 @@ randomSerialDecimal, DateTime.Now);
         {
 
             MyValidation MyValidation = new MyValidation();
-            var ex = db.InvoiceFields.Where(r => r.Field == propertyInfo.Name);
+            //var ex = db.InvoiceFields.Where(r => r.Field == propertyInfo.Name);
 
-            if (ex.Count() == 0)
+            //if (ex.Count() == 0)
+            //{
+
+            //    MyValidation.InvoiceField = new InvoiceField();
+            //    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
+            //    {
+            //        row = -1
+            //    };
+            //    //MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
+            //    //{
+            //    //    row = x,
+            //    //    title = propertyInfo.Name,
+            //    //    message = "فیلد نا معتبر"
+            //    //};
+
+            //}
+            //else
             {
-
-                MyValidation.InvoiceField = new InvoiceField();
-                MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
-                {
-                    row = -1
-                };
-                //MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
-                //{
-                //    row = x,
-                //    title = propertyInfo.Name,
-                //    message = "فیلد نا معتبر"
-                //};
-
-            }
-            else
-            {
-                var _InvoiceField = ex.FirstOrDefault();
-                MyValidation.InvoiceField = ex.FirstOrDefault();
+                //var _InvoiceField = ex.FirstOrDefault();
+                //MyValidation.InvoiceField = ex.FirstOrDefault();
                 MyValidation.InvoiceMyValidation = new InvoiceMyValidation() { row = -1 };
 
                 var val = propertyInfo.GetValue(obj, null);
@@ -886,103 +886,103 @@ randomSerialDecimal, DateTime.Now);
                 {
                     int a = 0;
                 }
-                if ((_Inty == 1 && _Inp == 1 && _InvoiceField.Inp11 == 1 && val == null) || _Inty == null || _Inp == null)
-                {
-                    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
-                    {
-                        row = x,
-                        title = _InvoiceField.InvoiceTitle,
-                        message = "فیلد  نباید خالی بماند"
-                    };
-                }
-                else if ((_Inty == 1 && _Inp == 2 && _InvoiceField.Inp12 == 1 && val == null) || _Inty == null || _Inp == null)
-                {
-                    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
-                    {
-                        row = x,
-                        title = _InvoiceField.InvoiceTitle,
-                        message = "فیلد  نباید خالی بماند"
-                    };
-                }
-                else if ((_Inty == 1 && _Inp == 3 && _InvoiceField.Inp13 == 1 && val == null) || _Inty == null || _Inp == null)
-                {
-                    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
-                    {
-                        row = x,
-                        title = _InvoiceField.InvoiceTitle,
-                        message = "فیلد  نباید خالی بماند"
-                    };
-                }
-                else if ((_Inty == 1 && _Inp == 4 && _InvoiceField.Inp14 == 1 && val == null) || _Inty == null || _Inp == null)
-                {
-                    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
-                    {
-                        row = x,
-                        title = _InvoiceField.InvoiceTitle,
-                        message = "فیلد  نباید خالی بماند"
-                    };
-                }
-                else if ((_Inty == 1 && _Inp == 5 && _InvoiceField.Inp15 == 1 && val == null) || _Inty == null || _Inp == null)
-                {
-                    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
-                    {
-                        row = x,
-                        title = _InvoiceField.InvoiceTitle,
-                        message = "فیلد  نباید خالی بماند"
-                    };
-                }
-                else if ((_Inty == 1 && _Inp == 6 && _InvoiceField.Inp16 == 1 && val == null) || _Inty == null || _Inp == null)
-                {
-                    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
-                    {
-                        row = x,
-                        title = _InvoiceField.InvoiceTitle,
-                        message = "فیلد  نباید خالی بماند"
-                    };
-                }
-                else if ((_Inty == 1 && _Inp == 7 && _InvoiceField.Inp17 == 1 && val == null) || _Inty == null || _Inp == null)
-                {
-                    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
-                    {
-                        row = x,
-                        title = _InvoiceField.InvoiceTitle,
-                        message = "فیلد  نباید خالی بماند"
-                    };
-                }
-                else if ((_Inty == 2 && _Inp == 1 && _InvoiceField.inp21 == 1 && val == null) || _Inty == null || _Inp == null)
-                {
-                    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
-                    {
-                        row = x,
-                        title = _InvoiceField.InvoiceTitle,
-                        message = "فیلد  نباید خالی بماند"
-                    };
-                }
-                else if ((_Inty == 2 && _Inp == 2 && _InvoiceField.inp22 == 1 && val == null) || _Inty == null || _Inp == null)
-                {
-                    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
-                    {
-                        row = x,
-                        title = _InvoiceField.InvoiceTitle,
-                        message = "فیلد  نباید خالی بماند"
-                    };
-                }
-                else if ((_Inty == 3 && _Inp == 1 && _InvoiceField.inp31 == 1 && val == null) || _Inty == null || _Inp == null)
-                {
-                    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
-                    {
-                        row = x,
-                        title = _InvoiceField.InvoiceTitle,
-                        message = "فیلد  نباید خالی بماند"
-                    };
-                }
-                else
-                {
-                    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
-                    {
-                        row = -1
-                    };
-                }
+                //if ((_Inty == 1 && _Inp == 1 && _InvoiceField.Inp11 == 1 && val == null) || _Inty == null || _Inp == null)
+                //{
+                //    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
+                //    {
+                //        row = x,
+                //        title = _InvoiceField.InvoiceTitle,
+                //        message = "فیلد  نباید خالی بماند"
+                //    };
+                //}
+                //else if ((_Inty == 1 && _Inp == 2 && _InvoiceField.Inp12 == 1 && val == null) || _Inty == null || _Inp == null)
+                //{
+                //    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
+                //    {
+                //        row = x,
+                //        title = _InvoiceField.InvoiceTitle,
+                //        message = "فیلد  نباید خالی بماند"
+                //    };
+                //}
+                //else if ((_Inty == 1 && _Inp == 3 && _InvoiceField.Inp13 == 1 && val == null) || _Inty == null || _Inp == null)
+                //{
+                //    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
+                //    {
+                //        row = x,
+                //        title = _InvoiceField.InvoiceTitle,
+                //        message = "فیلد  نباید خالی بماند"
+                //    };
+                //}
+                //else if ((_Inty == 1 && _Inp == 4 && _InvoiceField.Inp14 == 1 && val == null) || _Inty == null || _Inp == null)
+                //{
+                //    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
+                //    {
+                //        row = x,
+                //        title = _InvoiceField.InvoiceTitle,
+                //        message = "فیلد  نباید خالی بماند"
+                //    };
+                //}
+                //else if ((_Inty == 1 && _Inp == 5 && _InvoiceField.Inp15 == 1 && val == null) || _Inty == null || _Inp == null)
+                //{
+                //    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
+                //    {
+                //        row = x,
+                //        title = _InvoiceField.InvoiceTitle,
+                //        message = "فیلد  نباید خالی بماند"
+                //    };
+                //}
+                //else if ((_Inty == 1 && _Inp == 6 && _InvoiceField.Inp16 == 1 && val == null) || _Inty == null || _Inp == null)
+                //{
+                //    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
+                //    {
+                //        row = x,
+                //        title = _InvoiceField.InvoiceTitle,
+                //        message = "فیلد  نباید خالی بماند"
+                //    };
+                //}
+                //else if ((_Inty == 1 && _Inp == 7 && _InvoiceField.Inp17 == 1 && val == null) || _Inty == null || _Inp == null)
+                //{
+                //    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
+                //    {
+                //        row = x,
+                //        title = _InvoiceField.InvoiceTitle,
+                //        message = "فیلد  نباید خالی بماند"
+                //    };
+                //}
+                //else if ((_Inty == 2 && _Inp == 1 && _InvoiceField.inp21 == 1 && val == null) || _Inty == null || _Inp == null)
+                //{
+                //    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
+                //    {
+                //        row = x,
+                //        title = _InvoiceField.InvoiceTitle,
+                //        message = "فیلد  نباید خالی بماند"
+                //    };
+                //}
+                //else if ((_Inty == 2 && _Inp == 2 && _InvoiceField.inp22 == 1 && val == null) || _Inty == null || _Inp == null)
+                //{
+                //    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
+                //    {
+                //        row = x,
+                //        title = _InvoiceField.InvoiceTitle,
+                //        message = "فیلد  نباید خالی بماند"
+                //    };
+                //}
+                //else if ((_Inty == 3 && _Inp == 1 && _InvoiceField.inp31 == 1 && val == null) || _Inty == null || _Inp == null)
+                //{
+                //    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
+                //    {
+                //        row = x,
+                //        title = _InvoiceField.InvoiceTitle,
+                //        message = "فیلد  نباید خالی بماند"
+                //    };
+                //}
+                //else
+                //{
+                //    MyValidation.InvoiceMyValidation = new InvoiceMyValidation()
+                //    {
+                //        row = -1
+                //    };
+                //}
 
                 if (memory_id != _ClientID)
                 {
