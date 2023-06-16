@@ -89,18 +89,15 @@ namespace ApiTax.Models
     }
     public class func
     {
-      public  ITaxApis _api;
+        public ITaxApis _api;
         public ITaxApis initApi(string memory_id, string key)
         {
-
-            TaxApiService.Instance.Init(memory_id,
-          new SignatoryConfig(key, null),
-          new NormalProperties(ClientType.SELF_TSP));
+            TaxApiService.Instance.Init(memory_id, new SignatoryConfig(key, null), new NormalProperties(ClientType.SELF_TSP), "https://tp.tax.gov.ir/req/api");
 
             var info = TaxApiService.Instance.TaxApis.GetServerInformation();
             var token = TaxApiService.Instance.TaxApis.RequestToken();
 
-             _api = TaxApiService.Instance.TaxApis;
+            _api = TaxApiService.Instance.TaxApis;
             return _api;
         }
         public bool IsValid(string email, string password)
@@ -127,7 +124,7 @@ namespace ApiTax.Models
 
             foreach (var item in list_send)
             {
-                if(item.tb_send != null)
+                if (item.tb_send != null)
                 {
                     MyUidAndFiscalId myuidAndFiscalId = new MyUidAndFiscalId()
                     {
@@ -139,13 +136,13 @@ namespace ApiTax.Models
 
                     list_check.Add(uidAndFiscalId);
                 }
-          
+
             }
 
             var inquiryResultModels =
 _api.InquiryByUidAndFiscalId(list_check);
 
-            if(GlobalUser._ObjectUser.is_api)
+            if (GlobalUser._ObjectUser.is_api)
             {
                 json_result = JsonConvert.SerializeObject(inquiryResultModels);
             }
