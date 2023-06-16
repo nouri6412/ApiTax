@@ -217,7 +217,7 @@ namespace ApiTax.Controllers
 
                     try
                     {
-                        _body[x].Vop = Math.Floor(Convert.ToDecimal((_body[x].Vam * _Header[x].Cap) / _Header[x].Tadis)).ToString();
+                        _body[x].Vop = Math.Floor(Convert.ToDecimal((_body[x].Vam * _Header[x].Cap) / _Header[x].Tadis));
                     }
                     catch { }
 
