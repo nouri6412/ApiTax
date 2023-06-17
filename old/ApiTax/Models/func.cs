@@ -93,9 +93,8 @@ namespace ApiTax.Models
         public ITaxApis initApi(string memory_id, string key)
         {
 
-            TaxApiService.Instance.Init(memory_id,
-          new SignatoryConfig(key, null),
-          new NormalProperties(ClientType.SELF_TSP));
+            TaxApiService.Instance.Init(memory_id, new SignatoryConfig(key, null), new NormalProperties(ClientType.SELF_TSP), "https://tp.tax.gov.ir/req/api");
+
 
             var info = TaxApiService.Instance.TaxApis.GetServerInformation();
             var token = TaxApiService.Instance.TaxApis.RequestToken();
