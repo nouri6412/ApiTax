@@ -61,7 +61,7 @@ namespace ApiTax.Controllers
 
                 CurrentUser = GlobalUser.CurrentUser;
 
-
+              
 
                 var json = formCollection["excel_data"];
                 List<ApiTax.Models.InvoiceBodyDto> _body = JsonConvert.DeserializeObject<List<ApiTax.Models.InvoiceBodyDto>>(json);
@@ -217,7 +217,7 @@ namespace ApiTax.Controllers
 
                     try
                     {
-                        _body[x].Vop = Math.Floor(Convert.ToDecimal((_body[x].Vam * _Header[x].Cap) / _Header[x].Tadis)).ToString();
+                        _body[x].Vop = Math.Floor(Convert.ToDecimal((_body[x].Vam * _Header[x].Cap) / _Header[x].Tadis));
                     }
                     catch { }
 
@@ -258,12 +258,22 @@ namespace ApiTax.Controllers
                     DateTime Indatim = utility.ToMiladi(date1).AddHours(Hours).AddMinutes(Minutes).AddSeconds(Seconds);
 
                     var now2 = new DateTimeOffset(Indatim).ToUnixTimeMilliseconds();
-                    var taxId = TaxApiService.Instance.TaxIdGenerator.GenerateTaxId(memory_id,
-                    randomSerialDecimal, Indatim);
+                    var taxId = TaxApiService.Instance.TaxIdGenerator.GenerateTaxId(memory_id, randomSerialDecimal, Indatim);
+                                
                     _Header[x].Taxid = taxId;
                     _Header[x].Indati2m = now;
                     _Header[x].Indatim = now2;
                     _Header[x].Tdis = 0;
+
+                    if (type_1 == 1 && type_2 == 7)
+                    {
+                        string Cdcd = "";
+                        Cdcd = _Header[x].Cdcd.ToString().Substring(0, 4) + "/" + _Header[x].Cdcd.ToString().Substring(4, 2) + "/" + _Header[x].Cdcd.ToString().Substring(6, 2);
+                        DateTime Cdcd1 = utility.ToMiladi(Cdcd);
+                        var now3 = new DateTimeOffset(Cdcd1).ToUnixTimeSeconds();
+                        int xx = (int)((Int64)now3 / 86400);
+                        _Header[x].Cdcd = xx;
+                    }
 
                 }
 
@@ -312,7 +322,7 @@ namespace ApiTax.Controllers
                         is_added = true;
                         list.Add(_InvoiceDto);
                     }
-                    if(is_added_detail==false)
+                    if (is_added_detail == false)
                     {
                         list_detail.Add(_body[x]);
                         list_pay.Add(_Payments[x]);
@@ -623,7 +633,7 @@ randomSerialDecimal, DateTime.Now);
                     MissingMemberHandling = MissingMemberHandling.Ignore
                 };
                 List<TaxCollectData.Library.Dto.Content.InvoiceDto> invoices = JsonConvert.DeserializeObject<List<TaxCollectData.Library.Dto.Content.InvoiceDto>>(json, settings);
-                var responseModel = _api.SendInvoices(invoices,null);
+                var responseModel = _api.SendInvoices(invoices, null);
 
                 if (responseModel != null && responseModel.Status == 200)
                 {
