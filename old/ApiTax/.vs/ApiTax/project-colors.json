@@ -5,6 +5,11 @@
       "ProjectGuid": "fa7f0499-a985-442d-b8f5-91c9294cf121",
       "DisplayName": "ApiTax",
       "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
     }
   },
   "NextColorIndex": 1
